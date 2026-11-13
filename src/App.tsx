@@ -639,8 +639,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Offscreen Unscaled Capture Nodes for Crisp 1:1 A4 html2pdf Export */}
+      {/* Offscreen Unscaled Capture Nodes for Crisp 1:1 A4 PDF Export */}
       <div
+        ref={sampleCaptureRef}
         aria-hidden="true"
         style={{
           position: 'fixed',
@@ -648,30 +649,42 @@ export default function App() {
           top: 0,
           width: '794px',
           height: '1122px',
+          overflow: 'hidden',
           pointerEvents: 'none',
           opacity: 1,
         }}
       >
-        <div ref={sampleCaptureRef}>
-          <A4PreviewSheet
-            mode={mode}
-            language={language}
-            templateId={templateId}
-            marriageData={marriageData}
-            jobData={jobData}
-            showWatermark={true}
-          />
-        </div>
-        <div ref={hdCaptureRef}>
-          <A4PreviewSheet
-            mode={mode}
-            language={language}
-            templateId={templateId}
-            marriageData={marriageData}
-            jobData={jobData}
-            showWatermark={false}
-          />
-        </div>
+        <A4PreviewSheet
+          mode={mode}
+          language={language}
+          templateId={templateId}
+          marriageData={marriageData}
+          jobData={jobData}
+          showWatermark={true}
+        />
+      </div>
+      <div
+        ref={hdCaptureRef}
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          left: '-10000px',
+          top: 0,
+          width: '794px',
+          height: '1122px',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          opacity: 1,
+        }}
+      >
+        <A4PreviewSheet
+          mode={mode}
+          language={language}
+          templateId={templateId}
+          marriageData={marriageData}
+          jobData={jobData}
+          showWatermark={false}
+        />
       </div>
 
       {/* ₹29 UPI Payment Popup with Dynamic QR, Direct UPI Link & Mandatory 12-Digit UTR */}

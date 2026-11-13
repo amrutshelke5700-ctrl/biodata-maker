@@ -782,6 +782,8 @@ const MarriageContent: React.FC<{
               <img
                 src={data.photoDataUrl}
                 alt={data.fullName || copy.photoAlt}
+                loading="eager"
+                decoding="sync"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -966,6 +968,8 @@ const JobContent: React.FC<{
             <img
               src={data.photoDataUrl}
               alt={data.fullName || copy.photoAlt}
+              loading="eager"
+              decoding="sync"
               style={{
                 width: '100%',
                 height: '100%',
