@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Check,
+  Copy,
   Download,
   ExternalLink,
   Loader2,
   Lock,
   QrCode,
   ShieldCheck,
+  Smartphone,
   X,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
@@ -24,8 +26,48 @@ interface PaymentModalProps {
   onConfirmPaymentAndDownload: () => Promise<void>;
 }
 
+type PaymentTab = 'qr' | 'upi';
+
 const MERCHANT_UPI_ID = 'amrutshelke5700@okhdfcbank';
-const UPI_PAYMENT_LINK = `upi://pay?pa=${MERCHANT_UPI_ID}&pn=Marathi%20Biodata&am=29&cu=INR`;
+const PAYEE_NAME = 'Marathi Biodata';
+const PAYMENT_AMOUNT = '29';
+const PAYMENT_CURRENCY = 'INR';
+
+const UPI_PAYMENT_LINK = `upi://pay?pa=${encodeURIComponent(
+  MERCHANT_UPI_ID
+)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(
+  PAYMENT_AMOUNT
+)}&cu=${encodeURIComponent(PAYMENT_CURRENCY)}`;
+
+async function copyTextToClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // Fall back to execCommand below
+  }
+
+  try {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '-9999px';
+    textarea.style.left = '-9999px';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    textarea.setSelectionRange(0, text.length);
+    const copied = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    return copied;
+  } catch {
+    return false;
+  }
+}
 
 export const PaymentModal: React.FC<PaymentModalProps> = ({
   isOpen,
@@ -37,8 +79,11 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   onConfirmPaymentAndDownload,
 }) => {
   const copy = getCopy(language);
+  const [activeTab, setActiveTab] = useState<PaymentTab>('qr');
   const [utrRef, setUtrRef] = useState('');
   const [downloadDone, setDownloadDone] = useState(false);
+  const [upiCopied, setUpiCopied] = useState(false);
+  const copyTimerRef = useRef<number | null>(null);
 
   const utrDigits = toAsciiDigits(utrRef).replace(/\D/g, '');
   const isUtrValid = utrDigits.length >= 12;
@@ -46,6 +91,8 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   useEffect(() => {
     if (!isOpen) {
       setDownloadDone(false);
+      setUpiCopied(false);
+      setActiveTab('qr');
       return;
     }
     const handleEsc = (e: KeyboardEvent) => {
@@ -57,6 +104,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, isExporting, onClose]);
 
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
+
   if (!isOpen) return null;
 
   const handleUtrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,11 +119,51 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     setUtrRef(cleaned);
   };
 
+  const handleCopyUpiId = async () => {
+    const ok = await copyTextToClipboard(MERCHANT_UPI_ID);
+    if (ok) {
+      setUpiCopied(true);
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+      copyTimerRef.current = window.setTimeout(() => {
+        setUpiCopied(false);
+      }, 3000);
+    }
+  };
+
   const handleConfirm = async () => {
     if (!isUtrValid || isExporting) return;
     await onConfirmPaymentAndDownload();
     setDownloadDone(true);
   };
+
+  const upiAppOptions = [
+    {
+      id: 'gpay',
+      label: copy.payAppGpay,
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+      dotColor: 'bg-blue-600',
+    },
+    {
+      id: 'phonepe',
+      label: copy.payAppPhonePe,
+      badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
+      dotColor: 'bg-purple-600',
+    },
+    {
+      id: 'paytm',
+      label: copy.payAppPaytm,
+      badgeBg: 'bg-sky-50 text-sky-700 border-sky-200',
+      dotColor: 'bg-sky-600',
+    },
+    {
+      id: 'any',
+      label: copy.payAppAny,
+      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      dotColor: 'bg-emerald-600',
+    },
+  ];
 
   return (
     <div
@@ -125,43 +220,181 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
             </div>
           </div>
 
-          {/* Dynamic QR Code Box */}
-          <div className="flex flex-col items-center text-center bg-slate-50/70 rounded-xl border border-slate-200 p-4">
-            <div className="text-xs font-bold text-slate-800 mb-3">
-              {copy.payScanPrompt}
-            </div>
-
-            <div className="relative p-3 bg-white rounded-xl border border-slate-200 shadow-xs">
-              <span className="absolute top-1.5 left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-emerald-600 rounded-tl-xs" />
-              <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-emerald-600 rounded-tr-xs" />
-              <span className="absolute bottom-1.5 left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-emerald-600 rounded-bl-xs" />
-              <span className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-emerald-600 rounded-br-xs" />
-
-              <QRCodeSVG
-                value={UPI_PAYMENT_LINK}
-                size={168}
-                level="M"
-                bgColor="#ffffff"
-                fgColor="#0f172a"
-              />
-            </div>
-
-            <p className="text-xs font-medium text-slate-600 mt-3">{copy.payAppsNote}</p>
-
-            {/* Direct Mobile UPI Anchor Link (target="_top") */}
-            <a
-              href={UPI_PAYMENT_LINK}
-              target="_top"
-              className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-blue-700 hover:bg-blue-800 rounded-xl transition-colors shadow-xs"
+          {/* Payment Method Tabs: Scan QR Code | UPI App */}
+          <div
+            role="tablist"
+            aria-label={copy.payModalTitle}
+            className="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === 'qr'}
+              onClick={() => setActiveTab('qr')}
+              className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                activeTab === 'qr'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             >
-              <ExternalLink className="w-4 h-4 shrink-0" />
-              <span>{copy.payUpiAppBtn}</span>
-            </a>
+              <QrCode className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">{copy.payTabScanQr}</span>
+            </button>
 
-            <p className="text-[11px] leading-relaxed text-slate-600 mt-2.5">
-              {copy.payFallbackNote}
-            </p>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === 'upi'}
+              onClick={() => setActiveTab('upi')}
+              className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                activeTab === 'upi'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Smartphone className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">{copy.payTabUpiApp}</span>
+            </button>
           </div>
+
+          {/* Tab Panel 1: Dynamic QR Code View */}
+          {activeTab === 'qr' ? (
+            <div
+              role="tabpanel"
+              className="flex flex-col items-center text-center bg-slate-50/70 rounded-xl border border-slate-200 p-4"
+            >
+              <div className="text-xs font-bold text-slate-800 mb-3">
+                {copy.payScanPrompt}
+              </div>
+
+              <div className="relative p-3 bg-white rounded-xl border border-slate-200 shadow-xs">
+                <span className="absolute top-1.5 left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-emerald-600 rounded-tl-xs" />
+                <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-emerald-600 rounded-tr-xs" />
+                <span className="absolute bottom-1.5 left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-emerald-600 rounded-bl-xs" />
+                <span className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-emerald-600 rounded-br-xs" />
+
+                <QRCodeSVG
+                  value={UPI_PAYMENT_LINK}
+                  size={168}
+                  level="M"
+                  bgColor="#ffffff"
+                  fgColor="#0f172a"
+                />
+              </div>
+
+              <p className="text-xs font-medium text-slate-600 mt-3">{copy.payAppsNote}</p>
+
+              {/* Quick Actions: Direct UPI App Link + One-Click Copy UPI ID */}
+              <div className="mt-3 w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <a
+                  href={UPI_PAYMENT_LINK}
+                  target="_top"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-bold text-white bg-blue-700 hover:bg-blue-800 rounded-xl transition-colors shadow-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{copy.payUpiAppBtn}</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyUpiId}
+                  className={`inline-flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-semibold rounded-xl border transition-colors cursor-pointer ${
+                    upiCopied
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                      : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-100'
+                  }`}
+                >
+                  {upiCopied ? (
+                    <Check className="w-3.5 h-3.5 shrink-0" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5 shrink-0" />
+                  )}
+                  <span className="truncate">
+                    {upiCopied ? copy.payCopiedUpiBtn : copy.payCopyUpiBtn}
+                  </span>
+                </button>
+              </div>
+
+              <p className="text-[11px] leading-relaxed text-slate-600 mt-2.5">
+                {copy.payFallbackNote}
+              </p>
+            </div>
+          ) : (
+            /* Tab Panel 2: Direct UPI App View */
+            <div
+              role="tabpanel"
+              className="bg-slate-50/70 rounded-xl border border-slate-200 p-4 space-y-3"
+            >
+              <div className="text-center">
+                <div className="text-xs sm:text-sm font-bold text-slate-900">
+                  {copy.payUpiAppTitle}
+                </div>
+                <p className="text-[11px] text-slate-600 mt-0.5">{copy.payUpiAppSubtitle}</p>
+              </div>
+
+              {/* Direct Pay via UPI App Deep Links (GPay / PhonePe / Paytm / Any UPI App) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {upiAppOptions.map((app) => (
+                  <a
+                    key={app.id}
+                    href={UPI_PAYMENT_LINK}
+                    target="_top"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-2 px-3.5 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-400 rounded-xl transition-all shadow-2xs group"
+                  >
+                    <span className="inline-flex items-center gap-2 min-w-0">
+                      <span
+                        className={`w-2.5 h-2.5 rounded-full shrink-0 ${app.dotColor}`}
+                        aria-hidden="true"
+                      />
+                      <span className="text-xs font-bold text-slate-900 truncate">
+                        {app.label}
+                      </span>
+                    </span>
+                    <span
+                      className={`inline-flex items-center justify-center w-6 h-6 rounded-lg border shrink-0 ${app.badgeBg}`}
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              {/* One-Click Copy UPI ID & Switch to QR Fallback */}
+              <div className="pt-1 flex flex-col sm:flex-row gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyUpiId}
+                  className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-bold rounded-xl border transition-colors cursor-pointer ${
+                    upiCopied
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                      : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-100'
+                  }`}
+                >
+                  {upiCopied ? (
+                    <Check className="w-3.5 h-3.5 shrink-0" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5 shrink-0" />
+                  )}
+                  <span>{upiCopied ? copy.payCopiedUpiBtn : copy.payCopyUpiBtn}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('qr')}
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-colors cursor-pointer"
+                >
+                  <QrCode className="w-3.5 h-3.5 shrink-0" />
+                  <span>{copy.paySwitchToQrBtn}</span>
+                </button>
+              </div>
+
+              <div className="rounded-lg bg-amber-50/80 border border-amber-200/80 px-3 py-2 text-[11px] leading-relaxed text-amber-900">
+                {copy.payUpiFallbackNote}
+              </div>
+            </div>
+          )}
 
           {/* Mandatory 12-Digit UTR / Transaction ID */}
           <div>
