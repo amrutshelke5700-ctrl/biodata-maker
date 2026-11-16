@@ -13,6 +13,7 @@ import {
 import { A4PreviewSheet } from './components/A4PreviewSheet';
 import { BiodataForm } from './components/BiodataForm';
 import { PaymentModal } from './components/PaymentModal';
+import { SeoGuideFooter } from './components/SeoGuideFooter';
 import { TemplateSelector } from './components/TemplateSelector';
 import {
   AppLanguage,
@@ -631,12 +632,13 @@ export default function App() {
         </div>
       </main>
 
-      {/* Quiet Footer */}
+      {/* Quiet Footer & Subtle Collapsible Marathi SEO Guide / FAQs */}
       <footer className="border-t border-slate-200 bg-white mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <span>{copy.footerLeft}</span>
           <span>{copy.footerRight}</span>
         </div>
+        <SeoGuideFooter />
       </footer>
 
       {/* Offscreen Unscaled Capture Nodes for Crisp 1:1 A4 PDF Export */}
