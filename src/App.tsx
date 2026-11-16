@@ -348,14 +348,21 @@ export default function App() {
     >
       {/* Clean 3-Zone Top Header with 12-Language Dropdown Selector */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-15 flex items-center justify-between gap-4 sm:gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-15 flex items-center justify-between gap-3 sm:gap-8">
           <a
             href="#top"
-            className={`text-base sm:text-lg font-bold text-slate-900 whitespace-nowrap shrink-0 ${
+            className={`inline-flex items-center gap-2 sm:gap-2.5 min-w-0 text-sm sm:text-lg font-bold text-slate-900 ${
               language === 'en' ? 'tracking-tight' : ''
             }`}
           >
-            {copy.brandTitle}
+            <img
+              src="/favicon.svg"
+              alt="मराठी बायोडाटा मेकर लोगो (Marathi Biodata Maker Logo)"
+              width={32}
+              height={32}
+              className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg shadow-2xs"
+            />
+            <span className="truncate">{copy.brandTitle}</span>
           </a>
 
           <nav
