@@ -1,6 +1,11 @@
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (
+      command: 'event' | 'config' | 'js' | 'set',
+      targetOrEventName: string | Date,
+      params?: Record<string, unknown>
+    ) => void;
   }
 }
 
@@ -14,4 +19,8 @@ export function pushDataLayerEvent(
     event: eventName,
     ...params,
   });
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, params);
+  }
 }

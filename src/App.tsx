@@ -13,6 +13,7 @@ import {
 import { A4PreviewSheet } from './components/A4PreviewSheet';
 import { BiodataForm } from './components/BiodataForm';
 import { PaymentModal } from './components/PaymentModal';
+import { PromoCodeModal } from './components/PromoCodeModal';
 import { SeoGuideFooter } from './components/SeoGuideFooter';
 import { TemplateSelector } from './components/TemplateSelector';
 import {
@@ -124,6 +125,7 @@ export default function App() {
 
   const [isExportingSample, setIsExportingSample] = useState(false);
   const [isExportingHd, setIsExportingHd] = useState(false);
+  const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [exportError, setExportError] = useState('');
 
@@ -320,11 +322,17 @@ export default function App() {
     }
   };
 
-  const handleDownloadHd = async () => {
+  const handleDownloadHd = async (method: 'promo_code' | 'upi_payment' = 'upi_payment') => {
     if (!hdCaptureRef.current) return;
     setExportError('');
     setIsExportingHd(true);
     try {
+      pushDataLayerEvent('biodata_pdf_download', {
+        download_method: method,
+        biodata_mode: mode,
+        template_id: templateId,
+        language,
+      });
       await exportA4Pdf({
         element: hdCaptureRef.current,
         filename: getPdfFilename(false),
@@ -332,19 +340,15 @@ export default function App() {
       });
     } catch {
       setExportError(copy.exportErrorMsg);
+      throw new Error('HD PDF export failed');
     } finally {
       setIsExportingHd(false);
     }
   };
 
-  const handleOpenHdModal = (source: 'header' | 'preview_bar') => {
-    pushDataLayerEvent('biodata_pdf_download', {
-      button_location: source,
-      biodata_mode: mode,
-      template_id: templateId,
-      language,
-    });
-    setIsPaymentModalOpen(true);
+  const handleOpenHdModal = () => {
+    setExportError('');
+    setIsPromoModalOpen(true);
   };
 
   const activeTemplate = TEMPLATES.find((t) => t.id === templateId) || TEMPLATES[0];
@@ -440,7 +444,7 @@ export default function App() {
 
             <button
               type="button"
-              onClick={() => handleOpenHdModal('header')}
+              onClick={handleOpenHdModal}
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
@@ -601,7 +605,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => handleOpenHdModal('preview_bar')}
+                  onClick={handleOpenHdModal}
                   className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer shadow-xs"
                 >
                   <QrCode className="w-4 h-4 shrink-0" />
@@ -707,6 +711,21 @@ export default function App() {
         />
       </div>
 
+      {/* Promo Code Popup for 100% Free HD PDF Download */}
+      <PromoCodeModal
+        isOpen={isPromoModalOpen}
+        isExporting={isExportingHd}
+        language={language}
+        templateName={activeTemplateName}
+        modeLabel={modeLabel}
+        onClose={() => setIsPromoModalOpen(false)}
+        onVerifyAndDownload={() => handleDownloadHd('promo_code')}
+        onSwitchToUpiPayment={() => {
+          setIsPromoModalOpen(false);
+          setIsPaymentModalOpen(true);
+        }}
+      />
+
       {/* ₹29 UPI Payment Popup with Dynamic QR, Direct UPI Link & Mandatory 12-Digit UTR */}
       <PaymentModal
         isOpen={isPaymentModalOpen}
@@ -715,7 +734,7 @@ export default function App() {
         templateName={activeTemplateName}
         modeLabel={modeLabel}
         onClose={() => setIsPaymentModalOpen(false)}
-        onConfirmPaymentAndDownload={handleDownloadHd}
+        onConfirmPaymentAndDownload={() => handleDownloadHd('upi_payment')}
       />
     </div>
   );

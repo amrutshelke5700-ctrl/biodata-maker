@@ -134,8 +134,12 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
   const handleConfirm = async () => {
     if (!isUtrValid || isExporting) return;
-    await onConfirmPaymentAndDownload();
-    setDownloadDone(true);
+    try {
+      await onConfirmPaymentAndDownload();
+      setDownloadDone(true);
+    } catch {
+      // Export failure is surfaced via App.tsx exportError banner
+    }
   };
 
   const upiAppOptions = [
