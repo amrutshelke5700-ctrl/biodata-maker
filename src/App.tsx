@@ -32,6 +32,7 @@ import {
   getLanguageMeta,
 } from './utils/languageFonts';
 import { exportA4Pdf } from './utils/pdfExport';
+import { pushDataLayerEvent } from './utils/gtm';
 import {
   getReligionConfig,
   isKnownReligionDefaultTitle,
@@ -336,6 +337,16 @@ export default function App() {
     }
   };
 
+  const handleOpenHdModal = (source: 'header' | 'preview_bar') => {
+    pushDataLayerEvent('biodata_pdf_download', {
+      button_location: source,
+      biodata_mode: mode,
+      template_id: templateId,
+      language,
+    });
+    setIsPaymentModalOpen(true);
+  };
+
   const activeTemplate = TEMPLATES.find((t) => t.id === templateId) || TEMPLATES[0];
   const activeTemplateName = getLocalizedTemplateCopy(activeTemplate.id, language).name;
   const modeLabel = mode === 'marriage' ? copy.marriageTab : copy.jobTab;
@@ -429,7 +440,7 @@ export default function App() {
 
             <button
               type="button"
-              onClick={() => setIsPaymentModalOpen(true)}
+              onClick={() => handleOpenHdModal('header')}
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
@@ -590,7 +601,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => setIsPaymentModalOpen(true)}
+                  onClick={() => handleOpenHdModal('preview_bar')}
                   className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer shadow-xs"
                 >
                   <QrCode className="w-4 h-4 shrink-0" />
