@@ -3,12 +3,14 @@ import {
   Briefcase,
   ChevronDown,
   Download,
+  ExternalLink,
   Eye,
   FileText,
   Heart,
   Languages,
   Loader2,
   QrCode,
+  X,
 } from 'lucide-react';
 import { A4PreviewSheet } from './components/A4PreviewSheet';
 import { BiodataForm } from './components/BiodataForm';
@@ -62,6 +64,12 @@ function getInitialLanguage(): AppLanguage {
   } catch {
     return 'mr';
   }
+}
+
+function isSocialInAppBrowser(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  return /FBAN|FBAV|Instagram/i.test(ua);
 }
 
 function loadSavedState<T>(key: string, fallback: T): T {
@@ -128,6 +136,7 @@ export default function App() {
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [exportError, setExportError] = useState('');
+  const [showInAppBanner, setShowInAppBanner] = useState<boolean>(isSocialInAppBrowser);
 
   useEffect(() => {
     const meta = getLanguageMeta(language);
@@ -361,6 +370,39 @@ export default function App() {
       style={{ fontFamily: langMeta.fontStack }}
       className="min-h-screen flex flex-col bg-[#F8F9FB] text-slate-900"
     >
+      {/* Instagram / Facebook In-App Browser Guidance Banner */}
+      {showInAppBanner && (
+        <div
+          role="region"
+          aria-label="Browser recommendation"
+          lang="mr"
+          dir="ltr"
+          className="bg-amber-100 border-b border-amber-300 text-amber-950 px-3 sm:px-6 py-2.5"
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2.5">
+            <div className="flex items-start sm:items-center gap-2 text-xs sm:text-sm font-medium leading-snug">
+              <ExternalLink
+                className="w-4 h-4 text-amber-800 shrink-0 mt-0.5 sm:mt-0"
+                aria-hidden="true"
+              />
+              <p>
+                PDF डाउनलोड सुरळीत होण्यासाठी, कृपया वरच्या कोपऱ्यातील तीन डॉट्स (
+                <strong className="font-bold">⋮</strong>) वर टॅप करा आणि{' '}
+                <strong className="font-bold">&apos;Open in Chrome&apos;</strong> निवडा.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowInAppBanner(false)}
+              aria-label="सूचना बंद करा (Dismiss notice)"
+              className="p-1 rounded-md text-amber-800 hover:text-amber-950 hover:bg-amber-200/70 transition-colors shrink-0 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Clean 3-Zone Top Header with 12-Language Dropdown Selector */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-15 flex items-center justify-between gap-3 sm:gap-8">
