@@ -1,6 +1,7 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Check, ChevronDown, ChevronUp, Search, X } from 'lucide-react';
 import { AppLanguage, BiodataMode, TEMPLATES, TemplateId } from '../types/biodata';
+import { getModernTemplateSpec } from '../utils/modernTemplates';
 import { getCopy } from '../utils/translations';
 import { getLocalizedTemplateCopy } from '../utils/templateTranslations';
 
@@ -11,44 +12,71 @@ interface TemplateSelectorProps {
   onSelectTemplate: (id: TemplateId) => void;
 }
 
+type GalleryFilter = 'all' | 'modern' | 'traditional';
+
 function getTemplatePreviewSvgUri(id: TemplateId, paperColor: string): string {
+  const modernSpec = getModernTemplateSpec(id);
   let inner = '';
 
-  switch (id) {
-    case 'royal-gold':
-      inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#B8860B" stroke-width="2"/><rect x="8" y="10" width="24" height="4" fill="#7C2D12"/>`;
-      break;
-    case 'paithani':
-      inner = `<rect x="2" y="2" width="36" height="8" fill="#8E1A50"/><line x1="2" y1="10" x2="38" y2="10" stroke="#D4AF37" stroke-width="1"/><rect x="2" y="42" width="36" height="8" fill="#8E1A50"/><line x1="2" y1="42" x2="38" y2="42" stroke="#D4AF37" stroke-width="1"/><rect x="2" y="10" width="4" height="32" fill="#0F5C53"/><rect x="34" y="10" width="4" height="32" fill="#0F5C53"/>`;
-      break;
-    case 'emerald-ivory':
-      inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#064E3B" stroke-width="2"/><rect x="8" y="8" width="24" height="36" fill="none" stroke="#C59B27" stroke-width="1"/>`;
-      break;
-    case 'kumkum-maroon':
-      inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#7F1D1D" stroke-width="2"/><rect x="8" y="8" width="24" height="6" fill="#D97706"/>`;
-      break;
-    case 'lotus-rose':
-      inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#BE185D" stroke-width="1.5"/><path d="M4 4 H14 A10 10 0 0 1 4 14 Z" fill="#FBCFE8"/><path d="M36 48 H26 A10 10 0 0 1 36 38 Z" fill="#FBCFE8"/>`;
-      break;
-    case 'saffron-maratha':
-      inner = `<rect x="2" y="2" width="36" height="8" fill="#9A3412"/><line x1="2" y1="10" x2="38" y2="10" stroke="#F59E0B" stroke-width="1"/><rect x="2" y="42" width="36" height="8" fill="#9A3412"/><line x1="2" y1="42" x2="38" y2="42" stroke="#F59E0B" stroke-width="1"/><rect x="6" y="6" width="28" height="40" fill="none" stroke="#D97706" stroke-width="1"/>`;
-      break;
-    case 'modern-blue':
-      inner = `<rect x="0" y="0" width="40" height="14" fill="#1E3A8A"/><rect x="2" y="2" width="36" height="48" fill="none" stroke="#BFDBFE" stroke-width="1"/>`;
-      break;
-    case 'charcoal-exec':
-      inner = `<rect x="0" y="0" width="40" height="14" fill="#0F172A"/><rect x="0" y="0" width="6" height="52" fill="#334155"/>`;
-      break;
-    case 'teal-modern':
-      inner = `<rect x="0" y="0" width="40" height="14" fill="#0F766E"/><rect x="2" y="2" width="36" height="48" fill="none" stroke="#99F6E4" stroke-width="1"/>`;
-      break;
-    case 'minimalist':
-    default:
-      inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#374151" stroke-width="1.2"/>`;
-      break;
+  if (modernSpec) {
+    const { primary, accent, dividerColor, borderColor, sectionBg } = modernSpec.color;
+    switch (modernSpec.style) {
+      case 'top-bar':
+        inner = `<rect x="2" y="2" width="36" height="48" fill="none" stroke="${dividerColor}" stroke-width="1"/><rect x="2" y="2" width="36" height="9" fill="${primary}"/><rect x="2" y="11" width="36" height="2" fill="${accent}"/>`;
+        break;
+      case 'left-sidebar':
+        inner = `<rect x="2" y="2" width="36" height="48" fill="none" stroke="${dividerColor}" stroke-width="1"/><rect x="2" y="2" width="6" height="48" fill="${primary}"/><rect x="8" y="2" width="2" height="48" fill="${accent}"/>`;
+        break;
+      case 'split-card':
+        inner = `<rect x="3" y="3" width="34" height="46" rx="3" fill="none" stroke="${borderColor}" stroke-width="1.5"/><rect x="6" y="6" width="28" height="8" rx="1.5" fill="${sectionBg}" stroke="${dividerColor}" stroke-width="0.8"/>`;
+        break;
+      case 'geometric-corner':
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="${dividerColor}" stroke-width="0.8"/><path d="M3 11 V3 H11" fill="none" stroke="${primary}" stroke-width="2"/><path d="M29 3 H37 V11" fill="none" stroke="${accent}" stroke-width="2"/><path d="M3 41 V49 H11" fill="none" stroke="${accent}" stroke-width="2"/><path d="M29 49 H37 V41" fill="none" stroke="${primary}" stroke-width="2"/>`;
+        break;
+      case 'minimal-accent':
+      default:
+        inner = `<rect x="4" y="4" width="32" height="2.5" fill="${primary}"/><rect x="4" y="46" width="32" height="2" fill="${accent}"/><line x1="4" y1="7" x2="4" y2="46" stroke="${dividerColor}" stroke-width="0.8"/><line x1="36" y1="7" x2="36" y2="46" stroke="${dividerColor}" stroke-width="0.8"/>`;
+        break;
+    }
+  } else {
+    switch (id) {
+      case 'royal-gold':
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#B8860B" stroke-width="2"/><rect x="8" y="10" width="24" height="4" fill="#7C2D12"/>`;
+        break;
+      case 'paithani':
+        inner = `<rect x="2" y="2" width="36" height="8" fill="#8E1A50"/><line x1="2" y1="10" x2="38" y2="10" stroke="#D4AF37" stroke-width="1"/><rect x="2" y="42" width="36" height="8" fill="#8E1A50"/><line x1="2" y1="42" x2="38" y2="42" stroke="#D4AF37" stroke-width="1"/><rect x="2" y="10" width="4" height="32" fill="#0F5C53"/><rect x="34" y="10" width="4" height="32" fill="#0F5C53"/>`;
+        break;
+      case 'emerald-ivory':
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#064E3B" stroke-width="2"/><rect x="8" y="8" width="24" height="36" fill="none" stroke="#C59B27" stroke-width="1"/>`;
+        break;
+      case 'kumkum-maroon':
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#7F1D1D" stroke-width="2"/><rect x="8" y="8" width="24" height="6" fill="#D97706"/>`;
+        break;
+      case 'lotus-rose':
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#BE185D" stroke-width="1.5"/><path d="M4 4 H14 A10 10 0 0 1 4 14 Z" fill="#FBCFE8"/><path d="M36 48 H26 A10 10 0 0 1 36 38 Z" fill="#FBCFE8"/>`;
+        break;
+      case 'saffron-maratha':
+        inner = `<rect x="2" y="2" width="36" height="8" fill="#9A3412"/><line x1="2" y1="10" x2="38" y2="10" stroke="#F59E0B" stroke-width="1"/><rect x="2" y="42" width="36" height="8" fill="#9A3412"/><line x1="2" y1="42" x2="38" y2="42" stroke="#F59E0B" stroke-width="1"/><rect x="6" y="6" width="28" height="40" fill="none" stroke="#D97706" stroke-width="1"/>`;
+        break;
+      case 'modern-blue':
+        inner = `<rect x="0" y="0" width="40" height="14" fill="#1E3A8A"/><rect x="2" y="2" width="36" height="48" fill="none" stroke="#BFDBFE" stroke-width="1"/>`;
+        break;
+      case 'charcoal-exec':
+        inner = `<rect x="0" y="0" width="40" height="14" fill="#0F172A"/><rect x="0" y="0" width="6" height="52" fill="#334155"/>`;
+        break;
+      case 'teal-modern':
+        inner = `<rect x="0" y="0" width="40" height="14" fill="#0F766E"/><rect x="2" y="2" width="36" height="48" fill="none" stroke="#99F6E4" stroke-width="1"/>`;
+        break;
+      case 'minimalist':
+      default:
+        inner = `<rect x="4" y="4" width="32" height="44" fill="none" stroke="#374151" stroke-width="1.2"/>`;
+        break;
+    }
   }
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 52" width="40" height="52"><rect width="40" height="52" fill="${paperColor}"/>${inner}<rect x="9" y="18" width="14" height="2" rx="1" fill="#CBD5E1"/><rect x="9" y="23" width="22" height="1.8" rx="0.9" fill="#E2E8F0"/><rect x="9" y="28" width="20" height="1.8" rx="0.9" fill="#E2E8F0"/><rect x="9" y="33" width="17" height="1.8" rx="0.9" fill="#E2E8F0"/></svg>`;
+  const lineOffset = modernSpec?.style === 'left-sidebar' ? 13 : 9;
+  const lineWidth = modernSpec?.style === 'left-sidebar' ? 18 : 22;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 52" width="40" height="52"><rect width="40" height="52" fill="${paperColor}"/>${inner}<rect x="${lineOffset}" y="18" width="14" height="2" rx="1" fill="#CBD5E1"/><rect x="${lineOffset}" y="23" width="${lineWidth}" height="1.8" rx="0.9" fill="#E2E8F0"/><rect x="${lineOffset}" y="28" width="${lineWidth - 2}" height="1.8" rx="0.9" fill="#E2E8F0"/><rect x="${lineOffset}" y="33" width="${lineWidth - 5}" height="1.8" rx="0.9" fill="#E2E8F0"/></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
@@ -59,70 +87,197 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   onSelectTemplate,
 }) => {
   const copy = getCopy(language);
+  const [filter, setFilter] = useState<GalleryFilter>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const filteredTemplates = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return TEMPLATES.filter((tpl) => {
+      if (filter !== 'all' && tpl.category !== filter) {
+        return false;
+      }
+      if (!q) return true;
+      const localized = getLocalizedTemplateCopy(tpl.id, language);
+      const enCopy = getLocalizedTemplateCopy(tpl.id, 'en');
+      const mrCopy = getLocalizedTemplateCopy(tpl.id, 'mr');
+      return (
+        localized.name.toLowerCase().includes(q) ||
+        localized.description.toLowerCase().includes(q) ||
+        enCopy.name.toLowerCase().includes(q) ||
+        mrCopy.name.toLowerCase().includes(q)
+      );
+    });
+  }, [filter, searchQuery, language]);
+
+  const showScrollableAll = isExpanded || filter === 'modern' || searchQuery.trim().length > 0;
+
+  const visibleTemplates = useMemo(() => {
+    if (showScrollableAll || filteredTemplates.length <= 10) {
+      return filteredTemplates;
+    }
+    const baseSlice = filteredTemplates.slice(0, 10);
+    if (baseSlice.some((t) => t.id === selectedTemplate)) {
+      return baseSlice;
+    }
+    const selectedObj = filteredTemplates.find((t) => t.id === selectedTemplate);
+    if (!selectedObj) return baseSlice;
+    return [selectedObj, ...baseSlice.slice(0, 9)];
+  }, [filteredTemplates, showScrollableAll, selectedTemplate]);
 
   return (
-    <section id="templates-section" aria-label={copy.templatesHeading}>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
-        <h2 className="text-sm font-bold text-slate-900">
-          {copy.templatesHeading}
-        </h2>
+    <section id="templates-section" aria-label={copy.templatesHeading} className="space-y-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="text-sm font-bold text-slate-900">{copy.templatesHeading}</h2>
         <span className="text-xs text-slate-500">
           {mode === 'job' ? copy.templatesHintJob : copy.templatesHintMarriage}
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {TEMPLATES.map((tpl) => {
-          const isSelected = selectedTemplate === tpl.id;
-          const tplCopy = getLocalizedTemplateCopy(tpl.id, language);
-          const mrCopy = getLocalizedTemplateCopy(tpl.id, 'mr');
-          const enCopy = getLocalizedTemplateCopy(tpl.id, 'en');
-          const primaryTitle = tplCopy.name;
-          const subLabel =
-            tpl.recommendedFor === mode ? copy.recommendedLabel : tplCopy.description;
-          const previewAlt = `${mrCopy.name} (${enCopy.name}) — ${mrCopy.description} | ${enCopy.description}`;
+      {/* Category Filter Tabs & Search */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+        <div className="inline-flex flex-wrap items-center gap-1.5" role="group" aria-label={copy.templatesHeading}>
+          {(
+            [
+              { id: 'all', label: copy.tplFilterAll },
+              { id: 'modern', label: copy.tplFilterModern },
+              { id: 'traditional', label: copy.tplFilterTraditional },
+            ] as const
+          ).map((tab) => {
+            const active = filter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setFilter(tab.id)}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
+                  active
+                    ? 'bg-slate-900 text-white border-slate-900'
+                    : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-900'
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
 
-          return (
+        <div className="relative w-full sm:w-64">
+          <Search
+            className="w-3.5 h-3.5 text-slate-400 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2"
+            aria-hidden="true"
+          />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={copy.tplSearchPlaceholder}
+            className="w-full pl-8 pr-8 py-1.5 text-xs bg-white border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-400"
+          />
+          {searchQuery && (
             <button
-              key={tpl.id}
               type="button"
-              onClick={() => onSelectTemplate(tpl.id)}
-              aria-pressed={isSelected}
-              className={`group text-left p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-2.5 ${
-                isSelected
-                  ? 'bg-white border-slate-900 ring-2 ring-slate-900/10 shadow-xs'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
-              }`}
+              onClick={() => setSearchQuery('')}
+              aria-label={copy.closeAriaLabel}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5 text-slate-400 hover:text-slate-700 cursor-pointer"
             >
-              {/* Miniature A4 Frame Preview Image with Descriptive Marathi & English Alt */}
-              <img
-                src={getTemplatePreviewSvgUri(tpl.id, tpl.paperColor)}
-                alt={previewAlt}
-                width={40}
-                height={52}
-                className="w-10 h-13 shrink-0 rounded-xs border border-slate-200 block object-cover"
-              />
-
-              {/* Label & Description */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-1">
-                  <div className="text-xs font-bold text-slate-900 leading-snug">
-                    {primaryTitle}
-                  </div>
-                  {isSelected && (
-                    <span className="w-4 h-4 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0">
-                      <Check className="w-2.5 h-2.5" />
-                    </span>
-                  )}
-                </div>
-                <div className="text-[11px] font-medium text-slate-500 mt-0.5 line-clamp-1">
-                  {subLabel}
-                </div>
-              </div>
+              <X className="w-3.5 h-3.5" />
             </button>
-          );
-        })}
+          )}
+        </div>
       </div>
+
+      {/* Template Grid */}
+      {visibleTemplates.length === 0 ? (
+        <div className="bg-white rounded-xl border border-slate-200 p-6 text-center text-xs text-slate-500">
+          {copy.tplNoMatch}
+        </div>
+      ) : (
+        <div
+          className={
+            showScrollableAll
+              ? 'max-h-[390px] overflow-y-auto pr-1 rounded-xl'
+              : ''
+          }
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {visibleTemplates.map((tpl) => {
+              const isSelected = selectedTemplate === tpl.id;
+              const tplCopy = getLocalizedTemplateCopy(tpl.id, language);
+              const mrCopy = getLocalizedTemplateCopy(tpl.id, 'mr');
+              const enCopy = getLocalizedTemplateCopy(tpl.id, 'en');
+              const primaryTitle = tplCopy.name;
+              const subLabel =
+                tpl.recommendedFor === mode ? copy.recommendedLabel : tplCopy.description;
+              const previewAlt = `${mrCopy.name} (${enCopy.name}) — ${mrCopy.description} | ${enCopy.description}`;
+
+              return (
+                <button
+                  key={tpl.id}
+                  type="button"
+                  onClick={() => onSelectTemplate(tpl.id)}
+                  aria-pressed={isSelected}
+                  className={`group text-left p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-2.5 ${
+                    isSelected
+                      ? 'bg-white border-slate-900 ring-2 ring-slate-900/10 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  {/* Miniature A4 Frame Preview Image with Descriptive Marathi & English Alt */}
+                  <img
+                    src={getTemplatePreviewSvgUri(tpl.id, tpl.paperColor)}
+                    alt={previewAlt}
+                    width={40}
+                    height={52}
+                    loading="lazy"
+                    className="w-10 h-13 shrink-0 rounded-xs border border-slate-200 block object-cover"
+                  />
+
+                  {/* Label & Description */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-1">
+                      <div className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
+                        {primaryTitle}
+                      </div>
+                      {isSelected && (
+                        <span className="w-4 h-4 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0">
+                          <Check className="w-2.5 h-2.5" />
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-[11px] font-medium text-slate-500 mt-0.5 line-clamp-1">
+                      {subLabel}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Expand / Collapse All 110 Templates Toggle */}
+      {filter === 'all' && !searchQuery.trim() && filteredTemplates.length > 10 && (
+        <div className="flex justify-center pt-1">
+          <button
+            type="button"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl shadow-2xs transition-colors cursor-pointer"
+          >
+            {isExpanded ? (
+              <>
+                <ChevronUp className="w-4 h-4" />
+                <span>{copy.tplShowLessBtn}</span>
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-4 h-4" />
+                <span>{copy.tplShowAllBtn}</span>
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </section>
   );
 };

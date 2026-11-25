@@ -7,6 +7,7 @@ import {
   TemplateId,
 } from '../types/biodata';
 import { getLanguageMeta } from '../utils/languageFonts';
+import { getModernTemplateSpec } from '../utils/modernTemplates';
 import { getCopy } from '../utils/translations';
 import { getReligionFieldValues } from '../utils/religionConfig';
 import { formatBirthDateForDisplay } from '../utils/smartFieldOptions';
@@ -42,6 +43,21 @@ interface ThemePalette {
 }
 
 function getPalette(templateId: TemplateId): ThemePalette {
+  const modernSpec = getModernTemplateSpec(templateId);
+  if (modernSpec) {
+    return {
+      paperBg: modernSpec.color.paperBg,
+      headingColor: modernSpec.color.primary,
+      subHeadingColor: modernSpec.color.secondary,
+      accentColor: modernSpec.color.accent,
+      labelColor: '#475569',
+      valueColor: '#0F172A',
+      dividerColor: modernSpec.color.dividerColor,
+      sectionBg: modernSpec.color.sectionBg,
+      photoBorder: modernSpec.color.accent,
+    };
+  }
+
   switch (templateId) {
     case 'royal-gold':
       return {
@@ -229,7 +245,223 @@ const WatermarkLayer: React.FC<{ watermarkText: string; language: AppLanguage }>
   );
 };
 
-const FrameChrome: React.FC<{ templateId: TemplateId }> = ({ templateId }) => {
+const ModernFrameChrome: React.FC<{
+  templateId: TemplateId;
+  isRtl: boolean;
+}> = ({ templateId, isRtl }) => {
+  const spec = getModernTemplateSpec(templateId);
+  if (!spec) return null;
+  const { primary, accent, dividerColor, borderColor } = spec.color;
+
+  if (spec.style === 'top-bar') {
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            inset: '14px',
+            border: `1.5px solid ${dividerColor}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '14px',
+            left: '14px',
+            right: '14px',
+            height: '8px',
+            backgroundColor: primary,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '22px',
+            left: '14px',
+            right: '14px',
+            height: '2.5px',
+            backgroundColor: accent,
+            pointerEvents: 'none',
+          }}
+        />
+      </>
+    );
+  }
+
+  if (spec.style === 'left-sidebar') {
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            inset: '14px',
+            border: `1.5px solid ${dividerColor}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '14px',
+            bottom: '14px',
+            ...(isRtl ? { right: '14px' } : { left: '14px' }),
+            width: '12px',
+            backgroundColor: primary,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '14px',
+            bottom: '14px',
+            ...(isRtl ? { right: '26px' } : { left: '26px' }),
+            width: '3px',
+            backgroundColor: accent,
+            pointerEvents: 'none',
+          }}
+        />
+      </>
+    );
+  }
+
+  if (spec.style === 'split-card') {
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            inset: '14px',
+            border: `2px solid ${borderColor}`,
+            borderRadius: '10px',
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: '20px',
+            border: `1px solid ${dividerColor}`,
+            borderRadius: '6px',
+            pointerEvents: 'none',
+          }}
+        />
+      </>
+    );
+  }
+
+  if (spec.style === 'geometric-corner') {
+    const cornerSize = '26px';
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            inset: '16px',
+            border: `1px solid ${dividerColor}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '14px',
+            left: '14px',
+            width: cornerSize,
+            height: cornerSize,
+            borderTop: `3.5px solid ${primary}`,
+            borderLeft: `3.5px solid ${primary}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '14px',
+            right: '14px',
+            width: cornerSize,
+            height: cornerSize,
+            borderTop: `3.5px solid ${accent}`,
+            borderRight: `3.5px solid ${accent}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '14px',
+            left: '14px',
+            width: cornerSize,
+            height: cornerSize,
+            borderBottom: `3.5px solid ${accent}`,
+            borderLeft: `3.5px solid ${accent}`,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '14px',
+            right: '14px',
+            width: cornerSize,
+            height: cornerSize,
+            borderBottom: `3.5px solid ${primary}`,
+            borderRight: `3.5px solid ${primary}`,
+            pointerEvents: 'none',
+          }}
+        />
+      </>
+    );
+  }
+
+  // minimal-accent
+  return (
+    <>
+      <div
+        style={{
+          position: 'absolute',
+          top: '16px',
+          left: '22px',
+          right: '22px',
+          height: '3px',
+          backgroundColor: primary,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '16px',
+          left: '22px',
+          right: '22px',
+          height: '2px',
+          backgroundColor: accent,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: '22px',
+          borderLeft: `1px solid ${dividerColor}`,
+          borderRight: `1px solid ${dividerColor}`,
+          pointerEvents: 'none',
+        }}
+      />
+    </>
+  );
+};
+
+const FrameChrome: React.FC<{ templateId: TemplateId; isRtl: boolean }> = ({
+  templateId,
+  isRtl,
+}) => {
+  if (getModernTemplateSpec(templateId)) {
+    return <ModernFrameChrome templateId={templateId} isRtl={isRtl} />;
+  }
+
   if (templateId === 'royal-gold') {
     return (
       <>
@@ -551,6 +783,10 @@ const SectionHeading: React.FC<{
   templateId: TemplateId;
 }> = ({ title, language, palette, templateId }) => {
   const langMeta = getLanguageMeta(language);
+  const isRtl = langMeta.dir === 'rtl';
+  const modernSpec = getModernTemplateSpec(templateId);
+  const isLeftAccentModern =
+    modernSpec?.style === 'left-sidebar' || modernSpec?.style === 'minimal-accent';
   const isClassic =
     templateId === 'royal-gold' ||
     templateId === 'paithani' ||
@@ -563,9 +799,16 @@ const SectionHeading: React.FC<{
       style={{
         marginTop: '14px',
         marginBottom: '8px',
-        padding: '4px 10px',
+        padding: isLeftAccentModern ? '5px 10px' : '4px 10px',
         backgroundColor: palette.sectionBg,
-        borderBottom: `1.5px solid ${palette.accentColor}`,
+        borderRadius: modernSpec?.style === 'split-card' ? '5px' : '0px',
+        ...(isLeftAccentModern
+          ? {
+              ...(isRtl
+                ? { borderRight: `3.5px solid ${palette.accentColor}` }
+                : { borderLeft: `3.5px solid ${palette.accentColor}` }),
+            }
+          : { borderBottom: `1.5px solid ${palette.accentColor}` }),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -596,12 +839,18 @@ export const A4PreviewSheet: React.FC<A4PreviewSheetProps> = ({
 }) => {
   const copy = getCopy(language);
   const langMeta = getLanguageMeta(language);
+  const isRtl = langMeta.dir === 'rtl';
   const palette = getPalette(templateId);
+  const modernSpec = getModernTemplateSpec(templateId);
   const contentPadding =
     templateId === 'paithani'
       ? '56px 50px 54px 50px'
       : templateId === 'saffron-maratha'
       ? '54px 48px 52px 48px'
+      : modernSpec?.style === 'left-sidebar'
+      ? isRtl
+        ? '40px 54px 40px 44px'
+        : '40px 44px 40px 54px'
       : '42px 46px 40px 46px';
 
   return (
@@ -615,7 +864,7 @@ export const A4PreviewSheet: React.FC<A4PreviewSheetProps> = ({
         direction: langMeta.dir,
       }}
     >
-      <FrameChrome templateId={templateId} />
+      <FrameChrome templateId={templateId} isRtl={isRtl} />
       {showWatermark && (
         <WatermarkLayer watermarkText={copy.watermarkWord} language={language} />
       )}
@@ -872,24 +1121,31 @@ const JobContent: React.FC<{
 }> = ({ data, language, templateId, palette }) => {
   const copy = getCopy(language);
   const isRtl = getLanguageMeta(language).dir === 'rtl';
+  const modernSpec = getModernTemplateSpec(templateId);
   const hasDarkBanner =
     templateId === 'modern-blue' ||
     templateId === 'charcoal-exec' ||
-    templateId === 'teal-modern';
-  const bannerBg =
-    templateId === 'charcoal-exec'
-      ? '#0F172A'
-      : templateId === 'teal-modern'
-      ? '#0F766E'
-      : templateId === 'modern-blue'
-      ? '#1E3A8A'
-      : palette.sectionBg;
-  const bannerSubColor =
-    templateId === 'charcoal-exec'
-      ? '#CBD5E1'
-      : templateId === 'teal-modern'
-      ? '#CCFBF1'
-      : '#DBEAFE';
+    templateId === 'teal-modern' ||
+    modernSpec?.style === 'top-bar' ||
+    modernSpec?.style === 'left-sidebar';
+  const bannerBg = modernSpec
+    ? hasDarkBanner
+      ? modernSpec.color.primary
+      : palette.sectionBg
+    : templateId === 'charcoal-exec'
+    ? '#0F172A'
+    : templateId === 'teal-modern'
+    ? '#0F766E'
+    : templateId === 'modern-blue'
+    ? '#1E3A8A'
+    : palette.sectionBg;
+  const bannerSubColor = modernSpec
+    ? modernSpec.color.bannerSubColor
+    : templateId === 'charcoal-exec'
+    ? '#CBD5E1'
+    : templateId === 'teal-modern'
+    ? '#CCFBF1'
+    : '#DBEAFE';
   const validEducation = data.educationList.filter(
     (item) => item.degree.trim() || item.institute.trim() || item.year.trim() || item.score.trim()
   );

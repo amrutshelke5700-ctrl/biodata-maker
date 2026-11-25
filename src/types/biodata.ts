@@ -1,3 +1,5 @@
+import { MODERN_TEMPLATE_SPECS, ModernTemplateId } from '../utils/modernTemplates';
+
 export type AppLanguage =
   | 'mr'
   | 'hi'
@@ -14,7 +16,7 @@ export type AppLanguage =
 
 export type BiodataMode = 'marriage' | 'job';
 
-export type TemplateId =
+export type ClassicTemplateId =
   | 'royal-gold'
   | 'paithani'
   | 'emerald-ivory'
@@ -25,6 +27,8 @@ export type TemplateId =
   | 'charcoal-exec'
   | 'teal-modern'
   | 'minimalist';
+
+export type TemplateId = ClassicTemplateId | ModernTemplateId;
 
 export type PhotoShape = 'circle' | 'square';
 
@@ -116,12 +120,13 @@ export interface TemplateConfig {
   descriptionMarathi: string;
   descriptionEnglish: string;
   recommendedFor: BiodataMode;
+  category: 'traditional' | 'modern';
   primaryColor: string;
   secondaryColor: string;
   paperColor: string;
 }
 
-export const TEMPLATES: TemplateConfig[] = [
+const CORE_TEMPLATES: TemplateConfig[] = [
   {
     id: 'royal-gold',
     nameMarathi: 'शाही पेशवाई सोनेरी बॉर्डर',
@@ -129,6 +134,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'पारंपरिक सोनेरी महिरप व शाही किनार',
     descriptionEnglish: 'Traditional ornate gold border & emblem',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#7C2D12',
     secondaryColor: '#C59B27',
     paperColor: '#FFFDF7',
@@ -140,6 +146,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'राणी-मोरपंखी पैठणी काठ व जरीच्या नक्षीसह',
     descriptionEnglish: 'Classic Paithani silk border with zari motifs',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#8E1A50',
     secondaryColor: '#0F5C53',
     paperColor: '#FFFBF6',
@@ -151,6 +158,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'गडद पाचू हिरवी व सोनेरी कोपऱ्यांची मांडणी',
     descriptionEnglish: 'Deep emerald green frame with antique gold corners',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#064E3B',
     secondaryColor: '#C59B27',
     paperColor: '#FAFDF9',
@@ -162,6 +170,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'मंगल कुंकू लाल व भगव्या सोनेरी सजावटीसह',
     descriptionEnglish: 'Auspicious maroon frame with golden temple corners',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#7F1D1D',
     secondaryColor: '#D97706',
     paperColor: '#FFFDF9',
@@ -173,6 +182,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'सौम्य गुलाबी हस्तिदंती व कमळ पाकळी बॉर्डर',
     descriptionEnglish: 'Elegant rosewood & blush ivory floral corners',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#9D174D',
     secondaryColor: '#BE185D',
     paperColor: '#FFF9FB',
@@ -184,6 +194,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'मराठा परंपरेची भगवी व सुवर्ण महिरप किनार',
     descriptionEnglish: 'Heritage saffron top-band & Peshwai arch corners',
     recommendedFor: 'marriage',
+    category: 'traditional',
     primaryColor: '#9A3412',
     secondaryColor: '#D97706',
     paperColor: '#FFFDF5',
@@ -195,6 +206,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'नोकरी बायोडाटा व आधुनिक मांडणीसाठी प्रभावी',
     descriptionEnglish: 'Clean corporate navy header ideal for resumes',
     recommendedFor: 'job',
+    category: 'modern',
     primaryColor: '#1E3A8A',
     secondaryColor: '#2563EB',
     paperColor: '#FFFFFF',
@@ -206,6 +218,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'प्रभावी गडद स्लेट पट्टीसह व्यावसायिक रेझ्युमे',
     descriptionEnglish: 'Sleek executive charcoal bar for corporate profiles',
     recommendedFor: 'job',
+    category: 'modern',
     primaryColor: '#0F172A',
     secondaryColor: '#475569',
     paperColor: '#FFFFFF',
@@ -217,6 +230,7 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'ताजेतवाने मोरपंखी शीर्षक व सुस्पष्ट मांडणी',
     descriptionEnglish: 'Contemporary deep teal banner with clean grid',
     recommendedFor: 'job',
+    category: 'modern',
     primaryColor: '#0F766E',
     secondaryColor: '#0D9488',
     paperColor: '#FFFFFF',
@@ -228,11 +242,27 @@ export const TEMPLATES: TemplateConfig[] = [
     descriptionMarathi: 'सुटसुटीत, वाचण्यास सोपी व क्लासिक दुहेरी किनार',
     descriptionEnglish: 'Crisp double-hairline border with timeless typography',
     recommendedFor: 'job',
+    category: 'modern',
     primaryColor: '#1F2937',
     secondaryColor: '#64748B',
     paperColor: '#FFFFFF',
   },
 ];
+
+const GENERATED_MODERN_TEMPLATES: TemplateConfig[] = MODERN_TEMPLATE_SPECS.map((spec) => ({
+  id: spec.id,
+  nameMarathi: `आधुनिक ${spec.color.key}`,
+  nameEnglish: `Modern ${spec.color.key} ${spec.style}`,
+  descriptionMarathi: 'आधुनिक स्वच्छ ए४ मांडणी',
+  descriptionEnglish: 'Clean modern A4 layout',
+  recommendedFor: spec.recommendedFor,
+  category: 'modern',
+  primaryColor: spec.color.primary,
+  secondaryColor: spec.color.accent,
+  paperColor: spec.color.paperBg,
+}));
+
+export const TEMPLATES: TemplateConfig[] = [...CORE_TEMPLATES, ...GENERATED_MODERN_TEMPLATES];
 
 export const MARRIAGE_TITLE_PRESETS = [
   '॥ श्री गणेशाय नमः ॥',

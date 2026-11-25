@@ -1,11 +1,16 @@
-import { AppLanguage, TemplateId } from '../types/biodata';
+import { AppLanguage, ClassicTemplateId, TemplateId } from '../types/biodata';
+import {
+  ModernColorKey,
+  ModernStyleKey,
+  getModernTemplateSpec,
+} from './modernTemplates';
 
 export interface TemplateCopy {
   name: string;
   description: string;
 }
 
-export const TEMPLATE_TRANSLATIONS: Record<TemplateId, Record<AppLanguage, TemplateCopy>> = {
+export const TEMPLATE_TRANSLATIONS: Record<ClassicTemplateId, Record<AppLanguage, TemplateCopy>> = {
   'royal-gold': {
     mr: { name: 'शाही पेशवाई सोनेरी बॉर्डर', description: 'पारंपरिक सोनेरी महिरप व शाही किनार' },
     hi: { name: 'शाही सुनहरी बॉर्डर', description: 'पारंपरिक सुनहरी मेहराब और शाही किनारा' },
@@ -148,6 +153,160 @@ export const TEMPLATE_TRANSLATIONS: Record<TemplateId, Record<AppLanguage, Templ
   },
 };
 
+export const MODERN_COLOR_LABELS: Record<ModernColorKey, Record<AppLanguage, string>> = {
+  indigo: {
+    mr: 'नील', hi: 'नील', gu: 'નીલ', bn: 'নীল', ta: 'கருநீலம்', te: 'నీలం', kn: 'ನೀಲಿ', ml: 'നീല', pa: 'ਨੀਲਾ', or: 'ନୀଳ', ur: 'نیلا', en: 'Indigo',
+  },
+  midnight: {
+    mr: 'रात्री निळा', hi: 'गहरा स्लेट', gu: 'ઘેરો સ્લેટ', bn: 'রাত্রি স্লেট', ta: 'இருள் நீலம்', te: 'రాత్రి నీలం', kn: 'ಕಡು ನೀಲಿ', ml: 'രാത്രി നീല', pa: 'ਗੂੜ੍ਹਾ ਸਲੇਟੀ', or: 'ଗାଢ଼ ସ୍ଲେଟ୍', ur: 'گہرا سلیٹی', en: 'Midnight',
+  },
+  emerald: {
+    mr: 'पाचू हिरवा', hi: 'पन्ना हरा', gu: 'પન્ના લીલો', bn: 'পান্না সবুজ', ta: 'மரகத பச்சை', te: 'మరకత పచ్చ', kn: 'ಪಚ್ಚೆ ಹಸಿರು', ml: 'മരതക പച്ച', pa: 'ਪੰਨਾ ਹਰਾ', or: 'ପାନ୍ନା ସବୁଜ', ur: 'زمرد سبز', en: 'Emerald',
+  },
+  violet: {
+    mr: 'जांभळा', hi: 'बैंगनी', gu: 'જાંબલી', bn: 'বেগুনি', ta: 'ஊதா', te: 'వంగపువ్వు', kn: 'ನೇರಳೆ', ml: 'വയലറ്റ്', pa: 'ਜਾਮਨੀ', or: 'ବାଇଗଣୀ', ur: 'جامنی', en: 'Violet',
+  },
+  crimson: {
+    mr: 'गडद गुलाबी लाल', hi: 'किरमिजी लाल', gu: 'લાલ કિરમજી', bn: 'সিঁদুর লাল', ta: 'செந்நிறம்', te: 'ఎరుపు', kn: 'ಕೆಂಪು', ml: 'ചുവപ്പ്', pa: 'ਸੂਹਾ ਲਾਲ', or: 'ଗାଢ଼ ଲାଲ', ur: 'سرخ', en: 'Crimson',
+  },
+  cobalt: {
+    mr: 'आकाशी निळा', hi: 'आसमानी नीला', gu: 'આસમાની વાદળી', bn: 'আকাশি নীল', ta: 'வான் நீலம்', te: 'ఆకాశ నీలం', kn: 'ಆಕಾಶ ನೀಲಿ', ml: 'ആകാശ നീല', pa: 'ਅਸਮਾਨੀ ਨੀਲਾ', or: 'ଆକାଶୀ ନୀଳ', ur: 'آسمانی نیلا', en: 'Cobalt',
+  },
+  terracotta: {
+    mr: 'तांबडा केशरी', hi: 'टेराकोटा केसरिया', gu: 'કેસરી માટી', bn: 'গেরুয়া', ta: 'செம்மண் காவி', te: 'కాషాయం', kn: 'ಕೇಸರಿ', ml: 'കേസരി', pa: 'ਕੇਸਰੀ', or: 'ଗେରୁଆ', ur: 'زعفرانی', en: 'Terracotta',
+  },
+  forest: {
+    mr: 'रान हिरवा', hi: 'वन हरा', gu: 'વન લીલો', bn: 'বন সবুজ', ta: 'காட்டுப் பச்சை', te: 'ఆకుపచ్చ', kn: 'ಕಾಡು ಹಸಿರು', ml: 'വന പച്ച', pa: 'ਹਰਾ', or: 'ସବୁଜ', ur: 'جنگل سبز', en: 'Forest',
+  },
+  burgundy: {
+    mr: 'गडद वाइन लाल', hi: 'बरगंडी लाल', gu: 'ઘેરો મરૂન', bn: 'গাঢ় লাল', ta: 'மெரூன்', te: 'మెరూన్', kn: 'ಮೆರೂನ್', ml: 'മെറൂൺ', pa: 'ਮੈਰੂਨ', or: 'ମେରୁନ୍', ur: 'گہرا سرخ', en: 'Burgundy',
+  },
+  sapphire: {
+    mr: 'नीलम निळा', hi: 'नीलम नीला', gu: 'નીલમ વાદળી', bn: 'নীলম নীল', ta: 'நீலக்கல்', te: 'నీలమణి', kn: 'ನೀಲಮಣಿ', ml: 'നീലക്കല്ല്', pa: 'ਨੀਲਮ ਨੀਲਾ', or: 'ନୀଳମଣି', ur: 'نیلم نیلا', en: 'Sapphire',
+  },
+  plum: {
+    mr: 'जाम्भुळसर गुलाबी', hi: 'आलूबुखारा बैंगनी', gu: 'જાંબુડી', bn: 'জাম রঙা', ta: 'நாவல் ஊதா', te: 'నేరేడు ఊదా', kn: 'ನೇರಳೆ ಗುಲಾಬಿ', ml: 'ഞാവൽ നിറം', pa: 'ਜਾਮਨੀ ਗੁਲਾਬੀ', or: 'ଜାମୁକୋଳି ରଙ୍ଗ', ur: 'آلوبخارا جامنی', en: 'Plum',
+  },
+  bronze: {
+    mr: 'कांस्य सोनेरी', hi: 'कांस्य सुनहरा', gu: 'કાંસ્ય સોનેરી', bn: 'তাম্র সোনালী', ta: 'வெண்கல தங்கம்', te: 'కంచు బంగారం', kn: 'ಕಂಚಿನ ಚಿನ್ನ', ml: 'വെങ്കല സ്വർണ്ണം', pa: 'ਕਾਂਸੀ ਸੁਨਹਿਰੀ', or: 'କାଂସ୍ୟ ସୁନେଲି', ur: 'کانسی سنہری', en: 'Bronze',
+  },
+  nordic: {
+    mr: 'सागर निळा', hi: 'सागर नीला', gu: 'સાગર વાદળી', bn: 'সাগর নীল', ta: 'கடல் நீலம்', te: 'సముద్ర నీలం', kn: 'ಸಾಗರ ನೀಲಿ', ml: 'കടൽ നീല', pa: 'ਸਾਗਰ ਨੀਲਾ', or: 'ସାଗର ନୀଳ', ur: 'سمندری نیلا', en: 'Nordic Sky',
+  },
+  rosequartz: {
+    mr: 'गुलाब पाकळी', hi: 'गुलाब पँखुड़ी', gu: 'ગુલાબી પાંખડી', bn: 'গোলাপি', ta: 'ரோஜா இளஞ்சிவப்பு', te: 'గులాబీ', kn: 'ಗುಲಾಬಿ', ml: 'റോസ് പിങ്ക്', pa: 'ਗੁਲਾਬੀ', or: 'ଗୋଲାପୀ', ur: 'گلابی', en: 'Rose Quartz',
+  },
+  olive: {
+    mr: 'ऑलिव्ह हिरवा', hi: 'जैतूनी हरा', gu: 'ઓલિવ લીલો', bn: 'জলপাই সবুজ', ta: 'ஆலிவ் பச்சை', te: 'ఆలివ్ పచ్చ', kn: 'ಆಲಿವ್ ಹಸಿರು', ml: 'ഒലിവ് പച്ച', pa: 'ਜ਼ੈਤੂਨੀ ਹਰਾ', or: 'ଅଲିଭ୍ ସବୁଜ', ur: 'زیتونی سبز', en: 'Olive',
+  },
+  graphite: {
+    mr: 'राखाडी स्लेट', hi: 'ग्रेफाइट स्लेट', gu: 'રાખોડી સ્લેટ', bn: 'ধূসর স্লেট', ta: 'கிராஃபைட் சாம்பல்', te: 'గ్రాఫైట్ బూడిద', kn: 'ಗ್ರ್ಯಾಫೈಟ್ ಬೂದು', ml: 'ഗ്രാഫൈറ്റ് ചാരനിറം', pa: 'ਸਲੇਟੀ', or: 'ଧୂସର', ur: 'سلیٹی', en: 'Graphite',
+  },
+  peacock: {
+    mr: 'मोरपंखी', hi: 'मोरपंखी', gu: 'મોરપીંછ', bn: 'ময়ূরকণ্ঠী', ta: 'மயில்நீலம்', te: 'నెమలిపింఛం', kn: 'ನವಿಲುನೀಲಿ', ml: 'മയിൽനീല', pa: 'ਮੋਰਪੰਖੀ', or: 'ମୟୂରକଣ୍ଠୀ', ur: 'فیروزی', en: 'Peacock Teal',
+  },
+  vermilion: {
+    mr: 'सिंदुरी लाल', hi: 'सिंदूरी लाल', gu: 'સિંદૂરી લાલ', bn: 'সিঁদুর লাল', ta: 'குங்கும சிவப்பு', te: 'సిందూరం', kn: 'ಸಿಂಧೂರ ಕೆಂಪು', ml: 'സിന്ദൂര ചുവപ്പ്', pa: 'ਸੰਧੂਰੀ ਲਾਲ', or: 'ସିନ୍ଦୂର ଲାଲ', ur: 'سندوری سرخ', en: 'Vermilion',
+  },
+  lavender: {
+    mr: 'सौम्य लॅव्हेंडर', hi: 'लैवेंडर बैंगनी', gu: 'સૌમ્ય જાંબલી', bn: 'ল্যাভেন্ডার', ta: 'லாவெண்டர் ஊதா', te: 'లావెండర్', kn: 'ಲ್ಯಾವೆಂಡರ್', ml: 'ലാവെൻഡർ', pa: 'ਲਵੈਂਡਰ', or: 'ଲାଭେଣ୍ଡର', ur: 'ہلکا جامنی', en: 'Lavender',
+  },
+  obsidian: {
+    mr: 'काळा सुवर्ण', hi: 'काला स्वर्ण', gu: 'કાળો સુવર્ણ', bn: 'কালো সোনালী', ta: 'கருப்பு தங்கம்', te: 'నలుపు బంగారం', kn: 'ಕಪ್ಪು ಚಿನ್ನ', ml: 'കറുപ്പ് സ്വർണ്ണം', pa: 'ਕਾਲਾ ਸੁਨਹਿਰੀ', or: 'କଳା ସୁନେଲି', ur: 'سیاہ سنہری', en: 'Obsidian Gold',
+  },
+};
+
+export const MODERN_STYLE_LABELS: Record<
+  ModernStyleKey,
+  Record<AppLanguage, { styleName: string; styleDesc: string }>
+> = {
+  'top-bar': {
+    mr: { styleName: 'आधुनिक शीर्ष पट्टी', styleDesc: 'शीर्षक पट्टीसह सुटसुटीत आधुनिक मांडणी' },
+    hi: { styleName: 'आधुनिक शीर्ष पट्टी', styleDesc: 'शीर्ष पट्टी के साथ स्पष्ट आधुनिक रूपरेखा' },
+    gu: { styleName: 'આધુનિક ટોચની પટ્ટી', styleDesc: 'શીર્ષક પટ્ટી સાથે સ્વચ્છ આધુનિક ગોઠવણી' },
+    bn: { styleName: 'আধুনিক শীর্ষ ফ্রেম', styleDesc: 'আকর্ষণীয় শীর্ষ পট্টিসহ পরিচ্ছন্ন বিন্যাস' },
+    ta: { styleName: 'நவீன மேல் பட்டை', styleDesc: 'தெளிவான மேல் பட்டையுடன் நவீன அமைப்பு' },
+    te: { styleName: 'ఆధునిక టాప్ బ్యానర్', styleDesc: 'ఆకర్షణీయమైన ఎగువ పట్టీతో ఆధునిక డిజైన్' },
+    kn: { styleName: 'ಆಧುನಿಕ ಮೇಲ್ಭಾಗ ಪಟ್ಟಿ', styleDesc: 'ಸ್ಪಷ್ಟ ಮೇಲ್ಭಾಗ ಪಟ್ಟಿಯೊಂದಿಗೆ ಆಧುನಿಕ ವಿನ್ಯಾಸ' },
+    ml: { styleName: 'ആധുനിക ടോപ്പ് ബാർ', styleDesc: 'മനോഹരമായ മുകൾപ്പട്ടയുള്ള ആധുനിക രൂപകല്പന' },
+    pa: { styleName: 'ਆਧੁਨਿਕ ਸਿਖਰ ਪੱਟੀ', styleDesc: 'ਸਾਫ਼-ਸੁਥਰੀ ਸਿਖਰ ਪੱਟੀ ਵਾਲਾ ਆਧੁਨਿਕ ਡਿਜ਼ਾਈਨ' },
+    or: { styleName: 'ଆଧୁନିକ ଶୀର୍ଷ ପଟି', styleDesc: 'ସୁନ୍ଦର ଶୀର୍ଷ ପଟି ସହିତ ଆଧୁନିକ ବିନ୍ୟାସ' },
+    ur: { styleName: 'جدید بالائی پٹی', styleDesc: 'نمایاں بالائی پٹی کے ساتھ صاف جدید انداز' },
+    en: { styleName: 'Top Header Band', styleDesc: 'Modern top accent bar with clean page frame' },
+  },
+  'left-sidebar': {
+    mr: { styleName: 'डावी बाजू पट्टी', styleDesc: 'डाव्या बाजूला आकर्षक उभी आधुनिक पट्टी' },
+    hi: { styleName: 'बायां स्तंभ पट्टी', styleDesc: 'बाईं ओर आकर्षक ऊर्ध्वाधर आधुनिक पट्टी' },
+    gu: { styleName: 'ડાબી બાજુ પટ્ટી', styleDesc: 'ડાબી બાજુ આકર્ષક ઊભી આધુનિક પટ્ટી' },
+    bn: { styleName: 'বাম পার্শ্বরেখা', styleDesc: 'বাম পাশে আকর্ষণীয় উল্লম্ব আধুনিক রেখা' },
+    ta: { styleName: 'இடது பட்டை அமைப்பு', styleDesc: 'இடதுபுறம் செங்குத்து பட்டையுடன் நவீன தோற்றம்' },
+    te: { styleName: 'ఎడమ సైడ్ బార్', styleDesc: 'ఎడమ వైపు ఆకర్షణీయమైన నిలువు పట్టీ డిజైన్' },
+    kn: { styleName: 'ಎಡ ಪಾರ್ಶ್ವ ಪಟ್ಟಿ', styleDesc: 'ಎಡಭಾಗದಲ್ಲಿ ಆಕರ್ಷಕ ಲಂಬ ಪಟ್ಟಿಯ ವಿನ್ಯಾಸ' },
+    ml: { styleName: 'ഇടത് സൈഡ്ബാർ', styleDesc: 'ഇടതുവശത്ത് മനോഹരമായ ലംബ പട്ടയുള്ള ഡിസൈൻ' },
+    pa: { styleName: 'ਖੱਬੀ ਸਾਈਡ ਪੱਟੀ', styleDesc: 'ਖੱਬੇ ਪਾਸੇ ਆਕਰਸ਼ਕ ਖੜ੍ਹੀ ਆਧੁਨਿਕ ਪੱਟੀ' },
+    or: { styleName: 'ବାମ ପାର୍ଶ୍ୱ ପଟି', styleDesc: 'ବାମ ପାର୍ଶ୍ୱରେ ଆକର୍ଷଣୀୟ ଲମ୍ବ ପଟି ବିନ୍ୟାସ' },
+    ur: { styleName: 'بائیں سائیڈ بار', styleDesc: 'بائیں جانب عمودی پٹی کے ساتھ جدید ڈیزائن' },
+    en: { styleName: 'Left Accent Sidebar', styleDesc: 'Architectural vertical sidebar with crisp layout' },
+  },
+  'split-card': {
+    mr: { styleName: 'आधुनिक गोलाकार कार्ड', styleDesc: 'सौम्य गोलाकार किनार व रंगसंगत विभाग मांडणी' },
+    hi: { styleName: 'आधुनिक गोल कार्ड', styleDesc: 'सौम्य गोल कोने और संतुलित आधुनिक कार्ड' },
+    gu: { styleName: 'આધુનિક ગોળાકાર કાર્ડ', styleDesc: 'સુંદર ગોળાકાર ખૂણા અને આધુનિક કાર્ડ ફ્રેમ' },
+    bn: { styleName: 'আধুনিক কার্ড ফ্রেম', styleDesc: 'নরম গোলাকার কোণ ও পরিচ্ছন্ন আধুনিক কার্ড' },
+    ta: { styleName: 'நவீன வளைவு அட்டை', styleDesc: 'மென்மையான வளைவு ஓரத்துடன் நவீன அட்டை அமைப்பு' },
+    te: { styleName: 'ఆధునిక కార్డ్ ఫ్రేమ్', styleDesc: 'మృదువైన గుండ్రని మూలలతో ఆధునిక కార్డ్ డిజైన్' },
+    kn: { styleName: 'ಆಧುನಿಕ ಕಾರ್ಡ್ ವಿನ್ಯಾಸ', styleDesc: 'ಮೃದುವಾದ ದುಂಡು ಮೂಲೆಗಳ ಆಧುನಿಕ ಕಾರ್ಡ್' },
+    ml: { styleName: 'ആധുനിക കാർഡ് ഫ്രെയിം', styleDesc: 'മനോഹരമായ വൃത്താകൃതിയിലുള്ള അരികുകൾ' },
+    pa: { styleName: 'ਆਧੁਨਿਕ ਗੋਲ ਕਾਰਡ', styleDesc: 'ਨਰਮ ਗੋਲ ਕੋਨਿਆਂ ਵਾਲਾ ਆਧੁਨਿਕ ਕਾਰਡ ਫਰੇਮ' },
+    or: { styleName: 'ଆଧୁନିକ କାର୍ଡ ଫ୍ରେମ୍', styleDesc: 'ସୁନ୍ଦର ଗୋଲାକାର କୋଣ ସହିତ ଆଧୁନିକ କାର୍ଡ' },
+    ur: { styleName: 'جدید گول کارڈ', styleDesc: 'نرم گول کونوں اور متوازن حاشیہ کے ساتھ' },
+    en: { styleName: 'Modern Soft Card', styleDesc: 'Rounded modern card frame with tinted headers' },
+  },
+  'geometric-corner': {
+    mr: { styleName: 'भौमितिक कोपरा किनार', styleDesc: 'चारही कोपऱ्यांवर आकर्षक आधुनिक भौमितिक रेषा' },
+    hi: { styleName: 'ज्यामितीय कोना फ्रेम', styleDesc: 'चारों कोनों पर आकर्षक आधुनिक ज्यामितीय रेखाएं' },
+    gu: { styleName: 'ભૌમિતિક ખૂણા ફ્રેમ', styleDesc: 'ચારેય ખૂણે આકર્ષક આધુનિક ભૌમિતિક રેખા' },
+    bn: { styleName: 'জ্যামিতিক কোণ ফ্রেম', styleDesc: 'চার কোণে আধুনিক জ্যামিতিক রেখার সাজ' },
+    ta: { styleName: 'வடிவியல் மூலை ஓரம்', styleDesc: 'நான்கு மூலைகளிலும் நவீன வடிவியல் கோடுகள்' },
+    te: { styleName: 'జ్యామితీయ మూల ఫ్రేమ్', styleDesc: 'నాలుగు మూలల్లో ఆధునిక జ్యామితీయ అంచులు' },
+    kn: { styleName: 'ಜ್ಯಾಮಿತೀಯ ಮೂಲೆ ಅಂಚು', styleDesc: 'ನಾಲ್ಕು ಮೂಲೆಗಳಲ್ಲಿ ಆಧುನಿಕ ಜ್ಯಾಮಿತೀಯ ಗೆರೆಗಳು' },
+    ml: { styleName: 'ജ്യാമിതീയ കോർണർ', styleDesc: 'നാല് മൂലകളിലും ആധുനിക ജ്യാമിതീയ അലങ്കാരം' },
+    pa: { styleName: 'ਜਿਓਮੈਟ੍ਰਿਕ ਕੋਨਾ ਫਰੇਮ', styleDesc: 'ਚਾਰੇ ਕੋਨਿਆਂ ਤੇ ਆਕਰਸ਼ਕ ਆਧੁਨਿਕ ਰੇਖਾਵਾਂ' },
+    or: { styleName: 'ଜ୍ୟାମିତିକ କୋଣ ଫ୍ରେମ୍', styleDesc: 'ଚାରି କୋଣରେ ଆଧୁନିକ ଜ୍ୟାମିତିକ ରେଖା ସଜ୍ଜା' },
+    ur: { styleName: 'جیومیٹرک کونہ فریم', styleDesc: 'چاروں کونوں پر جدید جیومیٹرک لکیروں کی آرائش' },
+    en: { styleName: 'Geometric Corner', styleDesc: 'Crisp architectural corner brackets & hairline' },
+  },
+  'minimal-accent': {
+    mr: { styleName: 'स्वच्छ आधुनिक किमान', styleDesc: 'सुस्पष्ट विभाग रेषा व अत्याधुनिक मिनिमल शैली' },
+    hi: { styleName: 'स्वच्छ आधुनिक मिनिमल', styleDesc: 'स्पष्ट अनुभाग रेखा और आधुनिक मिनिमल शैली' },
+    gu: { styleName: 'સ્વચ્છ આધુનિક મિનિમલ', styleDesc: 'સ્પષ્ટ વિભાગ રેખા અને આધુનિક સરળ શૈલી' },
+    bn: { styleName: 'পরিচ্ছন্ন মিনিমাল', styleDesc: 'স্পষ্ট বিভাগ রেখা ও আধুনিক পরিশীলিত শৈলী' },
+    ta: { styleName: 'தூய நவீன மினிமல்', styleDesc: 'தெளிவான பிரிவு கோடு மற்றும் நவீன எளிய பாணி' },
+    te: { styleName: 'శుభ్రమైన మినిమల్', styleDesc: 'స్పష్టమైన విభాగాలతో ఆధునిక సొగసైన శైలి' },
+    kn: { styleName: 'ಸ್ವಚ್ಛ ಆಧುನಿಕ ಮಿನಿಮಲ್', styleDesc: 'ಸ್ಪಷ್ಟ ವಿಭಾಗ ಗೆರೆ ಮತ್ತು ಆಧುನಿಕ ಸರಳ ಶೈಲಿ' },
+    ml: { styleName: 'ലളിതമായ മിനിമൽ', styleDesc: 'വ്യക്തമായ വിഭാഗങ്ങളും ആധുനിക ലളിത ശൈലിയും' },
+    pa: { styleName: 'ਸਾਫ਼ ਆਧੁਨਿਕ ਮਿਨੀਮਲ', styleDesc: 'ਸਪੱਸ਼ਟ ਭਾਗ ਰੇਖਾ ਅਤੇ ਆਧੁਨਿਕ ਸਧਾਰਨ ਸ਼ੈਲੀ' },
+    or: { styleName: 'ସ୍ୱଚ୍ଛ ଆଧୁନିକ ମିନିମାଲ୍', styleDesc: 'ସ୍ପଷ୍ଟ ବିଭାଗ ରେଖା ଏବଂ ଆଧୁନିକ ସରଳ ଶୈଳୀ' },
+    ur: { styleName: 'صاف جدید سادہ', styleDesc: 'واضح سیکشن لائن اور جدید نفیس انداز' },
+    en: { styleName: 'Minimalist Accent', styleDesc: 'Swiss-inspired minimal layout with accent bars' },
+  },
+};
+
 export function getLocalizedTemplateCopy(templateId: TemplateId, language: AppLanguage): TemplateCopy {
-  return TEMPLATE_TRANSLATIONS[templateId][language] || TEMPLATE_TRANSLATIONS[templateId].mr;
+  if (templateId in TEMPLATE_TRANSLATIONS) {
+    const core = TEMPLATE_TRANSLATIONS[templateId as ClassicTemplateId];
+    return core[language] || core.mr;
+  }
+
+  const modernSpec = getModernTemplateSpec(templateId);
+  if (modernSpec) {
+    const colorName = MODERN_COLOR_LABELS[modernSpec.color.key][language] || MODERN_COLOR_LABELS[modernSpec.color.key].mr;
+    const styleCopy = MODERN_STYLE_LABELS[modernSpec.style][language] || MODERN_STYLE_LABELS[modernSpec.style].mr;
+    return {
+      name: `${colorName} · ${styleCopy.styleName}`,
+      description: styleCopy.styleDesc,
+    };
+  }
+
+  return TEMPLATE_TRANSLATIONS['royal-gold'][language] || TEMPLATE_TRANSLATIONS['royal-gold'].mr;
 }

@@ -281,7 +281,7 @@ export default function App() {
   const handleModeSwitch = (nextMode: BiodataMode) => {
     setMode(nextMode);
     const activeTpl = TEMPLATES.find((t) => t.id === templateId);
-    if (nextMode === 'job' && activeTpl?.recommendedFor === 'marriage') {
+    if (nextMode === 'job' && activeTpl?.category === 'traditional') {
       setTemplateId('modern-blue');
     } else if (
       nextMode === 'marriage' &&
