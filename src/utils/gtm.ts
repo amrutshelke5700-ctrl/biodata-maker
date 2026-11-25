@@ -24,3 +24,33 @@ export function pushDataLayerEvent(
     window.gtag('event', eventName, params);
   }
 }
+
+export type DocumentType = 'biodata' | 'resume';
+
+export interface FileDownloadEventParams {
+  documentType: DocumentType;
+  fileName: string;
+  downloadVariant: 'free_sample' | 'hd_pdf';
+  downloadMethod?: 'promo_code' | 'upi_payment';
+  templateId: string;
+  language: string;
+}
+
+export function trackFileDownloadEvent({
+  documentType,
+  fileName,
+  downloadVariant,
+  downloadMethod,
+  templateId,
+  language,
+}: FileDownloadEventParams): void {
+  pushDataLayerEvent('file_download', {
+    document_type: documentType,
+    file_name: fileName,
+    file_extension: 'pdf',
+    download_variant: downloadVariant,
+    ...(downloadMethod ? { download_method: downloadMethod } : {}),
+    template_id: templateId,
+    language,
+  });
+}

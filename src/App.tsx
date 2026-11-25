@@ -35,7 +35,7 @@ import {
   getLanguageMeta,
 } from './utils/languageFonts';
 import { exportA4Pdf } from './utils/pdfExport';
-import { pushDataLayerEvent } from './utils/gtm';
+import { pushDataLayerEvent, trackFileDownloadEvent } from './utils/gtm';
 import {
   getReligionConfig,
   isKnownReligionDefaultTitle,
@@ -316,12 +316,21 @@ export default function App() {
 
   const handleDownloadSample = async () => {
     if (!sampleCaptureRef.current) return;
+    const filename = getPdfFilename(true);
+    const documentType = mode === 'marriage' ? 'biodata' : 'resume';
     setExportError('');
     setIsExportingSample(true);
     try {
       await exportA4Pdf({
         element: sampleCaptureRef.current,
-        filename: getPdfFilename(true),
+        filename,
+        language,
+      });
+      trackFileDownloadEvent({
+        documentType,
+        fileName: filename,
+        downloadVariant: 'free_sample',
+        templateId,
         language,
       });
     } catch {
@@ -333,18 +342,29 @@ export default function App() {
 
   const handleDownloadHd = async (method: 'promo_code' | 'upi_payment' = 'upi_payment') => {
     if (!hdCaptureRef.current) return;
+    const filename = getPdfFilename(false);
+    const documentType = mode === 'marriage' ? 'biodata' : 'resume';
     setExportError('');
     setIsExportingHd(true);
     try {
       pushDataLayerEvent('biodata_pdf_download', {
         download_method: method,
         biodata_mode: mode,
+        document_type: documentType,
         template_id: templateId,
         language,
       });
       await exportA4Pdf({
         element: hdCaptureRef.current,
-        filename: getPdfFilename(false),
+        filename,
+        language,
+      });
+      trackFileDownloadEvent({
+        documentType,
+        fileName: filename,
+        downloadVariant: 'hd_pdf',
+        downloadMethod: method,
+        templateId,
         language,
       });
     } catch {
