@@ -207,7 +207,7 @@ export interface AppCopy {
 }
 
 const MR_COPY: AppCopy = {
-  pageTitle: 'मराठी बायोडाटा मेकर — विवाह व नोकरी बायोडाटा ए४ पीडीएफ',
+  pageTitle: 'Free Marathi Biodata Maker - लग्नाचा बायोडाटा व नोकरीचा Resume मोफत बनवा',
   brandTitle: 'मराठी बायोडाटा मेकर',
   navAriaLabel: 'मुख्य नेव्हिगेशन',
   langAriaLabel: 'भाषा निवडा',
