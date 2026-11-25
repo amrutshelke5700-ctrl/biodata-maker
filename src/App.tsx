@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Briefcase,
+  CheckCircle2,
   ChevronDown,
   Download,
   ExternalLink,
@@ -36,6 +37,12 @@ import {
 } from './utils/languageFonts';
 import { exportA4Pdf } from './utils/pdfExport';
 import { pushDataLayerEvent, trackFileDownloadEvent } from './utils/gtm';
+import {
+  fetchDownloadCount,
+  formatDownloadCount,
+  getInitialDownloadCount,
+  incrementDownloadCount,
+} from './utils/downloadCounter';
 import {
   getReligionConfig,
   isKnownReligionDefaultTitle,
@@ -137,6 +144,17 @@ export default function App() {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [exportError, setExportError] = useState('');
   const [showInAppBanner, setShowInAppBanner] = useState<boolean>(isSocialInAppBrowser);
+  const [downloadCount, setDownloadCount] = useState<number>(getInitialDownloadCount);
+
+  useEffect(() => {
+    let active = true;
+    void fetchDownloadCount().then((count) => {
+      if (active) setDownloadCount(count);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const meta = getLanguageMeta(language);
@@ -333,6 +351,7 @@ export default function App() {
         templateId,
         language,
       });
+      void incrementDownloadCount().then(setDownloadCount);
     } catch {
       setExportError(copy.exportErrorMsg);
     } finally {
@@ -367,6 +386,7 @@ export default function App() {
         templateId,
         language,
       });
+      void incrementDownloadCount().then(setDownloadCount);
     } catch {
       setExportError(copy.exportErrorMsg);
       throw new Error('HD PDF export failed');
@@ -531,6 +551,13 @@ export default function App() {
               {copy.heroTitle}
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">{copy.heroSubtitle}</p>
+            <div className="mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200/80 text-xs font-semibold text-emerald-800">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-hidden="true" />
+              <span className="tabular-nums font-bold">
+                {formatDownloadCount(downloadCount, language)}
+              </span>
+              <span>{copy.downloadsCountLabel}</span>
+            </div>
           </div>
 
           <div className="self-start lg:self-auto w-full lg:w-auto">

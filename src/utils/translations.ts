@@ -14,6 +14,7 @@ export interface AppCopy {
   headerDownloadCta: string;
   heroTitle: string;
   heroSubtitle: string;
+  downloadsCountLabel: string;
   languageLabel: string;
   marriageTab: string;
   jobTab: string;
@@ -212,6 +213,7 @@ const MR_COPY: AppCopy = {
   headerDownloadCta: 'एचडी पीडीएफ डाउनलोड करा',
   heroTitle: 'मराठी विवाह आणि नोकरी बायोडाटा मेकर',
   heroSubtitle: 'फक्त २ मिनिटांत आकर्षक ए४ बायोडाटा तयार करा · लाइव्ह प्रिव्ह्यू आणि इन्स्टंट पीडीएफ डाउनलोड',
+  downloadsCountLabel: 'बायोडाटा व रेझ्युमे डाउनलोड्स',
   languageLabel: 'भाषा:',
   marriageTab: 'विवाह बायोडाटा',
   jobTab: 'नोकरी बायोडाटा',
@@ -404,6 +406,7 @@ const HI_COPY: AppCopy = {
   headerDownloadCta: 'एचडी पीडीएफ डाउनलोड करें',
   heroTitle: 'हिन्दी विवाह एवं नौकरी बायोडाटा मेकर',
   heroSubtitle: 'सिर्फ २ मिनट में आकर्षक ए४ बायोडाटा बनाएं · लाइव प्रीव्यू और तुरंत पीडीएफ डाउनलोड',
+  downloadsCountLabel: 'बायोडाटा व रेज़्यूमे डाउनलोड्स',
   languageLabel: 'भाषा:',
   marriageTab: 'विवाह बायोडाटा',
   jobTab: 'नौकरी बायोडाटा',
@@ -596,6 +599,7 @@ const GU_COPY: AppCopy = {
   headerDownloadCta: 'એચડી પીડીએફ ડાઉનલોડ કરો',
   heroTitle: 'ગુજરાતી લગ્ન અને નોકરી બાયોડેટા મેકર',
   heroSubtitle: 'માત્ર ૨ મિનિટમાં આકર્ષક એ૪ બાયોડેટા બનાવો · લાઇવ પૂર્વાવલોકન અને ત્વરિત પીડીએફ ડાઉનલોડ',
+  downloadsCountLabel: 'બાયોડેટા અને રેઝ્યુમે ડાઉનલોડ્સ',
   languageLabel: 'ભાષા:',
   marriageTab: 'લગ્ન બાયોડેટા',
   jobTab: 'નોકરી બાયોડેટા',
@@ -788,6 +792,7 @@ const BN_COPY: AppCopy = {
   headerDownloadCta: 'এইচডি পিডিএফ ডাউনলোড করুন',
   heroTitle: 'বাংলা বিবাহ ও চাকরি বায়োডাটা মেকার',
   heroSubtitle: 'মাত্র ২ মিনিটে আকর্ষণীয় এ৪ বায়োডাটা তৈরি করুন · লাইভ প্রিভিউ ও তাৎক্ষণিক পিডিএফ ডাউনলোড',
+  downloadsCountLabel: 'বায়োডাটা ও রেজিউমে ডাউনলোড',
   languageLabel: 'ভাষা:',
   marriageTab: 'বিবাহ বায়োডাটা',
   jobTab: 'চাকরি বায়োডাটা',
@@ -980,6 +985,7 @@ const TA_COPY: AppCopy = {
   headerDownloadCta: 'எச்டி பிடிஎஃப் பதிவிறக்கவும்',
   heroTitle: 'தமிழ் திருமண மற்றும் வேலை பயோடேட்டா மேக்கர்',
   heroSubtitle: '2 நிமிடங்களில் அழகான ஏ4 பயோடேட்டா உருவாக்குங்கள் · நேரடி முன்னோட்டம் மற்றும் உடனடி பிடிஎஃப் பதிவிறக்கம்',
+  downloadsCountLabel: 'பயோடேட்டா மற்றும் ரெஸ்யூம் பதிவிறக்கங்கள்',
   languageLabel: 'மொழி:',
   marriageTab: 'திருமண பயோடேட்டா',
   jobTab: 'வேலை பயோடேட்டா',
@@ -1172,6 +1178,7 @@ const TE_COPY: AppCopy = {
   headerDownloadCta: 'హెచ్‌డి పిడిఎఫ్ డౌన్‌లోడ్',
   heroTitle: 'తెలుగు వివాహ మరియు ఉద్యోగ బయోడేటా మేకర్',
   heroSubtitle: 'కేవలం 2 నిమిషాల్లో ఆకర్షణీయమైన ఏ4 బయోడేటా తయారు చేయండి · లైవ్ ప్రివ్యూ మరియు తక్షణ పిడిఎఫ్ డౌన్‌లోడ్',
+  downloadsCountLabel: 'బయోడేటా మరియు రెజ్యూమ్ డౌన్‌లోడ్‌లు',
   languageLabel: 'భాష:',
   marriageTab: 'వివాహ బయోడేటా',
   jobTab: 'ఉద్యోగ బయోడేటా',
@@ -1364,6 +1371,7 @@ const KN_COPY: AppCopy = {
   headerDownloadCta: 'ಎಚ್‌ಡಿ ಪಿಡಿಎಫ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ',
   heroTitle: 'ಕನ್ನಡ ವಿವಾಹ ಮತ್ತು ಉದ್ಯೋಗ ಬಯೋಡೇಟಾ ಮೇಕರ್',
   heroSubtitle: 'ಕೇವಲ 2 ನಿಮಿಷಗಳಲ್ಲಿ ಆಕರ್ಷಕ ಎ4 ಬಯೋಡೇಟಾ ತಯಾರಿಸಿ · ನೇರ ಮುನ್ನೋಟ ಮತ್ತು ತಕ್ಷಣದ ಪಿಡಿಎಫ್ ಡೌನ್‌ಲೋಡ್',
+  downloadsCountLabel: 'ಬಯೋಡೇಟಾ ಮತ್ತು ರೆಸ್ಯೂಮ್ ಡೌನ್‌ಲೋಡ್‌ಗಳು',
   languageLabel: 'ಭಾಷೆ:',
   marriageTab: 'ವಿವಾಹ ಬಯೋಡೇಟಾ',
   jobTab: 'ಉದ್ಯೋಗ ಬಯೋಡೇಟಾ',
@@ -1556,6 +1564,7 @@ const ML_COPY: AppCopy = {
   headerDownloadCta: 'എച്ച്ഡി പിഡിഎഫ് ഡൗൺലോഡ്',
   heroTitle: 'മലയാളം വിവാഹ, ജോലി ബയോഡാറ്റ മേക്കർ',
   heroSubtitle: 'വെറും 2 മിനിറ്റിനുള്ളിൽ മനോഹരമായ എ4 ബയോഡാറ്റ തയ്യാറാക്കൂ · തത്സമയ പ്രിവ്യൂവും ഉടനടി പിഡിഎഫ് ഡൗൺലോഡും',
+  downloadsCountLabel: 'ബയോഡാറ്റ, റെസ്യൂമെ ഡൗൺലോഡുകൾ',
   languageLabel: 'ഭാഷ:',
   marriageTab: 'വിവാഹ ബയോഡാറ്റ',
   jobTab: 'ജോലി ബയോഡാറ്റ',
@@ -1748,6 +1757,7 @@ const PA_COPY: AppCopy = {
   headerDownloadCta: 'ਐਚਡੀ ਪੀਡੀਐਫ ਡਾਊਨਲੋਡ ਕਰੋ',
   heroTitle: 'ਪੰਜਾਬੀ ਵਿਆਹ ਅਤੇ ਨੌਕਰੀ ਬਾਇਓਡਾਟਾ ਮੇਕਰ',
   heroSubtitle: 'ਸਿਰਫ਼ ੨ ਮਿੰਟਾਂ ਵਿੱਚ ਆਕਰਸ਼ਕ ਏ੪ ਬਾਇਓਡਾਟਾ ਬਣਾਓ · ਲਾਈਵ ਪ੍ਰੀਵਿਊ ਅਤੇ ਤੁਰੰਤ ਪੀਡੀਐਫ ਡਾਊਨਲੋਡ',
+  downloadsCountLabel: 'ਬਾਇਓਡਾਟਾ ਅਤੇ ਰਿਜ਼ਿਊਮੇ ਡਾਊਨਲੋਡ',
   languageLabel: 'ਭਾਸ਼ਾ:',
   marriageTab: 'ਵਿਆਹ ਬਾਇਓਡਾਟਾ',
   jobTab: 'ਨੌਕਰੀ ਬਾਇਓਡਾਟਾ',
@@ -1940,6 +1950,7 @@ const OR_COPY: AppCopy = {
   headerDownloadCta: 'ଏଚ୍‌ଡି ପିଡିଏଫ୍ ଡାଉନଲୋଡ୍',
   heroTitle: 'ଓଡ଼ିଆ ବିବାହ ଏବଂ ଚାକିରି ବାୟୋଡାଟା ମେକର',
   heroSubtitle: 'ମାତ୍ର ୨ ମିନିଟରେ ଆକର୍ଷଣୀୟ ଏ୪ ବାୟୋଡାଟା ପ୍ରସ୍ତୁତ କରନ୍ତୁ · ଲାଇଭ୍ ପ୍ରିଭ୍ୟୁ ଏବଂ ତତକ୍ଷଣାତ୍ ପିଡିଏଫ୍ ଡାଉନଲୋଡ୍',
+  downloadsCountLabel: 'ବାୟୋଡାଟା ଏବଂ ରେଜ୍ୟୁମେ ଡାଉନଲୋଡ୍',
   languageLabel: 'ଭାଷା:',
   marriageTab: 'ବିବାହ ବାୟୋଡାଟା',
   jobTab: 'ଚାକିରି ବାୟୋଡାଟା',
@@ -2132,6 +2143,7 @@ const UR_COPY: AppCopy = {
   headerDownloadCta: 'ایچ ڈی پی ڈی ایف ڈاؤن لوڈ',
   heroTitle: 'اردو شادی اور ملازمت بائیوڈیٹا میکر',
   heroSubtitle: 'صرف ۲ منٹ میں دلکش اے۴ بائیوڈیٹا تیار کریں · براہ راست پیش نظارہ اور فوری پی ڈی ایف ڈاؤن لوڈ',
+  downloadsCountLabel: 'بائیوڈیٹا اور ریزیومے ڈاؤن لوڈز',
   languageLabel: 'زبان:',
   marriageTab: 'شادی بائیوڈیٹا',
   jobTab: 'ملازمت بائیوڈیٹا',
@@ -2324,6 +2336,7 @@ const EN_COPY: AppCopy = {
   headerDownloadCta: 'Download HD PDF',
   heroTitle: 'Marriage & Job Biodata Maker',
   heroSubtitle: 'Create a print-ready A4 Marriage Biodata or Job Resume in minutes · Live preview & instant PDF download',
+  downloadsCountLabel: 'Biodata & Resume Downloads',
   languageLabel: 'Language:',
   marriageTab: 'Marriage Biodata',
   jobTab: 'Job Resume',
