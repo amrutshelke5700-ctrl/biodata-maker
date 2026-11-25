@@ -453,11 +453,11 @@ export default function App() {
             }`}
           >
             <img
-              src="/favicon.svg"
-              alt="मराठी बायोडाटा मेकर लोगो (Marathi Biodata Maker Logo)"
-              width={32}
-              height={32}
-              className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg shadow-2xs"
+              src="/assets/aistudio/file_000000000e2882118e1921c0f496a220_b2812ba7.png"
+              alt="Biodata Resume Maker Logo"
+              width={40}
+              height={40}
+              className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full object-cover shadow-2xs"
             />
             <span className="truncate">{copy.brandTitle}</span>
           </a>
