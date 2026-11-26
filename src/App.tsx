@@ -1199,12 +1199,11 @@ export default function App() {
       </main>
 
       {/* SadhanBox Footer & Legal Navigation + Quick FAQs */}
-      <footer lang={uiLang} dir="ltr" className="border-t border-slate-200 bg-white mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-          <span>{s.footerTagline}</span>
-          <span>{s.footerPrivacyNote}</span>
-        </div>
+      <footer lang={uiLang} dir="ltr" className="border-t border-[#E2E8F0] bg-[#FFFFFF] mt-12">
         <SeoGuideFooter uiLang={uiLang} onNavigate={navigateTo} />
+        <div className="border-t border-[#E2E8F0] max-w-7xl mx-auto px-4 sm:px-6 py-4 text-center text-xs font-medium text-slate-600">
+          © 2026 SadhanBox. All rights reserved.
+        </div>
       </footer>
 
       {/* Offscreen Unscaled Capture Nodes for Crisp 1:1 A4 PDF Export */}
