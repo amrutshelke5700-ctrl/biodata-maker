@@ -260,7 +260,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const handlePointerDown = (event: MouseEvent) => {
+    const handlePointerDown = (event: PointerEvent) => {
       if (toolsMenuRef.current && !toolsMenuRef.current.contains(event.target as Node)) {
         setIsToolsMenuOpen(false);
       }
@@ -270,10 +270,10 @@ export default function App() {
         setIsToolsMenuOpen(false);
       }
     };
-    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('pointerdown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
@@ -759,14 +759,20 @@ export default function App() {
                 </button>
 
                 {isToolsMenuOpen && (
-                  <div
-                    role="menu"
-                    aria-label="SadhanBox Tools Menu"
-                    className="absolute right-0 mt-2 w-72 sm:w-80 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 z-50"
-                  >
-                    <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400">
-                      {s.navAllToolsSubheading}
-                    </div>
+                  <>
+                    <div
+                      className="fixed inset-0 z-40 md:hidden"
+                      aria-hidden="true"
+                      onClick={() => setIsToolsMenuOpen(false)}
+                    />
+                    <div
+                      role="menu"
+                      aria-label="SadhanBox Tools Menu"
+                      className="fixed inset-x-4 top-[4.25rem] mx-auto max-w-md md:absolute md:inset-x-auto md:top-auto md:right-0 md:mt-2 md:w-80 bg-white border border-[#E2E8F0] rounded-2xl shadow-xl p-2 z-50 max-h-[80vh] overflow-y-auto"
+                    >
+                      <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400">
+                        {s.navAllToolsSubheading}
+                      </div>
                     <div className="space-y-0.5 mt-1">
                       {TOOL_CATALOG.map((tool) => {
                         const isCurrent = activeRoute === tool.route;
@@ -803,6 +809,7 @@ export default function App() {
                       })}
                     </div>
                   </div>
+                  </>
                 )}
               </div>
             </nav>
