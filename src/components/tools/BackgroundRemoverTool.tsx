@@ -308,7 +308,7 @@ export const BackgroundRemoverTool: React.FC<BackgroundRemoverToolProps> = ({
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
           >
             <ImagePlus className="w-4 h-4" />
             <span>{s.bgUploadBtn}</span>
@@ -317,13 +317,13 @@ export const BackgroundRemoverTool: React.FC<BackgroundRemoverToolProps> = ({
       ) : (
         <div className="space-y-5">
           {/* Action Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-[#E2E8F0] rounded-xl p-3.5">
             <div className="flex flex-wrap items-center gap-2.5">
               <button
                 type="button"
                 onClick={handleRemoveBackground}
                 disabled={isProcessing}
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-violet-700 hover:bg-violet-800 rounded-xl transition-colors cursor-pointer disabled:opacity-60"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer disabled:opacity-60"
               >
                 {isProcessing ? (
                   <>
@@ -377,7 +377,7 @@ export const BackgroundRemoverTool: React.FC<BackgroundRemoverToolProps> = ({
                     ? void handleDownloadAllBatch()
                     : void handleDownloadSingle(primaryItem)
                 }
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>
@@ -506,7 +506,7 @@ export const BackgroundRemoverTool: React.FC<BackgroundRemoverToolProps> = ({
                       <button
                         type="button"
                         onClick={() => void handleDownloadSingle(item)}
-                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg cursor-pointer"
+                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-lg cursor-pointer"
                       >
                         <Download className="w-3.5 h-3.5" />
                         <span>{s.bgDownloadPngBtn}</span>

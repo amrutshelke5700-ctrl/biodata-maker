@@ -151,26 +151,26 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div lang={uiLang} dir="ltr" className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-10">
       {/* Hero Section */}
-      <section className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 lg:p-10">
+      <section className="bg-[#FFFFFF] border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 lg:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-8 space-y-4">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
-              <span className="inline-flex items-center gap-1.5 text-emerald-700">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span className="inline-flex items-center gap-1.5 text-[#16A34A]">
+                <ShieldCheck className="w-4 h-4 text-[#16A34A] shrink-0" />
                 {s.heroTrustPrivacy}
               </span>
               <span className="text-slate-300" aria-hidden="true">
                 ·
               </span>
-              <span className="inline-flex items-center gap-1.5 text-slate-700">
-                <Lock className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+              <span className="inline-flex items-center gap-1.5 text-[#0F172A]">
+                <Lock className="w-3.5 h-3.5 text-[#2563EB] shrink-0" />
                 {s.heroTrustNoUpload}
               </span>
               <span className="text-slate-300" aria-hidden="true">
                 ·
               </span>
-              <span className="inline-flex items-center gap-1.5 text-slate-800">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span className="inline-flex items-center gap-1.5 text-[#0F172A]">
+                <CheckCircle2 className="w-4 h-4 text-[#16A34A] shrink-0" />
                 <strong className="tabular-nums font-bold">
                   {formatDownloadCount(downloadCount, uiLang)}
                 </strong>{' '}
@@ -178,15 +178,15 @@ export const HomePage: React.FC<HomePageProps> = ({
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight text-balance">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1E40AF] leading-tight text-balance">
               {s.heroTitle}
             </h1>
 
-            <p className="text-base sm:text-lg font-medium text-slate-700 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg font-medium text-[#0F172A] max-w-2xl leading-relaxed">
               {s.heroTagline}
             </p>
 
-            <p className="text-xs sm:text-sm text-slate-500 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
               {s.heroSubtitle}
             </p>
 
@@ -194,14 +194,14 @@ export const HomePage: React.FC<HomePageProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('/biodata-maker')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer shadow-xs"
               >
-                <Heart className="w-4 h-4 text-rose-400" />
+                <Heart className="w-4 h-4 text-rose-300" />
                 <span>{s.heroPrimaryCta}</span>
               </button>
               <a
                 href="#all-tools-grid"
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#1E40AF] bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl transition-colors"
               >
                 <span>{s.heroSecondaryCta}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -256,10 +256,10 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section id="all-tools-grid" className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">{s.toolsGridHeading}</h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">{s.toolsGridSubheading}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#1E40AF]">{s.toolsGridHeading}</h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">{s.toolsGridSubheading}</p>
           </div>
-          <span className="text-xs font-semibold text-slate-500 tabular-nums">
+          <span className="text-xs font-semibold text-[#1E40AF] tabular-nums">
             {s.toolsGridCount}
           </span>
         </div>
@@ -270,7 +270,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               key={tool.id}
               type="button"
               onClick={() => onNavigate(tool.route)}
-              className="group text-left bg-white border border-slate-200 hover:border-slate-400 rounded-2xl p-5 flex flex-col justify-between gap-4 transition-all hover:shadow-sm cursor-pointer"
+              className="group text-left bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#2563EB] rounded-2xl p-5 flex flex-col justify-between gap-4 transition-all hover:shadow-sm cursor-pointer"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
@@ -285,7 +285,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
 
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-slate-950">
+                  <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#1E40AF] transition-colors">
                     {tool.title[uiLang]}
                   </h3>
                 </div>
@@ -295,9 +295,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800">
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#1E40AF]">
                 <span>{s.openToolCta}</span>
-                <ArrowRight className="w-4 h-4 text-slate-500 group-hover:translate-x-1 group-hover:text-slate-900 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#2563EB] group-hover:translate-x-1 transition-transform" />
               </div>
             </button>
           ))}
@@ -333,8 +333,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                       onClick={() => setDonationAmount(amt)}
                       className={`px-3.5 py-1.5 text-xs font-bold rounded-lg border tabular-nums transition-colors cursor-pointer ${
                         active
-                          ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                          ? 'bg-[#1E40AF] text-white border-[#1E40AF]'
+                          : 'bg-slate-50 text-[#0F172A] border-[#E2E8F0] hover:border-[#2563EB]'
                       }`}
                     >
                       {amt ? `₹${amt}` : s.supportCustomAmt}
@@ -345,17 +345,17 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+              <div className="inline-flex items-center gap-2 bg-slate-50 border border-[#E2E8F0] rounded-xl px-3 py-2 text-xs">
                 <span className="text-slate-500">UPI ID:</span>
-                <code className="font-bold text-slate-900 select-all">{DONATION_UPI_ID}</code>
+                <code className="font-bold text-[#0F172A] select-all">{DONATION_UPI_ID}</code>
                 <button
                   type="button"
                   onClick={handleCopyUpi}
-                  className="inline-flex items-center gap-1 px-2 py-1 text-[11px] font-semibold bg-white border border-slate-200 rounded-md hover:bg-slate-100 cursor-pointer"
+                  className="inline-flex items-center gap-1 px-2 py-1 text-[11px] font-semibold bg-white border border-[#E2E8F0] rounded-md hover:bg-slate-100 cursor-pointer"
                 >
                   {copiedUpi ? (
                     <>
-                      <Check className="w-3 h-3 text-emerald-600" />
+                      <Check className="w-3 h-3 text-[#16A34A]" />
                       <span>{s.supportCopiedBtn}</span>
                     </>
                   ) : (
@@ -369,7 +369,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <a
                 href={upiUri}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>{s.supportUpiAppBtn}</span>

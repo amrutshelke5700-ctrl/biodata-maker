@@ -1,64 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
   <defs>
-    <linearGradient id="brandRingGrad" x1="6" y1="54" x2="58" y2="10" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0F172A" />
-      <stop offset="52%" stop-color="#6D28D9" />
-      <stop offset="100%" stop-color="#F97316" />
-    </linearGradient>
-    <linearGradient id="purpleDocGrad" x1="14" y1="16" x2="36" y2="44" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#7C3AED" />
-      <stop offset="100%" stop-color="#4C1D95" />
+    <linearGradient id="sbFavBg" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="100%" stop-color="#2563EB" />
     </linearGradient>
   </defs>
-
-  <!-- Pure White Background -->
-  <rect width="64" height="64" rx="16" fill="#FFFFFF" />
-
-  <!-- Clean Circular Gradient Outline -->
-  <circle cx="32" cy="32" r="27" stroke="url(#brandRingGrad)" stroke-width="3.2" fill="#FFFFFF" />
-
-  <!-- Back Overlapping Document (Biodata) -->
-  <g transform="rotate(-8 26 32)">
-    <rect x="15" y="17" width="21" height="27" rx="3" fill="#EDE9FE" stroke="#6D28D9" stroke-width="1.3" />
-    <path d="M15 20C15 18.3431 16.3431 17 18 17H33C34.6569 17 36 18.3431 36 20V23.5H15V20Z" fill="url(#purpleDocGrad)" />
-    <rect x="18.5" y="27" width="11" height="2" rx="1" fill="#312E81" opacity="0.7" />
-    <rect x="18.5" y="31.5" width="14" height="2" rx="1" fill="#312E81" opacity="0.55" />
-    <rect x="18.5" y="36" width="10" height="2" rx="1" fill="#312E81" opacity="0.45" />
-  </g>
-
-  <!-- Front Overlapping Document (Resume) -->
-  <rect x="24" y="20" width="23" height="29" rx="3.2" fill="#FFFFFF" stroke="#1E1B4B" stroke-width="1.4" />
-  <rect x="27" y="23" width="17" height="2.4" rx="1.2" fill="#0F172A" />
-
-  <!-- Professional Profile Avatar -->
-  <circle cx="31" cy="30.5" r="3.4" fill="#E0E7FF" stroke="#1E1B4B" stroke-width="0.9" />
-  <circle cx="31" cy="29.6" r="1.25" fill="#1E1B4B" />
-  <path d="M28.8 32.7C29.3 31.6 32.7 31.6 33.2 32.7" stroke="#1E1B4B" stroke-width="1.1" stroke-linecap="round" />
-
-  <!-- Document Lines beside Avatar -->
-  <rect x="36.5" y="28.3" width="7.5" height="1.8" rx="0.9" fill="#0F172A" />
-  <rect x="36.5" y="31.5" width="6" height="1.6" rx="0.8" fill="#6D28D9" opacity="0.75" />
-
-  <!-- Checkmarks & Document Rows -->
-  <path d="M27.3 37.5L28.5 38.7L30.7 36.4" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <rect x="32.5" y="36.8" width="11.5" height="1.7" rx="0.85" fill="#334155" />
-
-  <path d="M27.3 41.7L28.5 42.9L30.7 40.6" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <rect x="32.5" y="41" width="11.5" height="1.7" rx="0.85" fill="#334155" />
-
-  <path d="M27.3 45.7L28.5 46.9L30.7 44.6" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <rect x="32.5" y="45" width="9.5" height="1.7" rx="0.85" fill="#475569" />
-
-  <!-- Red Circular/Scalloped FREE Badge -->
-  <circle cx="48" cy="18" r="8.2" fill="#EF4444" stroke="#FFFFFF" stroke-width="1.4" />
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#sbFavBg)" />
+  <rect x="4" y="4" width="56" height="56" rx="12" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="1.5" />
   <text
-    x="48"
-    y="19.8"
+    x="32"
+    y="42"
     text-anchor="middle"
     fill="#FFFFFF"
-    font-family="system-ui, -apple-system, sans-serif"
-    font-size="5.3"
+    font-family="Plus Jakarta Sans, system-ui, -apple-system, sans-serif"
+    font-size="28"
     font-weight="800"
-    letter-spacing="0.2"
-  >FREE</text>
+    letter-spacing="-1"
+  >SB</text>
+  <circle cx="51" cy="13" r="4.2" fill="#F59E0B" />
 </svg>

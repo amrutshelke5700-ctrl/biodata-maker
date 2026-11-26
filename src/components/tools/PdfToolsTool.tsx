@@ -489,7 +489,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
             <button
               type="button"
               onClick={() => mergeInputRef.current?.click()}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
             >
               <FilePlus2 className="w-4 h-4" />
               <span>{s.pdfMergeAddBtn}</span>
@@ -547,7 +547,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
                   type="button"
                   onClick={handleMergeAndDownload}
                   disabled={isWorking || mergeFiles.length < 2}
-                  className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer disabled:opacity-50"
                 >
                   {isWorking ? (
                     <>
@@ -595,7 +595,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
             <button
               type="button"
               onClick={() => splitInputRef.current?.click()}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
             >
               <FilePlus2 className="w-4 h-4" />
               <span>{splitFile ? s.pdfSplitChangeBtn : s.pdfSplitSelectBtn}</span>
@@ -625,7 +625,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
                 type="button"
                 onClick={handleSplitAndDownload}
                 disabled={isWorking}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer disabled:opacity-50"
               >
                 {isWorking ? (
                   <>
@@ -665,7 +665,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
             <button
               type="button"
               onClick={() => imgInputRef.current?.click()}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
             >
               <ImagePlus className="w-4 h-4" />
               <span>{s.pdfImgAddBtn}</span>
@@ -752,7 +752,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
                 type="button"
                 onClick={handleImagesToPdfDownload}
                 disabled={isWorking}
-                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer disabled:opacity-50"
               >
                 {isWorking ? (
                   <>

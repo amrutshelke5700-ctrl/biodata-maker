@@ -426,7 +426,7 @@ export const QrGeneratorTool: React.FC<QrGeneratorToolProps> = ({
               <button
                 type="button"
                 onClick={handleDownloadPng}
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold text-white bg-cyan-700 hover:bg-cyan-800 rounded-xl transition-colors cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>{s.qrDownloadBtn}</span>

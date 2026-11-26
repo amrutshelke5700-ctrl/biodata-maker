@@ -409,7 +409,7 @@ export const ImageCompressorTool: React.FC<ImageCompressorToolProps> = ({
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
           >
             <ImagePlus className="w-4 h-4" />
             <span>{s.compUploadBtn}</span>
@@ -480,7 +480,7 @@ export const ImageCompressorTool: React.FC<ImageCompressorToolProps> = ({
                   type="button"
                   onClick={handleCompress}
                   disabled={isCompressing}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer disabled:opacity-60"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {isCompressing ? (
                     <>
@@ -597,7 +597,7 @@ export const ImageCompressorTool: React.FC<ImageCompressorToolProps> = ({
                         <button
                           type="button"
                           onClick={() => handleDownloadItem(primaryItem)}
-                          className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer"
                         >
                           <Download className="w-4 h-4" />
                           <span>{s.compDownloadBtn}</span>
@@ -639,7 +639,7 @@ export const ImageCompressorTool: React.FC<ImageCompressorToolProps> = ({
                       <button
                         type="button"
                         onClick={() => handleDownloadItem(item)}
-                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-lg cursor-pointer"
+                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-lg cursor-pointer"
                       >
                         <Download className="w-3.5 h-3.5" />
                         <span>{s.compDownloadBtn}</span>

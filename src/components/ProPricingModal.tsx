@@ -415,7 +415,7 @@ export const ProPricingModal: React.FC<ProPricingModalProps> = ({
               <button
                 type="button"
                 onClick={() => void handleRazorpayCheckout()}
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-indigo-700 hover:bg-indigo-800 rounded-xl transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer"
               >
                 <CreditCard className="w-4 h-4" />
                 <span>
@@ -516,7 +516,7 @@ export const ProPricingModal: React.FC<ProPricingModalProps> = ({
                       />
                       <button
                         type="submit"
-                        className="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer whitespace-nowrap"
+                        className="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer whitespace-nowrap"
                       >
                         {s.proUtrVerifyBtn}
                       </button>

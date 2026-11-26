@@ -270,12 +270,12 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                           <Check className="w-2.5 h-2.5" />
                         </span>
                       ) : tplPro ? (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded shrink-0">
-                          <Crown className="w-2.5 h-2.5 text-amber-600" />
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold text-[#B45309] bg-amber-100 border border-[#F59E0B]/40 px-1.5 py-0.5 rounded shrink-0">
+                          <Crown className="w-2.5 h-2.5 text-[#D97706]" />
                           {s.tplProBadge}
                         </span>
                       ) : (
-                        <span className="text-[10px] font-semibold text-emerald-700 shrink-0">
+                        <span className="text-[10px] font-semibold text-[#16A34A] shrink-0">
                           {s.tplFreeBadge}
                         </span>
                       )}
@@ -296,21 +296,21 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
         <div
           lang={uiLang}
           dir="ltr"
-          className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+          className="bg-amber-50 border border-[#F59E0B]/50 rounded-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
         >
           <div className="flex items-start sm:items-center gap-2.5">
-            <Crown className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
+            <Crown className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5 sm:mt-0" />
             <div className="text-xs">
-              <span className="font-bold text-slate-900">{s.tplProBannerTitle}: </span>
+              <span className="font-bold text-[#0F172A]">{s.tplProBannerTitle}: </span>
               <span className="text-slate-700">{s.tplProBannerDesc}</span>
             </div>
           </div>
           <button
             type="button"
             onClick={onOpenProModal}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-[#D97706] to-[#F59E0B] hover:brightness-105 rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer"
           >
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
+            <Crown className="w-3.5 h-3.5 text-white" />
             <span>{s.tplProBannerCta}</span>
           </button>
         </div>

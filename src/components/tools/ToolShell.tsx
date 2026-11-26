@@ -39,15 +39,15 @@ export const ToolShell: React.FC<ToolShellProps> = ({
           <span>{s.backToHome}</span>
         </button>
 
-        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-800">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
+        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-[#16A34A]">
+          <ShieldCheck className="w-4 h-4 text-[#16A34A] shrink-0" aria-hidden="true" />
           <span>{s.privacyBadge}</span>
         </div>
       </div>
 
-      <section className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6">
+      <section className="bg-[#FFFFFF] rounded-2xl border border-[#E2E8F0] p-5 sm:p-6">
         <div className="pb-4 border-b border-slate-100">
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 text-balance">{title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-[#1E40AF] text-balance">{title}</h1>
           <p className="text-xs sm:text-sm text-slate-600 mt-1">{subtitle}</p>
         </div>
 

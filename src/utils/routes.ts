@@ -229,5 +229,5 @@ export function getHomePageTitle(lang: UiLang = 'en'): string {
   if (lang === 'hi') {
     return 'SadhanBox (साधनबॉक्स) — आपके दैनिक कार्यों के लिए १००% मुफ्त और सुरक्षित ऑनलाइन टूल्स';
   }
-  return 'SadhanBox — 100% Free & Private Client-Side Online Utility Tools';
+  return 'SadhanBox - Free Online Tools for Biodata, Resume, PDF, Image & QR';
 }

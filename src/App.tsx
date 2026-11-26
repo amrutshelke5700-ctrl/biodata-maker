@@ -651,7 +651,7 @@ export default function App() {
       style={{
         fontFamily: uiLangMeta.fontStack,
       }}
-      className="min-h-screen flex flex-col bg-[#F8F9FB] text-slate-900"
+      className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A]"
     >
       {/* Instagram / Facebook In-App Browser Guidance Banner */}
       {showInAppBanner && (
@@ -708,7 +708,7 @@ export default function App() {
               className="w-9 h-9 shrink-0 rounded-xl"
             />
             <div className="leading-tight min-w-0">
-              <div className="text-sm sm:text-lg font-extrabold text-slate-900 tracking-tight truncate">
+              <div className="text-sm sm:text-lg font-extrabold text-[#1E40AF] tracking-tight truncate">
                 {s.brandName}
               </div>
               <div className="hidden lg:block text-[11px] font-medium text-slate-500 truncate">
@@ -728,8 +728,8 @@ export default function App() {
                 }}
                 className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl transition-colors whitespace-nowrap ${
                   activeRoute === '/'
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-700 hover:bg-slate-100'
+                    ? 'bg-[#1E40AF] text-white'
+                    : 'text-[#0F172A] hover:bg-blue-50 hover:text-[#1E40AF]'
                 }`}
               >
                 <Home className="w-3.5 h-3.5 shrink-0" />
@@ -839,8 +839,8 @@ export default function App() {
               onClick={() => openProModal('monthly')}
               className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                 proActive
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100'
-                  : 'bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-md shadow-amber-500/25 hover:brightness-105'
+                  ? 'bg-emerald-50 text-[#16A34A] border border-emerald-300 hover:bg-emerald-100'
+                  : 'bg-gradient-to-r from-[#D97706] to-[#F59E0B] text-white shadow-md shadow-amber-500/25 hover:brightness-105'
               }`}
             >
               <Crown className="w-3.5 h-3.5 shrink-0" />
@@ -1111,7 +1111,7 @@ export default function App() {
                       type="button"
                       onClick={handleDownloadSample}
                       disabled={isExportingSample}
-                      className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl transition-colors cursor-pointer disabled:opacity-60"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-semibold text-white bg-[#1E40AF] hover:bg-[#2563EB] rounded-xl transition-colors cursor-pointer disabled:opacity-60"
                     >
                       {isExportingSample ? (
                         <>
@@ -1130,7 +1130,7 @@ export default function App() {
                       type="button"
                       onClick={handleOpenHdModal}
                       disabled={isExportingHd}
-                      className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl transition-colors cursor-pointer shadow-xs disabled:opacity-60"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-xl transition-colors cursor-pointer shadow-xs disabled:opacity-60"
                     >
                       {isExportingHd ? (
                         <Loader2 className="w-4 h-4 animate-spin shrink-0" />
