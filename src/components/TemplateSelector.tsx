@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Check, ChevronDown, ChevronUp, Search, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Crown, Search, X } from 'lucide-react';
 import { AppLanguage, BiodataMode, TEMPLATES, TemplateId } from '../types/biodata';
 import { getModernTemplateSpec } from '../utils/modernTemplates';
+import { isTemplatePro } from '../utils/proState';
+import { UiLang, getSiteStrings } from '../utils/siteI18n';
 import { getCopy } from '../utils/translations';
 import { getLocalizedTemplateCopy } from '../utils/templateTranslations';
 
@@ -9,7 +11,10 @@ interface TemplateSelectorProps {
   selectedTemplate: TemplateId;
   mode: BiodataMode;
   language: AppLanguage;
+  uiLang: UiLang;
+  isPro: boolean;
   onSelectTemplate: (id: TemplateId) => void;
+  onOpenProModal: () => void;
 }
 
 type GalleryFilter = 'all' | 'modern' | 'traditional';
@@ -84,16 +89,41 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,
   mode,
   language,
+  uiLang,
+  isPro,
   onSelectTemplate,
+  onOpenProModal,
 }) => {
   const copy = getCopy(language);
+  const s = getSiteStrings(uiLang);
   const [filter, setFilter] = useState<GalleryFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const orderedTemplates = useMemo(() => {
+    if (mode === 'job') {
+      // Put job-friendly modern Free + Pro templates first so Resume mode surfaces 4-5 Free + 3-4 Pro cleanly
+      const jobHighlightIds = new Set<string>([
+        'modern-blue',
+        'charcoal-exec',
+        'teal-modern',
+        'minimalist',
+        'modern-indigo-top-bar',
+        'modern-bronze-top-bar',
+        'modern-obsidian-left-sidebar',
+        'modern-sapphire-geometric-corner',
+        'modern-bronze-split-card',
+      ]);
+      const highlighted = TEMPLATES.filter((t) => jobHighlightIds.has(t.id));
+      const rest = TEMPLATES.filter((t) => !jobHighlightIds.has(t.id));
+      return [...highlighted, ...rest];
+    }
+    return TEMPLATES;
+  }, [mode]);
+
   const filteredTemplates = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    return TEMPLATES.filter((tpl) => {
+    return orderedTemplates.filter((tpl) => {
       if (filter !== 'all' && tpl.category !== filter) {
         return false;
       }
@@ -108,7 +138,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
         mrCopy.name.toLowerCase().includes(q)
       );
     });
-  }, [filter, searchQuery, language]);
+  }, [orderedTemplates, filter, searchQuery, language]);
 
   const showScrollableAll = isExpanded || filter === 'modern' || searchQuery.trim().length > 0;
 
@@ -125,6 +155,8 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     return [selectedObj, ...baseSlice.slice(0, 9)];
   }, [filteredTemplates, showScrollableAll, selectedTemplate]);
 
+  const selectedIsPro = isTemplatePro(selectedTemplate);
+
   return (
     <section id="templates-section" aria-label={copy.templatesHeading} className="space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -136,7 +168,11 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
       {/* Category Filter Tabs & Search */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-        <div className="inline-flex flex-wrap items-center gap-1.5" role="group" aria-label={copy.templatesHeading}>
+        <div
+          className="inline-flex flex-wrap items-center gap-1.5"
+          role="group"
+          aria-label={copy.templatesHeading}
+        >
           {(
             [
               { id: 'all', label: copy.tplFilterAll },
@@ -193,23 +229,15 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           {copy.tplNoMatch}
         </div>
       ) : (
-        <div
-          className={
-            showScrollableAll
-              ? 'max-h-[390px] overflow-y-auto pr-1 rounded-xl'
-              : ''
-          }
-        >
+        <div className={showScrollableAll ? 'max-h-[390px] overflow-y-auto pr-1 rounded-xl' : ''}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {visibleTemplates.map((tpl) => {
               const isSelected = selectedTemplate === tpl.id;
+              const tplPro = isTemplatePro(tpl.id);
               const tplCopy = getLocalizedTemplateCopy(tpl.id, language);
-              const mrCopy = getLocalizedTemplateCopy(tpl.id, 'mr');
-              const enCopy = getLocalizedTemplateCopy(tpl.id, 'en');
               const primaryTitle = tplCopy.name;
               const subLabel =
                 tpl.recommendedFor === mode ? copy.recommendedLabel : tplCopy.description;
-              const previewAlt = `${mrCopy.name} (${enCopy.name}) — ${mrCopy.description} | ${enCopy.description}`;
 
               return (
                 <button
@@ -223,25 +251,32 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                       : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  {/* Miniature A4 Frame Preview Image with Descriptive Marathi & English Alt */}
                   <img
                     src={getTemplatePreviewSvgUri(tpl.id, tpl.paperColor)}
-                    alt={previewAlt}
+                    alt={primaryTitle}
                     width={40}
                     height={52}
                     loading="lazy"
                     className="w-10 h-13 shrink-0 rounded-xs border border-slate-200 block object-cover"
                   />
 
-                  {/* Label & Description */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-1">
                       <div className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
                         {primaryTitle}
                       </div>
-                      {isSelected && (
+                      {isSelected ? (
                         <span className="w-4 h-4 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0">
                           <Check className="w-2.5 h-2.5" />
+                        </span>
+                      ) : tplPro ? (
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded shrink-0">
+                          <Crown className="w-2.5 h-2.5 text-amber-600" />
+                          {s.tplProBadge}
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-semibold text-emerald-700 shrink-0">
+                          {s.tplFreeBadge}
                         </span>
                       )}
                     </div>
@@ -253,6 +288,31 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               );
             })}
           </div>
+        </div>
+      )}
+
+      {/* Selected Pro Template Banner for Free Users */}
+      {selectedIsPro && !isPro && (
+        <div
+          lang={uiLang}
+          dir="ltr"
+          className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+        >
+          <div className="flex items-start sm:items-center gap-2.5">
+            <Crown className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
+            <div className="text-xs">
+              <span className="font-bold text-slate-900">{s.tplProBannerTitle}: </span>
+              <span className="text-slate-700">{s.tplProBannerDesc}</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onOpenProModal}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          >
+            <Crown className="w-3.5 h-3.5 text-amber-400" />
+            <span>{s.tplProBannerCta}</span>
+          </button>
         </div>
       )}
 

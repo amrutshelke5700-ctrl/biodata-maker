@@ -29,8 +29,8 @@ interface PaymentModalProps {
 type PaymentTab = 'qr' | 'upi';
 
 const MERCHANT_UPI_ID = 'amrutshelke5700@okhdfcbank';
-const PAYEE_NAME = 'Marathi Biodata';
-const PAYMENT_AMOUNT = '29';
+const PAYEE_NAME = 'SadhanBox';
+const PAYMENT_AMOUNT = '19';
 const PAYMENT_CURRENCY = 'INR';
 
 const UPI_PAYMENT_LINK = `upi://pay?pa=${encodeURIComponent(
