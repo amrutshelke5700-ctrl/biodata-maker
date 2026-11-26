@@ -49,6 +49,42 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/passport-photo-maker</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/signature-resize</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/rent-receipt-generator</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/gst-emi-calculator</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/image-converter</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://freemarathibiodatamaker.netlify.app/word-counter-typing</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://freemarathibiodatamaker.netlify.app/about</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>

@@ -273,6 +273,203 @@ export interface SiteStrings {
   promoSuccessMsg: string;
   promoSocialNote: string;
   promoPayAlternative: string;
+  // Passport Photo Maker
+  passUploadTitle: string;
+  passUploadHint: string;
+  passUploadBtn: string;
+  passChangePhotoBtn: string;
+  passFileTypeError: string;
+  passNameLabel: string;
+  passNamePlaceholder: string;
+  passDateLabel: string;
+  passClearDateBtn: string;
+  passBgLabel: string;
+  passBgOriginal: string;
+  passBgWhite: string;
+  passBgLightBlue: string;
+  passAiBgBtn: string;
+  passAiBgWorking: string;
+  passAiBgReady: string;
+  passAiBgError: string;
+  passSheetCountLabel: string;
+  passCount8: string;
+  passCount12: string;
+  passZoomLabel: string;
+  passOffsetYLabel: string;
+  passCutBorderLabel: string;
+  passSinglePreviewTitle: string;
+  passSheetPreviewTitle: string;
+  passDownloadPdfBtn: string;
+  passDownloadJpgBtn: string;
+  passDownloadSingleBtn: string;
+  passPdfGenerating: string;
+  passDatePrefix: string;
+  // Signature & Thumb Resize Tool
+  sigUploadTitle: string;
+  sigUploadHint: string;
+  sigUploadBtn: string;
+  sigChangeBtn: string;
+  sigFileTypeError: string;
+  sigPresetLabel: string;
+  sigPreset140: string;
+  sigPreset240: string;
+  sigPreset300: string;
+  sigPresetCustom: string;
+  sigWidthLabel: string;
+  sigHeightLabel: string;
+  sigMinKbLabel: string;
+  sigMaxKbLabel: string;
+  sigAutoCropLabel: string;
+  sigAutoCropHint: string;
+  sigCleanPaperLabel: string;
+  sigCleanPaperHint: string;
+  sigProcessBtn: string;
+  sigProcessingBtn: string;
+  sigOriginalLabel: string;
+  sigResultLabel: string;
+  sigRangeError: string;
+  sigErrorGeneric: string;
+  sigDownloadJpgBtn: string;
+  sigReadyBadge: string;
+  // Rent Receipt & Salary Slip Generator
+  rentTabReceipt: string;
+  rentTabSalary: string;
+  rentTenantNameLabel: string;
+  rentTenantPlaceholder: string;
+  rentLandlordNameLabel: string;
+  rentLandlordPlaceholder: string;
+  rentLandlordPanLabel: string;
+  rentLandlordPanPlaceholder: string;
+  rentMonthlyAmountLabel: string;
+  rentAddressLabel: string;
+  rentAddressPlaceholder: string;
+  rentStartMonthLabel: string;
+  rentCountLabel: string;
+  rentCount1: string;
+  rentCount2: string;
+  rentCount3: string;
+  rentPayModeLabel: string;
+  rentPayModes: string[];
+  rentReceiptNoLabel: string;
+  rentIncludeStampLabel: string;
+  rentDownloadPdfBtn: string;
+  rentDownloadingBtn: string;
+  rentSampleFillBtn: string;
+  rentPreviewTitle: string;
+  salCompanyLabel: string;
+  salCompanyPlaceholder: string;
+  salCompanyAddrLabel: string;
+  salCompanyAddrPlaceholder: string;
+  salMonthLabel: string;
+  salEmpNameLabel: string;
+  salEmpNamePlaceholder: string;
+  salEmpIdLabel: string;
+  salDesignationLabel: string;
+  salDesignationPlaceholder: string;
+  salDepartmentLabel: string;
+  salDepartmentPlaceholder: string;
+  salPanUanLabel: string;
+  salPaidDaysLabel: string;
+  salEarningsTitle: string;
+  salBasicLabel: string;
+  salHraLabel: string;
+  salAllowanceLabel: string;
+  salBonusLabel: string;
+  salDeductionsTitle: string;
+  salPfLabel: string;
+  salPtLabel: string;
+  salTdsLabel: string;
+  salOtherDedLabel: string;
+  salGrossLabel: string;
+  salTotalDedLabel: string;
+  salNetPayLabel: string;
+  // GST & EMI Calculator
+  finTabGst: string;
+  finTabEmi: string;
+  gstAmountLabel: string;
+  gstRateLabel: string;
+  gstCustomRateLabel: string;
+  gstModeLabel: string;
+  gstExclusiveBtn: string;
+  gstInclusiveBtn: string;
+  gstSupplyTypeLabel: string;
+  gstIntraBtn: string;
+  gstInterBtn: string;
+  gstBaseAmountLabel: string;
+  gstTaxAmountLabel: string;
+  gstCgstLabel: string;
+  gstSgstLabel: string;
+  gstIgstLabel: string;
+  gstTotalAmountLabel: string;
+  gstCopyBtn: string;
+  gstCopiedBtn: string;
+  emiPresetHome: string;
+  emiPresetVehicle: string;
+  emiPresetPersonal: string;
+  emiLoanAmountLabel: string;
+  emiInterestRateLabel: string;
+  emiTenureLabel: string;
+  emiYearsUnit: string;
+  emiMonthsUnit: string;
+  emiMonthlyTitle: string;
+  emiPrincipalLabel: string;
+  emiTotalInterestLabel: string;
+  emiTotalPayableLabel: string;
+  emiScheduleTitle: string;
+  emiYearCol: string;
+  emiPrincipalCol: string;
+  emiInterestCol: string;
+  emiBalanceCol: string;
+  // Image Format Converter
+  convUploadTitle: string;
+  convUploadHint: string;
+  convUploadBtn: string;
+  convFileTypeError: string;
+  convFormatLabel: string;
+  convQualityLabel: string;
+  convPngLosslessHint: string;
+  convBgFillLabel: string;
+  convBgWhite: string;
+  convBgBlack: string;
+  convBgSoft: string;
+  convConvertBtn: string;
+  convConvertingBtn: string;
+  convOriginalLabel: string;
+  convOutputLabel: string;
+  convDownloadBtn: string;
+  convDownloadAllBtn: string;
+  convAddMoreBtn: string;
+  convClearBtn: string;
+  convBatchProHint: string;
+  convErrorGeneric: string;
+  convWaitingLabel: string;
+  // Word Counter & Typing Pad
+  wordModeLabel: string;
+  wordModeEn: string;
+  wordModeMr: string;
+  wordModeHi: string;
+  wordCountLabel: string;
+  wordCharsWithSpaceLabel: string;
+  wordCharsNoSpaceLabel: string;
+  wordSentencesLabel: string;
+  wordParagraphsLabel: string;
+  wordReadTimeLabel: string;
+  wordMinUnit: string;
+  wordLiveHintPrefix: string;
+  wordLiveHintSpace: string;
+  wordConvertNowBtn: string;
+  wordConvertAllBtn: string;
+  wordSampleBtn: string;
+  wordCopyBtn: string;
+  wordCopiedBtn: string;
+  wordDownloadTxtBtn: string;
+  wordClearBtn: string;
+  wordCleanSpacesBtn: string;
+  wordPlaceholderEn: string;
+  wordPlaceholderMr: string;
+  wordPlaceholderHi: string;
+  wordQuickCharsLabel: string;
+  wordExamplesTitle: string;
 }
 
 const EN_STRINGS: SiteStrings = {
@@ -280,7 +477,7 @@ const EN_STRINGS: SiteStrings = {
   brandTaglineShort: '100% Free & Private Online Tools',
   navHome: 'Home',
   navAllTools: 'All Tools',
-  navAllToolsSubheading: '7 Client-Side Utility Tools',
+  navAllToolsSubheading: '13 Client-Side Utility Tools',
   goProHeaderBtn: 'Go Pro (₹49)',
   proActiveHeaderBadge: 'Pro Pass Active',
   backToHome: 'Back to Home',
@@ -291,11 +488,11 @@ const EN_STRINGS: SiteStrings = {
   heroTitle: 'SadhanBox',
   heroTagline: '100% Free & Secure Online Tools for Your Everyday Work',
   heroSubtitle:
-    'Marriage Biodata Maker, Resume Maker, Background Remover, PDF Merge & Split, Image Compressor for MPSC/UPSC forms, QR Code Generator, and Age Calculator — all running directly inside your browser.',
+    'Biodata & Resume Maker, Passport Photo, Signature Resize, Rent Receipt & Salary Slip, GST & EMI Calculator, Image Format Converter, Word Counter & Marathi/Hindi Typing, Background Remover, PDF Tools, Image Compressor, QR & Age Calculator — all inside your browser.',
   heroPrimaryCta: 'Create Marriage Biodata',
-  heroSecondaryCta: 'Explore All 7 Tools',
+  heroSecondaryCta: 'Explore All 13 Tools',
   heroSuiteTitle: 'SadhanBox Suite',
-  heroSuiteSubtitle: '7 Everyday Client-Side Tools',
+  heroSuiteSubtitle: '13 Everyday Client-Side Tools',
   heroLiveDownloadsLabel: 'Live Downloads',
   heroPrivacyStatVal: '100%',
   heroPrivacyStatLabel: 'Browser Privacy',
@@ -303,7 +500,7 @@ const EN_STRINGS: SiteStrings = {
   toolsGridHeading: 'Everyday Utility Tools',
   toolsGridSubheading:
     'Choose any tool below — every file is processed locally on your device.',
-  toolsGridCount: '7 Tools Available',
+  toolsGridCount: '13 Tools Available',
   openToolCta: 'Open Tool',
   supportHeading: 'Support SadhanBox (Voluntary Donation)',
   supportDesc:
@@ -479,7 +676,7 @@ const EN_STRINGS: SiteStrings = {
   proFreeAudience: 'For daily personal tasks',
   proFreePrice: '₹0',
   proFreeFeatures: [
-    'Daily access to all 7 browser tools',
+    'Daily access to all 13 browser tools',
     '4-5 clean Free Biodata & Resume templates',
     '1-by-1 file processing',
     'Standard PNG, PDF & KB compression downloads',
@@ -501,7 +698,7 @@ const EN_STRINGS: SiteStrings = {
   proPassMonthlyLabel: '₹49 / month',
   proPassYearlyLabel: '₹199 / year',
   proPassFeatures: [
-    '100% Ad-Free across all 7 SadhanBox tools',
+    '100% Ad-Free across all 13 SadhanBox tools',
     'All Royal & Golden Biodata + Resume templates unlocked',
     'Watermark-free A4 PDF downloads anytime',
     'HD Background Removal & Multi-file Batch Processing',
@@ -538,6 +735,203 @@ const EN_STRINGS: SiteStrings = {
   promoSuccessMsg: 'HD PDF downloaded successfully!',
   promoSocialNote: 'Comment "BIODATA" on our Instagram or Facebook post to receive a promo code, or upgrade via Single Download (₹19) / Pro Pass (₹49).',
   promoPayAlternative: 'No code? Unlock via UPI / Razorpay (₹19 / ₹49)',
+  // Passport Photo Maker
+  passUploadTitle: 'Upload or drag a portrait photo here',
+  passUploadHint: 'Supports JPG, PNG, or WEBP · Front-facing portrait works best for MPSC/UPSC & Passport A4 sheets',
+  passUploadBtn: 'Upload Photo',
+  passChangePhotoBtn: 'Change Photo',
+  passFileTypeError: 'Please choose a valid JPG, PNG, or WEBP photo.',
+  passNameLabel: 'Name on Photo (Optional)',
+  passNamePlaceholder: 'e.g. RAHUL SHARMA',
+  passDateLabel: 'Photo Taken Date (Optional)',
+  passClearDateBtn: 'Clear',
+  passBgLabel: 'Background Color',
+  passBgOriginal: 'Original',
+  passBgWhite: 'White',
+  passBgLightBlue: 'Light Blue',
+  passAiBgBtn: 'Auto-Replace Background with AI',
+  passAiBgWorking: 'Removing old background...',
+  passAiBgReady: 'Studio background applied cleanly',
+  passAiBgError: 'Could not remove background automatically. Using original photo framing.',
+  passSheetCountLabel: 'A4 Sheet Photos (MPSC / UPSC / Print)',
+  passCount8: '8 Photos (4×2)',
+  passCount12: '12 Photos (4×3)',
+  passZoomLabel: 'Face Zoom',
+  passOffsetYLabel: 'Vertical Position',
+  passCutBorderLabel: 'Show light cutting border around each photo',
+  passSinglePreviewTitle: 'Single Photo (3.5 × 4.5 cm)',
+  passSheetPreviewTitle: 'A4 Printable Sheet Preview',
+  passDownloadPdfBtn: 'Download A4 PDF',
+  passDownloadJpgBtn: 'Download A4 JPG',
+  passDownloadSingleBtn: 'Download Single JPG',
+  passPdfGenerating: 'Creating A4 PDF...',
+  passDatePrefix: 'DOP:',
+  // Signature & Thumb Resize Tool
+  sigUploadTitle: 'Upload Signature or Thumb Impression photo',
+  sigUploadHint: 'Supports JPG, PNG, or WEBP · Ideal for MPSC, UPSC, SSC, IBPS, and bank portal uploads',
+  sigUploadBtn: 'Upload Signature / Thumb',
+  sigChangeBtn: 'Change Image',
+  sigFileTypeError: 'Please select a valid JPG, PNG, or WEBP image.',
+  sigPresetLabel: 'Government Form Preset',
+  sigPreset140: 'Signature (140 × 60 px)',
+  sigPreset240: 'Thumb Impression (240 × 240 px)',
+  sigPreset300: 'Wide Signature (300 × 120 px)',
+  sigPresetCustom: 'Custom Size (px)',
+  sigWidthLabel: 'Width (px)',
+  sigHeightLabel: 'Height (px)',
+  sigMinKbLabel: 'Min Size (KB)',
+  sigMaxKbLabel: 'Max Size (KB)',
+  sigAutoCropLabel: 'Auto-Crop empty margins',
+  sigAutoCropHint: 'Detects ink/thumb edges and trims blank white space automatically',
+  sigCleanPaperLabel: 'Clean white paper & enhance ink',
+  sigCleanPaperHint: 'Turns dull gray paper background into pure white (#FFFFFF)',
+  sigProcessBtn: 'Resize & Compress',
+  sigProcessingBtn: 'Processing...',
+  sigOriginalLabel: 'Original Image',
+  sigResultLabel: 'Resized Output (JPG)',
+  sigRangeError: 'Enter valid dimensions (30–2000 px) and file size range (5–500 KB, Min ≤ Max).',
+  sigErrorGeneric: 'Unable to process image. Please try another photo.',
+  sigDownloadJpgBtn: 'Download JPG',
+  sigReadyBadge: 'Exact pixels & KB range ready',
+  // Rent Receipt & Salary Slip Generator
+  rentTabReceipt: 'Rent Receipt (HRA)',
+  rentTabSalary: 'Salary Slip',
+  rentTenantNameLabel: 'Tenant / Employee Name',
+  rentTenantPlaceholder: 'e.g. Rohan Deshmukh',
+  rentLandlordNameLabel: 'Landlord / Owner Name',
+  rentLandlordPlaceholder: 'e.g. Suresh Kulkarni',
+  rentLandlordPanLabel: 'Landlord PAN (Optional — needed if annual rent > ₹1,00,000)',
+  rentLandlordPanPlaceholder: 'e.g. ABCDE1234F',
+  rentMonthlyAmountLabel: 'Monthly Rent Amount (₹)',
+  rentAddressLabel: 'Rented Property Address',
+  rentAddressPlaceholder: 'Flat 302, Shanti Residency, Kothrud, Pune - 411038',
+  rentStartMonthLabel: 'Starting Month',
+  rentCountLabel: 'Receipts on A4 Sheet',
+  rentCount1: '1 Month',
+  rentCount2: '2 Months',
+  rentCount3: '3 Months (Quarterly)',
+  rentPayModeLabel: 'Payment Mode',
+  rentPayModes: ['UPI / Bank Transfer', 'NEFT / IMPS', 'Cheque', 'Cash'],
+  rentReceiptNoLabel: 'Starting Receipt No.',
+  rentIncludeStampLabel: 'Show ₹1 Revenue Stamp box for signing',
+  rentDownloadPdfBtn: 'Download A4 PDF',
+  rentDownloadingBtn: 'Generating A4 PDF...',
+  rentSampleFillBtn: 'Reset Sample',
+  rentPreviewTitle: 'Live A4 Printable Preview',
+  salCompanyLabel: 'Company / Employer Name',
+  salCompanyPlaceholder: 'e.g. Sahyadri Tech Solutions Pvt. Ltd.',
+  salCompanyAddrLabel: 'Company Office Address',
+  salCompanyAddrPlaceholder: 'Plot 14, Hinjawadi Phase 1, Pune - 411057',
+  salMonthLabel: 'Salary Month & Year',
+  salEmpNameLabel: 'Employee Name',
+  salEmpNamePlaceholder: 'e.g. Sneha Joshi',
+  salEmpIdLabel: 'Employee ID',
+  salDesignationLabel: 'Designation',
+  salDesignationPlaceholder: 'e.g. Senior Executive',
+  salDepartmentLabel: 'Department',
+  salDepartmentPlaceholder: 'e.g. Operations',
+  salPanUanLabel: 'PAN / UAN Number (Optional)',
+  salPaidDaysLabel: 'Paid Days (e.g. 30 / 30)',
+  salEarningsTitle: 'Earnings (₹)',
+  salBasicLabel: 'Basic Salary',
+  salHraLabel: 'House Rent Allowance (HRA)',
+  salAllowanceLabel: 'Conveyance & Special Allowance',
+  salBonusLabel: 'Bonus / Incentive',
+  salDeductionsTitle: 'Deductions (₹)',
+  salPfLabel: 'Provident Fund (EPF)',
+  salPtLabel: 'Professional Tax (PT)',
+  salTdsLabel: 'Income Tax (TDS)',
+  salOtherDedLabel: 'Other Deductions',
+  salGrossLabel: 'Gross Earnings',
+  salTotalDedLabel: 'Total Deductions',
+  salNetPayLabel: 'Net Payable Salary',
+  // GST & EMI Calculator
+  finTabGst: 'GST Calculator',
+  finTabEmi: 'Loan EMI Calculator',
+  gstAmountLabel: 'Invoice / Item Amount (₹)',
+  gstRateLabel: 'Select GST Slab (%)',
+  gstCustomRateLabel: 'Custom %',
+  gstModeLabel: 'Calculation Type',
+  gstExclusiveBtn: 'GST Exclusive (+ Add GST)',
+  gstInclusiveBtn: 'GST Inclusive (Remove GST)',
+  gstSupplyTypeLabel: 'Tax Breakdown',
+  gstIntraBtn: 'Intra-State (CGST + SGST)',
+  gstInterBtn: 'Inter-State (IGST)',
+  gstBaseAmountLabel: 'Net / Base Amount',
+  gstTaxAmountLabel: 'Total GST Amount',
+  gstCgstLabel: 'CGST',
+  gstSgstLabel: 'SGST',
+  gstIgstLabel: 'IGST',
+  gstTotalAmountLabel: 'Final Invoice Total',
+  gstCopyBtn: 'Copy Summary',
+  gstCopiedBtn: 'Copied',
+  emiPresetHome: 'Home Loan',
+  emiPresetVehicle: 'Vehicle / Car Loan',
+  emiPresetPersonal: 'Personal Loan',
+  emiLoanAmountLabel: 'Loan Amount (₹)',
+  emiInterestRateLabel: 'Annual Interest Rate (% p.a.)',
+  emiTenureLabel: 'Loan Tenure',
+  emiYearsUnit: 'Years',
+  emiMonthsUnit: 'Months',
+  emiMonthlyTitle: 'Monthly EMI',
+  emiPrincipalLabel: 'Principal Amount',
+  emiTotalInterestLabel: 'Total Interest Payable',
+  emiTotalPayableLabel: 'Total Amount Payable',
+  emiScheduleTitle: 'Year-by-Year Repayment Schedule',
+  emiYearCol: 'Year',
+  emiPrincipalCol: 'Principal Paid',
+  emiInterestCol: 'Interest Paid',
+  emiBalanceCol: 'Closing Balance',
+  // Image Format Converter
+  convUploadTitle: 'Upload or drag any photo (PNG, WebP, JPG, BMP)',
+  convUploadHint: 'Convert mobile camera photos, screenshots, or WebP files to high-quality JPG, PNG, or WebP',
+  convUploadBtn: 'Select Photo',
+  convFileTypeError: 'Please choose a valid image file (PNG, JPG, WebP, BMP, or GIF).',
+  convFormatLabel: 'Convert To Format',
+  convQualityLabel: 'Output Quality',
+  convPngLosslessHint: 'PNG uses lossless compression for crisp graphics & transparency.',
+  convBgFillLabel: 'Transparent Background Fill (for JPG)',
+  convBgWhite: 'White',
+  convBgBlack: 'Black',
+  convBgSoft: 'Light Gray',
+  convConvertBtn: 'Convert Format',
+  convConvertingBtn: 'Converting...',
+  convOriginalLabel: 'Original File',
+  convOutputLabel: 'Converted Output',
+  convDownloadBtn: 'Download',
+  convDownloadAllBtn: 'Download All',
+  convAddMoreBtn: 'Choose Another Photo',
+  convClearBtn: 'Clear',
+  convBatchProHint: 'Upgrade to Pro Pass to batch convert multiple photos at once',
+  convErrorGeneric: 'Unable to convert this image format. Please try another photo.',
+  convWaitingLabel: 'Ready to convert',
+  // Word Counter & Typing Pad
+  wordModeLabel: 'Typing Script Mode',
+  wordModeEn: 'English (Direct)',
+  wordModeMr: 'मराठी (English → मराठी)',
+  wordModeHi: 'हिंदी (English → हिंदी)',
+  wordCountLabel: 'Words',
+  wordCharsWithSpaceLabel: 'Characters (with spaces)',
+  wordCharsNoSpaceLabel: 'Characters (no spaces)',
+  wordSentencesLabel: 'Sentences',
+  wordParagraphsLabel: 'Paragraphs',
+  wordReadTimeLabel: 'Reading Time',
+  wordMinUnit: 'min',
+  wordLiveHintPrefix: 'Typing word:',
+  wordLiveHintSpace: 'Press Space / Enter to convert, or click a suggestion:',
+  wordConvertNowBtn: 'Convert Word',
+  wordConvertAllBtn: 'Convert English Text',
+  wordSampleBtn: 'Load Sample',
+  wordCopyBtn: 'Copy Text',
+  wordCopiedBtn: 'Copied!',
+  wordDownloadTxtBtn: 'Download .TXT',
+  wordClearBtn: 'Clear',
+  wordCleanSpacesBtn: 'Clean Extra Spaces',
+  wordPlaceholderEn: 'Start typing or paste any English, Marathi, or Hindi text here to count words, characters, and sentences...',
+  wordPlaceholderMr: 'येथे इंग्रजीत टाईप करा (उदा. namaskar maharashtra) — स्पेस दाबताच मराठीत रूपांतर होईल...',
+  wordPlaceholderHi: 'यहाँ अंग्रेजी में टाइप करें (जैसे namaste bharat) — स्पेस दबाते ही हिंदी में बदल जाएगा...',
+  wordQuickCharsLabel: 'Quick Insert:',
+  wordExamplesTitle: 'Quick Guide: Type "namaskar" + Space → नमस्कार | "maharashtra" → महाराष्ट्र | "L" → ळ | "dny" → ज्ञ',
 };
 
 const MR_STRINGS: SiteStrings = {
@@ -545,7 +939,7 @@ const MR_STRINGS: SiteStrings = {
   brandTaglineShort: '१००% मोफत व सुरक्षित साधने',
   navHome: 'होम',
   navAllTools: 'सर्व साधने',
-  navAllToolsSubheading: '७ ब्राउझर-आधारित साधने',
+  navAllToolsSubheading: '१३ ब्राउझर-आधारित साधने',
   goProHeaderBtn: 'Go Pro (₹49)',
   proActiveHeaderBadge: 'Pro पास सक्रिय',
   backToHome: 'मुख्य पानावर जा',
@@ -556,18 +950,18 @@ const MR_STRINGS: SiteStrings = {
   heroTitle: 'SadhanBox (साधनबॉक्स)',
   heroTagline: 'तुमच्या दैनंदिन कामांसाठी १००% मोफत आणि सुरक्षित ऑनलाइन साधने',
   heroSubtitle:
-    'लग्न बायोडाटा मेकर, रेझ्युमे मेकर, बॅकग्राउंड रिमूव्हर, PDF Merge व Split, MPSC/UPSC साठी इमेज कॉम्प्रेसर, QR Code जनरेटर आणि वय कॅल्क्युलेटर — सर्व साधने थेट तुमच्या ब्राउझरमध्ये चालतात.',
+    'लग्न बायोडाटा व रेझ्युमे, पासपोर्ट फोटो, सही रिसाईझ, घरभाडे पावती व पगार स्लिप, GST व EMI कॅल्क्युलेटर, इमेज फॉरमॅट कन्व्हर्टर, वर्ड काउंटर व मराठी/हिंदी टायपिंग, बॅकग्राउंड रिमूव्हर, PDF टूल्स, इमेज कॉम्प्रेसर, QR व वय कॅल्क्युलेटर — सर्व साधने तुमच्या ब्राउझरमध्ये.',
   heroPrimaryCta: 'लग्नाचा बायोडाटा बनवा',
-  heroSecondaryCta: 'सर्व ७ साधने पहा',
+  heroSecondaryCta: 'सर्व १३ साधने पहा',
   heroSuiteTitle: 'SadhanBox सूट',
-  heroSuiteSubtitle: '७ उपयुक्त ऑनलाइन साधने',
+  heroSuiteSubtitle: '१३ उपयुक्त ऑनलाइन साधने',
   heroLiveDownloadsLabel: 'लाइव्ह डाउनलोड्स',
   heroPrivacyStatVal: '१००%',
   heroPrivacyStatLabel: 'ब्राउझर सुरक्षितता',
   heroNoSignupNote: 'लॉगिन किंवा साइन-अपची गरज नाही — टूल निवडा आणि त्वरित वापर करा.',
   toolsGridHeading: 'तुमच्या दैनंदिन कामांसाठी सर्व साधने',
   toolsGridSubheading: 'खालीलपैकी टूल निवडा — सर्व प्रक्रिया थेट तुमच्या डिव्हाइसवर होते.',
-  toolsGridCount: '७ साधने उपलब्ध',
+  toolsGridCount: '१३ साधने उपलब्ध',
   openToolCta: 'टूल उघडा',
   supportHeading: 'SadhanBox उपक्रमाला पाठिंबा द्या',
   supportDesc:
@@ -744,7 +1138,7 @@ const MR_STRINGS: SiteStrings = {
   proFreeAudience: 'दैनंदिन वापरासाठी',
   proFreePrice: '₹0',
   proFreeFeatures: [
-    'सर्व ७ टूल्सचा मोफत दैनंदिन वापर',
+    'सर्व १३ टूल्सचा मोफत दैनंदिन वापर',
     '४-५ साधी मोफत बायोडाटा व रेझ्युमे टेम्प्लेट्स',
     '१-१ फाईल प्रोसेसिंग सुविधा',
     'मानक PNG, PDF व KB कॉम्प्रेशन डाउनलोड',
@@ -766,7 +1160,7 @@ const MR_STRINGS: SiteStrings = {
   proPassMonthlyLabel: '₹49 / महिना',
   proPassYearlyLabel: '₹199 / वर्ष',
   proPassFeatures: [
-    'सर्व ७ टूल्समध्ये १००% जाहिरातमुक्त अनुभव',
+    'सर्व १३ टूल्समध्ये १००% जाहिरातमुक्त अनुभव',
     'सर्व रॉयल आणि गोल्डन बायोडाटा व रेझ्युमे टेम्प्लेट्स अनलॉक',
     'वॉटरमार्कशिवाय अमर्यादित A4 PDF डाउनलोड्स',
     'HD बॅकग्राउंड रिमूव्हल आणि एकाच वेळी अनेक फाईल्स प्रोसेसिंग',
@@ -803,6 +1197,203 @@ const MR_STRINGS: SiteStrings = {
   promoSuccessMsg: 'वॉटरमार्कशिवाय PDF डाउनलोड झाली!',
   promoSocialNote: 'प्रोमो कोडसाठी Instagram किंवा Facebook पोस्टवर BIODATA कमेंट करा किंवा ₹19 / ₹49 मध्ये त्वरित अनलॉक करा.',
   promoPayAlternative: 'कोड नाही? UPI किंवा Razorpay ने अनलॉक करा (₹19 / ₹49)',
+  // Passport Photo Maker
+  passUploadTitle: 'तुमचा फोटो अपलोड करा किंवा येथे ड्रॅग करा',
+  passUploadHint: 'JPG, PNG किंवा WEBP सपोर्ट · MPSC/UPSC व पासपोर्ट A4 शीटसाठी सरळ चेहऱ्याचा फोटो वापरा',
+  passUploadBtn: 'फोटो निवडा',
+  passChangePhotoBtn: 'दुसरा फोटो निवडा',
+  passFileTypeError: 'कृपया वैध JPG, PNG किंवा WEBP फोटो निवडा.',
+  passNameLabel: 'फोटोवरील नाव (ऐच्छिक)',
+  passNamePlaceholder: 'उदा. RAHUL SHARMA',
+  passDateLabel: 'फोटो काढल्याची तारीख (ऐच्छिक)',
+  passClearDateBtn: 'पुसा',
+  passBgLabel: 'बॅकग्राउंड रंग',
+  passBgOriginal: 'मूळ फोटो',
+  passBgWhite: 'पांढरा',
+  passBgLightBlue: 'हलका निळा',
+  passAiBgBtn: 'AI ने बॅकग्राउंड बदला',
+  passAiBgWorking: 'जुने बॅकग्राउंड काढले जात आहे...',
+  passAiBgReady: 'नवीन बॅकग्राउंड अचूक लागू झाले',
+  passAiBgError: 'बॅकग्राउंड आपोआप बदलता आले नाही. मूळ फोटो वापरला जात आहे.',
+  passSheetCountLabel: 'A4 शीटवरील फोटो संख्या (MPSC / UPSC)',
+  passCount8: '८ फोटो (४×२)',
+  passCount12: '१२ फोटो (४×३)',
+  passZoomLabel: 'फोटो झूम',
+  passOffsetYLabel: 'वर-खाली सेटिंग',
+  passCutBorderLabel: 'प्रत्येक फोटोभोवती कापण्यासाठी हलकी बॉर्डर दाखवा',
+  passSinglePreviewTitle: 'सिंगल फोटो (3.5 × 4.5 सेमी)',
+  passSheetPreviewTitle: 'A4 प्रिंट शीट प्रिव्ह्यू',
+  passDownloadPdfBtn: 'A4 PDF डाउनलोड करा',
+  passDownloadJpgBtn: 'A4 JPG डाउनलोड करा',
+  passDownloadSingleBtn: 'सिंगल JPG डाउनलोड करा',
+  passPdfGenerating: 'A4 PDF तयार होत आहे...',
+  passDatePrefix: 'DOP:',
+  // Signature & Thumb Resize Tool
+  sigUploadTitle: 'सही किंवा अंगठ्याच्या ठशाचा फोटो अपलोड करा',
+  sigUploadHint: 'JPG, PNG किंवा WEBP सपोर्ट · MPSC, UPSC, SSC, IBPS आणि बँक फॉर्मसाठी उपयुक्त',
+  sigUploadBtn: 'सही / अंगठा निवडा',
+  sigChangeBtn: 'दुसरा फोटो निवडा',
+  sigFileTypeError: 'कृपया वैध JPG, PNG किंवा WEBP इमेज निवडा.',
+  sigPresetLabel: 'सरकारी फॉर्मसाठी साईझ निवडा',
+  sigPreset140: 'सही (140 × 60 px)',
+  sigPreset240: 'अंगठ्याचा ठसा (240 × 240 px)',
+  sigPreset300: 'रुंद सही (300 × 120 px)',
+  sigPresetCustom: 'कस्टम साईझ (px)',
+  sigWidthLabel: 'रुंदी (px)',
+  sigHeightLabel: 'उंची (px)',
+  sigMinKbLabel: 'किमान साईझ (KB)',
+  sigMaxKbLabel: 'कमाल साईझ (KB)',
+  sigAutoCropLabel: 'रिकाम्या कडा आपोआप क्रॉप करा (Auto-Crop)',
+  sigAutoCropHint: 'सही किंवा अंगठ्याभोवतीची अनावश्यक पांढरी जागा आपोआप कापते',
+  sigCleanPaperLabel: 'कागद पांढरा व सही गडद करा',
+  sigCleanPaperHint: 'फोटोतील करडा कागद शुद्ध पांढऱ्या रंगात (#FFFFFF) बदलते',
+  sigProcessBtn: 'रिसाईझ आणि कॉम्प्रेस करा',
+  sigProcessingBtn: 'प्रक्रिया सुरू आहे...',
+  sigOriginalLabel: 'मूळ इमेज',
+  sigResultLabel: 'तयार इमेज (JPG)',
+  sigRangeError: 'कृपया वैध पिक्सेल (30–2000 px) आणि KB मर्यादा (5–500 KB, किमान ≤ कमाल) टाका.',
+  sigErrorGeneric: 'इमेज प्रक्रिया पूर्ण झाली नाही. कृपया दुसरा फोटो वापरून पहा.',
+  sigDownloadJpgBtn: 'JPG डाउनलोड करा',
+  sigReadyBadge: 'अचूक पिक्सेल आणि KB साईझ तयार आहे',
+  // Rent Receipt & Salary Slip Generator
+  rentTabReceipt: 'घरभाडे पावती (HRA)',
+  rentTabSalary: 'पगार स्लिप (Salary Slip)',
+  rentTenantNameLabel: 'भाडेकरू / कर्मचाऱ्याचे नाव',
+  rentTenantPlaceholder: 'उदा. रोहन देशमुख',
+  rentLandlordNameLabel: 'घरमालकाचे नाव',
+  rentLandlordPlaceholder: 'उदा. सुरेश कुलकर्णी',
+  rentLandlordPanLabel: 'घरमालकाचा PAN (ऐच्छिक — वार्षिक भाडे ₹1,00,000 पेक्षा जास्त असल्यास)',
+  rentLandlordPanPlaceholder: 'उदा. ABCDE1234F',
+  rentMonthlyAmountLabel: 'मासिक भाडे रक्कम (₹)',
+  rentAddressLabel: 'भाड्याच्या घराचा पत्ता',
+  rentAddressPlaceholder: 'फ्लॅट ३०२, शांती रेसिडेन्सी, कोथरूड, पुणे - ४११०३८',
+  rentStartMonthLabel: 'सुरुवातीचा महिना',
+  rentCountLabel: 'A4 पानावरील पावत्यांची संख्या',
+  rentCount1: '१ महिना',
+  rentCount2: '२ महिने',
+  rentCount3: '३ महिने (तिमाही)',
+  rentPayModeLabel: 'पेमेंटचा प्रकार',
+  rentPayModes: ['UPI / बँक ट्रान्सफर', 'NEFT / IMPS', 'चेक (Cheque)', 'रोख (Cash)'],
+  rentReceiptNoLabel: 'पावती क्रमांक (सुरुवात)',
+  rentIncludeStampLabel: 'सहीसाठी ₹1 रेव्हेन्यू स्टॅम्प बॉक्स दाखवा',
+  rentDownloadPdfBtn: 'A4 PDF डाउनलोड करा',
+  rentDownloadingBtn: 'A4 PDF तयार होत आहे...',
+  rentSampleFillBtn: 'नमुना माहिती भरा',
+  rentPreviewTitle: 'लाइव्ह A4 प्रिंट प्रिव्ह्यू',
+  salCompanyLabel: 'कंपनी / संस्थेचे नाव',
+  salCompanyPlaceholder: 'उदा. सह्याद्री टेक सोल्युशन्स प्रा. लि.',
+  salCompanyAddrLabel: 'कंपनीचा पत्ता',
+  salCompanyAddrPlaceholder: 'प्लॉट १४, हिंजवडी फेज १, पुणे - ४११०५७',
+  salMonthLabel: 'पगाराचा महिना व वर्ष',
+  salEmpNameLabel: 'कर्मचाऱ्याचे नाव',
+  salEmpNamePlaceholder: 'उदा. स्नेहा जोशी',
+  salEmpIdLabel: 'कर्मचारी आयडी (ID)',
+  salDesignationLabel: 'पदनाम (Designation)',
+  salDesignationPlaceholder: 'उदा. सिनियर एक्झिक्युटिव्ह',
+  salDepartmentLabel: 'विभाग (Department)',
+  salDepartmentPlaceholder: 'उदा. ऑपरेशन्स',
+  salPanUanLabel: 'PAN / UAN क्रमांक (ऐच्छिक)',
+  salPaidDaysLabel: 'कामाचे दिवस (उदा. 30 / 30)',
+  salEarningsTitle: 'उत्पन्न / भत्ते (₹)',
+  salBasicLabel: 'मूळ पगार (Basic)',
+  salHraLabel: 'घरभाडे भत्ता (HRA)',
+  salAllowanceLabel: 'प्रवास व विशेष भत्ता',
+  salBonusLabel: 'बोनस / इन्सेंटिव्ह',
+  salDeductionsTitle: 'कपात (Deductions ₹)',
+  salPfLabel: 'भविष्य निर्वाह निधी (PF)',
+  salPtLabel: 'व्यवसाय कर (PT)',
+  salTdsLabel: 'आयकर (TDS)',
+  salOtherDedLabel: 'इतर कपात',
+  salGrossLabel: 'एकूण पगार (Gross)',
+  salTotalDedLabel: 'एकूण कपात',
+  salNetPayLabel: 'निव्वळ पगार (Net Pay)',
+  // GST & EMI Calculator
+  finTabGst: 'GST कॅल्क्युलेटर',
+  finTabEmi: 'कर्ज EMI कॅल्क्युलेटर',
+  gstAmountLabel: 'मूळ किंवा बिलाची रक्कम (₹)',
+  gstRateLabel: 'GST दर निवडा (%)',
+  gstCustomRateLabel: 'इतर %',
+  gstModeLabel: 'हिशोबाचा प्रकार',
+  gstExclusiveBtn: 'GST Exclusive (+ GST जोडा)',
+  gstInclusiveBtn: 'GST Inclusive (GST वेगळा करा)',
+  gstSupplyTypeLabel: 'कर विभागणी',
+  gstIntraBtn: 'राज्यांतर्गत (CGST + SGST)',
+  gstInterBtn: 'आंतरराज्य (IGST)',
+  gstBaseAmountLabel: 'मूळ करपात्र रक्कम',
+  gstTaxAmountLabel: 'एकूण GST रक्कम',
+  gstCgstLabel: 'CGST',
+  gstSgstLabel: 'SGST',
+  gstIgstLabel: 'IGST',
+  gstTotalAmountLabel: 'अंतिम एकूण बिल (₹)',
+  gstCopyBtn: 'तपशील कॉपी करा',
+  gstCopiedBtn: 'कॉपी झाले',
+  emiPresetHome: 'गृहकर्ज (Home)',
+  emiPresetVehicle: 'वाहन कर्ज (Vehicle)',
+  emiPresetPersonal: 'वैयक्तिक कर्ज',
+  emiLoanAmountLabel: 'कर्जाची रक्कम (₹)',
+  emiInterestRateLabel: 'वार्षिक व्याजदर (% p.a.)',
+  emiTenureLabel: 'कर्जाचा कालावधी',
+  emiYearsUnit: 'वर्षे',
+  emiMonthsUnit: 'महिने',
+  emiMonthlyTitle: 'मासिक हप्ता (EMI)',
+  emiPrincipalLabel: 'मुद्दल रक्कम',
+  emiTotalInterestLabel: 'एकूण व्याज',
+  emiTotalPayableLabel: 'एकूण परतफेड रक्कम',
+  emiScheduleTitle: 'वार्षिक कर्ज परतफेड तक्ता',
+  emiYearCol: 'वर्ष',
+  emiPrincipalCol: 'मुद्दल जमा',
+  emiInterestCol: 'व्याज जमा',
+  emiBalanceCol: 'शिल्लक मुद्दल',
+  // Image Format Converter
+  convUploadTitle: 'कोणताही फोटो अपलोड करा किंवा येथे ड्रॅग करा (PNG, WebP, JPG, BMP)',
+  convUploadHint: 'मोबाईलमधील कोणताही फोटो किंवा स्क्रीनशॉट थेट उच्च गुणवत्तेच्या JPG, PNG किंवा WebP मध्ये बदला',
+  convUploadBtn: 'फोटो निवडा',
+  convFileTypeError: 'कृपया वैध इमेज फाईल निवडा (PNG, JPG, WebP, BMP किंवा GIF).',
+  convFormatLabel: 'आउटपुट फॉरमॅट निवडा',
+  convQualityLabel: 'गुणवत्ता (Quality)',
+  convPngLosslessHint: 'PNG फॉरमॅट लॉसलेस गुणवत्तेत आणि पारदर्शक बॅकग्राउंडसह जतन होतो.',
+  convBgFillLabel: 'JPG साठी बॅकग्राउंड रंग (पारदर्शक फोटो असल्यास)',
+  convBgWhite: 'पांढरा',
+  convBgBlack: 'काळा',
+  convBgSoft: 'हलका करडा',
+  convConvertBtn: 'फॉरमॅट बदला (Convert)',
+  convConvertingBtn: 'रूपांतर सुरू आहे...',
+  convOriginalLabel: 'मूळ फोटो',
+  convOutputLabel: 'तयार झालेला फोटो',
+  convDownloadBtn: 'डाउनलोड करा',
+  convDownloadAllBtn: 'सर्व डाउनलोड करा',
+  convAddMoreBtn: 'दुसरा फोटो निवडा',
+  convClearBtn: 'साफ करा',
+  convBatchProHint: 'एकाच वेळी अनेक फोटो कन्व्हर्ट करण्यासाठी Pro पास घ्या',
+  convErrorGeneric: 'हा फोटो कन्व्हर्ट करताना त्रुटी आली. कृपया दुसरा फोटो वापरून पहा.',
+  convWaitingLabel: 'कन्व्हर्ट करण्यासाठी तयार',
+  // Word Counter & Typing Pad
+  wordModeLabel: 'टायपिंग भाषा निवडा',
+  wordModeEn: 'English (थेट)',
+  wordModeMr: 'मराठी (English → मराठी)',
+  wordModeHi: 'हिंदी (English → हिंदी)',
+  wordCountLabel: 'शब्द (Words)',
+  wordCharsWithSpaceLabel: 'अक्षरे (स्पेससह)',
+  wordCharsNoSpaceLabel: 'अक्षरे (स्पेसशिवाय)',
+  wordSentencesLabel: 'वाक्ये (Sentences)',
+  wordParagraphsLabel: 'परिच्छेद (Paragraphs)',
+  wordReadTimeLabel: 'वाचन वेळ',
+  wordMinUnit: 'मिनिट',
+  wordLiveHintPrefix: 'सध्याचा शब्द:',
+  wordLiveHintSpace: 'रूपांतरासाठी Space / Enter दाबा किंवा शब्द निवडा:',
+  wordConvertNowBtn: 'शब्द बदला',
+  wordConvertAllBtn: 'पूर्ण इंग्रजी मजकूर बदला',
+  wordSampleBtn: 'नमुना मजकूर',
+  wordCopyBtn: 'मजकूर कॉपी करा',
+  wordCopiedBtn: 'कॉपी झाले!',
+  wordDownloadTxtBtn: '.TXT डाउनलोड',
+  wordClearBtn: 'पुसा (Clear)',
+  wordCleanSpacesBtn: 'अतिरिक्त स्पेस काढा',
+  wordPlaceholderEn: 'शब्द, अक्षरे आणि वाक्ये मोजण्यासाठी येथे मजकूर टाईप करा किंवा पेस्ट करा...',
+  wordPlaceholderMr: 'येथे इंग्रजी अक्षरांत टाईप करा (उदा. namaskar maharashtra) — Space दाबताच मराठीत रूपांतर होईल...',
+  wordPlaceholderHi: 'येथे इंग्रजी अक्षरांत टाईप करा (उदा. namaste bharat) — Space दाबताच हिंदीत रूपांतर होईल...',
+  wordQuickCharsLabel: 'झटपट अक्षरे:',
+  wordExamplesTitle: 'सोपी टीप: "namaskar" + Space → नमस्कार | "maharashtra" → महाराष्ट्र | "L" → ळ | "dny" → ज्ञ',
 };
 
 const HI_STRINGS: SiteStrings = {
@@ -810,7 +1401,7 @@ const HI_STRINGS: SiteStrings = {
   brandTaglineShort: '१००% मुफ्त और सुरक्षित टूल्स',
   navHome: 'होम',
   navAllTools: 'सभी टूल्स',
-  navAllToolsSubheading: '७ ब्राउज़र-आधारित ऑनलाइन टूल्स',
+  navAllToolsSubheading: '१३ ब्राउज़र-आधारित ऑनलाइन टूल्स',
   goProHeaderBtn: 'Go Pro (₹49)',
   proActiveHeaderBadge: 'Pro पास सक्रिय',
   backToHome: 'मुख्य पृष्ठ पर जाएं',
@@ -821,18 +1412,18 @@ const HI_STRINGS: SiteStrings = {
   heroTitle: 'SadhanBox (साधनबॉक्स)',
   heroTagline: 'आपके दैनिक कार्यों के लिए १००% मुफ्त और सुरक्षित ऑनलाइन टूल्स',
   heroSubtitle:
-    'मैरिज बायोडाटा मेकर, रिज्यूमे मेकर, बैकग्राउंड रिमूवर, PDF Merge व Split, MPSC/UPSC फॉर्म के लिए इमेज कंप्रेसर, QR Code जनरेटर और आयु कैलकुलेटर — सभी टूल्स सीधे आपके ब्राउज़र में चलते हैं।',
+    'बायोडाटा व रिज्यूमे, पासपोर्ट फोटो, सिग्नेचर रिसाइज़, रेंट रसीद व सैलरी स्लिप, GST व EMI कैलकुलेटर, इमेज फॉर्मेट कन्वर्टर, वर्ड काउंटर व मराठी/हिंदी टाइपिंग, बैकग्राउंड रिमूवर, PDF टूल्स, इमेज कंप्रेसर, QR व आयु कैलकुलेटर — सभी आपके ब्राउज़र में।',
   heroPrimaryCta: 'शादी का बायोडाटा बनाएं',
-  heroSecondaryCta: 'सभी ७ टूल्स देखें',
+  heroSecondaryCta: 'सभी १३ टूल्स देखें',
   heroSuiteTitle: 'SadhanBox सूट',
-  heroSuiteSubtitle: '७ उपयोगी ऑनलाइन टूल्स',
+  heroSuiteSubtitle: '१३ उपयोगी ऑनलाइन टूल्स',
   heroLiveDownloadsLabel: 'लाइव डाउनलोड',
   heroPrivacyStatVal: '१००%',
   heroPrivacyStatLabel: 'ब्राउज़र सुरक्षा',
   heroNoSignupNote: 'लॉगिन या साइन-अप की जरूरत नहीं — टूल चुनें और तुरंत उपयोग शुरू करें।',
   toolsGridHeading: 'आपके दैनिक कार्यों के लिए सभी टूल्स',
   toolsGridSubheading: 'नीचे से कोई भी टूल चुनें — सभी फाइलें आपके डिवाइस पर ही प्रोसेस होती हैं।',
-  toolsGridCount: '७ टूल्स उपलब्ध',
+  toolsGridCount: '१३ टूल्स उपलब्ध',
   openToolCta: 'टूल खोलें',
   supportHeading: 'SadhanBox को सपोर्ट करें',
   supportDesc:
@@ -1009,7 +1600,7 @@ const HI_STRINGS: SiteStrings = {
   proFreeAudience: 'दैनिक उपयोग के लिए',
   proFreePrice: '₹0',
   proFreeFeatures: [
-    'सभी ७ टूल्स का मुफ्त दैनिक उपयोग',
+    'सभी १३ टूल्स का मुफ्त दैनिक उपयोग',
     '४-५ सरल मुफ्त बायोडाटा और रिज्यूमे टेम्प्लेट्स',
     '१-१ फाइल प्रोसेसिंग सुविधा',
     'सामान्य PNG, PDF और KB कंप्रेशन डाउनलोड',
@@ -1031,7 +1622,7 @@ const HI_STRINGS: SiteStrings = {
   proPassMonthlyLabel: '₹49 / महीना',
   proPassYearlyLabel: '₹199 / वर्ष',
   proPassFeatures: [
-    'सभी ७ टूल्स में १००% विज्ञापन-मुक्त अनुभव',
+    'सभी १३ टूल्स में १००% विज्ञापन-मुक्त अनुभव',
     'सभी रॉयल व गोल्डन बायोडाटा और रिज्यूमे टेम्प्लेट्स अनलॉक',
     'बिना वॉटरमार्क असीमित A4 PDF डाउनलोड',
     'HD बैकग्राउंड रिमूवल और एक साथ कई फाइलें प्रोसेस करने की सुविधा',
@@ -1068,6 +1659,203 @@ const HI_STRINGS: SiteStrings = {
   promoSuccessMsg: 'बिना वॉटरमार्क PDF डाउनलोड हो गई!',
   promoSocialNote: 'प्रोमो कोड के लिए Instagram या Facebook पोस्ट पर BIODATA कमेंट करें या ₹19 / ₹49 में तुरंत अनलॉक करें।',
   promoPayAlternative: 'कोड नहीं है? UPI या Razorpay से अनलॉक करें (₹19 / ₹49)',
+  // Passport Photo Maker
+  passUploadTitle: 'अपना फोटो अपलोड करें या यहाँ ड्रैग करें',
+  passUploadHint: 'JPG, PNG या WEBP सपोर्ट · MPSC/UPSC और पासपोर्ट A4 शीट के लिए सीधा चेहरा वाला फोटो चुनें',
+  passUploadBtn: 'फोटो चुनें',
+  passChangePhotoBtn: 'दूसरा फोटो चुनें',
+  passFileTypeError: 'कृपया सही JPG, PNG या WEBP फोटो चुनें।',
+  passNameLabel: 'फोटो पर नाम (वैकल्पिक)',
+  passNamePlaceholder: 'उदा. RAHUL SHARMA',
+  passDateLabel: 'फोटो खींचने की तारीख (वैकल्पिक)',
+  passClearDateBtn: 'हटाएं',
+  passBgLabel: 'बैकग्राउंड रंग',
+  passBgOriginal: 'मूल फोटो',
+  passBgWhite: 'सफेद',
+  passBgLightBlue: 'हल्का नीला',
+  passAiBgBtn: 'AI से बैकग्राउंड बदलें',
+  passAiBgWorking: 'पुराना बैकग्राउंड हटाया जा रहा है...',
+  passAiBgReady: 'नया बैकग्राउंड सफलतापूर्वक लागू हुआ',
+  passAiBgError: 'बैकग्राउंड ऑटोमैटिक हटाया नहीं जा सका। मूल फोटो का उपयोग किया जा रहा है।',
+  passSheetCountLabel: 'A4 शीट पर फोटो संख्या (MPSC / UPSC)',
+  passCount8: '८ फोटो (४×२)',
+  passCount12: '१२ फोटो (४×३)',
+  passZoomLabel: 'फोटो ज़ूम',
+  passOffsetYLabel: 'ऊपर-नीचे स्थिति',
+  passCutBorderLabel: 'काटने के लिए प्रत्येक फोटो के चारों ओर हल्की बॉर्डर दिखाएं',
+  passSinglePreviewTitle: 'सिंगल फोटो (3.5 × 4.5 सेमी)',
+  passSheetPreviewTitle: 'A4 प्रिंट शीट प्रिव्यू',
+  passDownloadPdfBtn: 'A4 PDF डाउनलोड करें',
+  passDownloadJpgBtn: 'A4 JPG डाउनलोड करें',
+  passDownloadSingleBtn: 'सिंगल JPG डाउनलोड करें',
+  passPdfGenerating: 'A4 PDF बन रही है...',
+  passDatePrefix: 'DOP:',
+  // Signature & Thumb Resize Tool
+  sigUploadTitle: 'सिग्नेचर या अंगूठे के निशान का फोटो अपलोड करें',
+  sigUploadHint: 'JPG, PNG या WEBP सपोर्ट · MPSC, UPSC, SSC, IBPS और सरकारी फॉर्म के लिए उपयुक्त',
+  sigUploadBtn: 'सिग्नेचर / थंब चुनें',
+  sigChangeBtn: 'दूसरा फोटो चुनें',
+  sigFileTypeError: 'कृपया सही JPG, PNG या WEBP इमेज चुनें।',
+  sigPresetLabel: 'सरकारी फॉर्म के अनुसार साइज चुनें',
+  sigPreset140: 'सिग्नेचर (140 × 60 px)',
+  sigPreset240: 'अंगूठे का निशान (240 × 240 px)',
+  sigPreset300: 'चौड़ा सिग्नेचर (300 × 120 px)',
+  sigPresetCustom: 'कस्टम साइज (px)',
+  sigWidthLabel: 'चौड़ाई (px)',
+  sigHeightLabel: 'ऊंचाई (px)',
+  sigMinKbLabel: 'न्यूनतम साइज (KB)',
+  sigMaxKbLabel: 'अधिकतम साइज (KB)',
+  sigAutoCropLabel: 'खाली किनारों को ऑटो-क्रॉप करें (Auto-Crop)',
+  sigAutoCropHint: 'हस्ताक्षर या अंगूठे के चारों ओर की खाली सफेद जगह को अपने आप काटता है',
+  sigCleanPaperLabel: 'कागज सफेद और स्याही गहरी करें',
+  sigCleanPaperHint: 'फोटो के हल्के ग्रे बैकग्राउंड को शुद्ध सफेद (#FFFFFF) बनाता है',
+  sigProcessBtn: 'रिसाइज़ और कंप्रेस करें',
+  sigProcessingBtn: 'प्रोसेसिंग जारी है...',
+  sigOriginalLabel: 'मूल इमेज',
+  sigResultLabel: 'तैयार इमेज (JPG)',
+  sigRangeError: 'कृपया मान्य पिक्सेल (30–2000 px) और KB सीमा (5–500 KB, न्यूनतम ≤ अधिकतम) दर्ज करें।',
+  sigErrorGeneric: 'इमेज प्रोसेस नहीं हो सकी। कृपया दूसरा फोटो आजमाएं।',
+  sigDownloadJpgBtn: 'JPG डाउनलोड करें',
+  sigReadyBadge: 'सटीक पिक्सेल और KB साइज तैयार है',
+  // Rent Receipt & Salary Slip Generator
+  rentTabReceipt: 'रेंट रसीद (HRA)',
+  rentTabSalary: 'सैलरी स्लिप (Salary Slip)',
+  rentTenantNameLabel: 'किरायेदार / कर्मचारी का नाम',
+  rentTenantPlaceholder: 'उदा. रोहन देशमुख',
+  rentLandlordNameLabel: 'मकान मालिक का नाम',
+  rentLandlordPlaceholder: 'उदा. सुरेश कुलकर्णी',
+  rentLandlordPanLabel: 'मकान मालिक का PAN (वैकल्पिक — सालाना किराया ₹1,00,000 से अधिक होने पर)',
+  rentLandlordPanPlaceholder: 'उदा. ABCDE1234F',
+  rentMonthlyAmountLabel: 'मासिक किराया राशि (₹)',
+  rentAddressLabel: 'किराये के मकान का पता',
+  rentAddressPlaceholder: 'फ्लैट ३०२, शांति रेजीडेंसी, कोथरूड, पुणे - ४११०३८',
+  rentStartMonthLabel: 'प्रारंभिक महीना',
+  rentCountLabel: 'A4 पेज पर रसीद संख्या',
+  rentCount1: '१ महीना',
+  rentCount2: '२ महीने',
+  rentCount3: '३ महीने (तिमाही)',
+  rentPayModeLabel: 'भुगतान का माध्यम',
+  rentPayModes: ['UPI / बैंक ट्रांसफर', 'NEFT / IMPS', 'चेक (Cheque)', 'नकद (Cash)'],
+  rentReceiptNoLabel: 'रसीद संख्या (प्रारंभ)',
+  rentIncludeStampLabel: 'हस्ताक्षर के लिए ₹1 रेवेन्यू स्टैम्प बॉक्स दिखाएं',
+  rentDownloadPdfBtn: 'A4 PDF डाउनलोड करें',
+  rentDownloadingBtn: 'A4 PDF बन रही है...',
+  rentSampleFillBtn: 'सैंपल जानकारी भरें',
+  rentPreviewTitle: 'लाइव A4 प्रिंट प्रिव्यू',
+  salCompanyLabel: 'कंपनी / नियोक्ता का नाम',
+  salCompanyPlaceholder: 'उदा. सह्याद्री टेक सॉल्यूशंस प्रा. लि.',
+  salCompanyAddrLabel: 'कंपनी का पता',
+  salCompanyAddrPlaceholder: 'प्लॉट १४, हिंजवडी फेज १, पुणे - ४११०५७',
+  salMonthLabel: 'वेतन महीना और वर्ष',
+  salEmpNameLabel: 'कर्मचारी का नाम',
+  salEmpNamePlaceholder: 'उदा. स्नेहा जोशी',
+  salEmpIdLabel: 'कर्मचारी आईडी (ID)',
+  salDesignationLabel: 'पदनाम (Designation)',
+  salDesignationPlaceholder: 'उदा. सीनियर एग्जीक्यूटिव',
+  salDepartmentLabel: 'विभाग (Department)',
+  salDepartmentPlaceholder: 'उदा. ऑपरेशंस',
+  salPanUanLabel: 'PAN / UAN नंबर (वैकल्पिक)',
+  salPaidDaysLabel: 'कार्य दिवस (उदा. 30 / 30)',
+  salEarningsTitle: 'आय / भत्ते (₹)',
+  salBasicLabel: 'मूल वेतन (Basic)',
+  salHraLabel: 'मकान किराया भत्ता (HRA)',
+  salAllowanceLabel: 'यात्रा व विशेष भत्ता',
+  salBonusLabel: 'बोनस / प्रोत्साहन',
+  salDeductionsTitle: 'कटौती (Deductions ₹)',
+  salPfLabel: 'भविष्य निधि (PF)',
+  salPtLabel: 'प्रोफेशनल टैक्स (PT)',
+  salTdsLabel: 'आयकर (TDS)',
+  salOtherDedLabel: 'अन्य कटौती',
+  salGrossLabel: 'कुल वेतन (Gross)',
+  salTotalDedLabel: 'कुल कटौती',
+  salNetPayLabel: 'शुद्ध वेतन (Net Pay)',
+  // GST & EMI Calculator
+  finTabGst: 'GST कैलकुलेटर',
+  finTabEmi: 'लोन EMI कैलकुलेटर',
+  gstAmountLabel: 'मूल या बिल राशि (₹)',
+  gstRateLabel: 'GST दर चुनें (%)',
+  gstCustomRateLabel: 'कस्टम %',
+  gstModeLabel: 'गणना का प्रकार',
+  gstExclusiveBtn: 'GST Exclusive (+ GST जोड़ें)',
+  gstInclusiveBtn: 'GST Inclusive (GST अलग करें)',
+  gstSupplyTypeLabel: 'टैक्स विभाजन',
+  gstIntraBtn: 'राज्य के भीतर (CGST + SGST)',
+  gstInterBtn: 'अंतरराज्यीय (IGST)',
+  gstBaseAmountLabel: 'मूल कर योग्य राशि',
+  gstTaxAmountLabel: 'कुल GST राशि',
+  gstCgstLabel: 'CGST',
+  gstSgstLabel: 'SGST',
+  gstIgstLabel: 'IGST',
+  gstTotalAmountLabel: 'अंतिम बिल राशि (₹)',
+  gstCopyBtn: 'सारांश कॉपी करें',
+  gstCopiedBtn: 'कॉपी हुआ',
+  emiPresetHome: 'होम लोन',
+  emiPresetVehicle: 'वाहन / कार लोन',
+  emiPresetPersonal: 'पर्सनल लोन',
+  emiLoanAmountLabel: 'लोन की राशि (₹)',
+  emiInterestRateLabel: 'वार्षिक ब्याज दर (% p.a.)',
+  emiTenureLabel: 'लोन अवधि',
+  emiYearsUnit: 'वर्ष',
+  emiMonthsUnit: 'महीने',
+  emiMonthlyTitle: 'मासिक किस्त (EMI)',
+  emiPrincipalLabel: 'मूलधन राशि',
+  emiTotalInterestLabel: 'कुल ब्याज देय',
+  emiTotalPayableLabel: 'कुल भुगतान राशि',
+  emiScheduleTitle: 'वार्षिक लोन भुगतान तालिका',
+  emiYearCol: 'वर्ष',
+  emiPrincipalCol: 'मूलधन भुगतान',
+  emiInterestCol: 'ब्याज भुगतान',
+  emiBalanceCol: 'शेष राशि',
+  // Image Format Converter
+  convUploadTitle: 'कोई भी फोटो अपलोड करें या यहाँ ड्रैग करें (PNG, WebP, JPG, BMP)',
+  convUploadHint: 'मोबाइल की कोई भी फोटो या स्क्रीनशॉट सीधे उच्च गुणवत्ता वाले JPG, PNG या WebP में बदलें',
+  convUploadBtn: 'फोटो चुनें',
+  convFileTypeError: 'कृपया सही इमेज फाइल चुनें (PNG, JPG, WebP, BMP या GIF)।',
+  convFormatLabel: 'आउटपुट फॉर्मेट चुनें',
+  convQualityLabel: 'आउटपुट गुणवत्ता (Quality)',
+  convPngLosslessHint: 'PNG फॉर्मेट बिना गुणवत्ता खोए पारदर्शी बैकग्राउंड के साथ सेव होता है।',
+  convBgFillLabel: 'JPG के लिए बैकग्राउंड रंग (पारदर्शी फोटो होने पर)',
+  convBgWhite: 'सफेद',
+  convBgBlack: 'काला',
+  convBgSoft: 'हल्का ग्रे',
+  convConvertBtn: 'फॉर्मेट बदलें (Convert)',
+  convConvertingBtn: 'बदला जा रहा है...',
+  convOriginalLabel: 'मूल फोटो',
+  convOutputLabel: 'बदला हुआ फोटो',
+  convDownloadBtn: 'डाउनलोड करें',
+  convDownloadAllBtn: 'सभी डाउनलोड करें',
+  convAddMoreBtn: 'दूसरा फोटो चुनें',
+  convClearBtn: 'साफ करें',
+  convBatchProHint: 'एक साथ कई फोटो कन्वर्ट करने के लिए Pro पास लें',
+  convErrorGeneric: 'इस इमेज फॉर्मेट को बदला नहीं जा सका। कृपया दूसरा फोटो आजमाएं।',
+  convWaitingLabel: 'कन्वर्ट करने के लिए तैयार',
+  // Word Counter & Typing Pad
+  wordModeLabel: 'टाइपिंग भाषा चुनें',
+  wordModeEn: 'English (सीधे)',
+  wordModeMr: 'मराठी (English → मराठी)',
+  wordModeHi: 'हिंदी (English → हिंदी)',
+  wordCountLabel: 'शब्द (Words)',
+  wordCharsWithSpaceLabel: 'अक्षर (स्पेस सहित)',
+  wordCharsNoSpaceLabel: 'अक्षर (बिना स्पेस)',
+  wordSentencesLabel: 'वाक्य (Sentences)',
+  wordParagraphsLabel: 'पैराग्राफ (Paragraphs)',
+  wordReadTimeLabel: 'पढ़ने का समय',
+  wordMinUnit: 'मिनट',
+  wordLiveHintPrefix: 'मौजूदा शब्द:',
+  wordLiveHintSpace: 'बदलने के लिए Space / Enter दबाएं या विकल्प चुनें:',
+  wordConvertNowBtn: 'शब्द बदलें',
+  wordConvertAllBtn: 'पूरा अंग्रेजी टेक्स्ट बदलें',
+  wordSampleBtn: 'सैंपल टेक्स्ट',
+  wordCopyBtn: 'टेक्स्ट कॉपी करें',
+  wordCopiedBtn: 'कॉपी हुआ!',
+  wordDownloadTxtBtn: '.TXT डाउनलोड',
+  wordClearBtn: 'साफ करें',
+  wordCleanSpacesBtn: 'अतिरिक्त स्पेस हटाएं',
+  wordPlaceholderEn: 'शब्द, अक्षर और वाक्य गिनने के लिए यहाँ कोई भी अंग्रेजी, मराठी या हिंदी टेक्स्ट टाइप या पेस्ट करें...',
+  wordPlaceholderMr: 'यहाँ अंग्रेजी में टाइप करें (जैसे namaskar maharashtra) — Space दबाते ही मराठी में बदल जाएगा...',
+  wordPlaceholderHi: 'यहाँ अंग्रेजी में टाइप करें (जैसे namaste bharat) — Space दबाते ही हिंदी में बदल जाएगा...',
+  wordQuickCharsLabel: 'त्वरित अक्षर:',
+  wordExamplesTitle: 'त्वरित मदद: "namaste" + Space → नमस्ते | "bharat" → भारत | "L" → ळ | "dny" → ज्ञ',
 };
 
 export const SITE_STRINGS: Record<UiLang, SiteStrings> = {

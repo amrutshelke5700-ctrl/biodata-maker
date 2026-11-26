@@ -7,7 +7,13 @@ export type ToolRoute =
   | '/pdf-tools'
   | '/image-compressor'
   | '/qr-generator'
-  | '/age-calculator';
+  | '/age-calculator'
+  | '/passport-photo-maker'
+  | '/signature-resize'
+  | '/rent-receipt-generator'
+  | '/gst-emi-calculator'
+  | '/image-converter'
+  | '/word-counter-typing';
 
 export type LegalRoute = '/about' | '/privacy-policy' | '/terms' | '/contact';
 
@@ -205,6 +211,162 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
       en: 'Age Calculator — Exact Years, Months, Days & Birthday Countdown | SadhanBox',
       mr: 'वय कॅल्क्युलेटर — अचूक वय व पुढील वाढदिवस काउंटडाऊन | SadhanBox',
       hi: 'आयु कैलकुलेटर — सटीक उम्र और अगला जन्मदिन काउंटडाउन | SadhanBox',
+    },
+  },
+  {
+    route: '/passport-photo-maker',
+    id: 'passport-photo-maker',
+    title: {
+      en: 'Passport Photo Maker',
+      mr: 'पासपोर्ट फोटो मेकर',
+      hi: 'पासपोर्ट फोटो मेकर',
+    },
+    shortDesc: {
+      en: 'Add Name and Photo Date on passport photos, pick White or Light Blue background, and download 8 or 12 photo A4 sheets for MPSC/UPSC in PDF or JPG.',
+      mr: 'फोटोखाली नाव व फोटो काढल्याची तारीख लिहा, पांढरे किंवा हलके निळे बॅकग्राउंड निवडा आणि MPSC/UPSC साठी ८ किंवा १२ फोटोंची A4 शीट PDF/JPG मध्ये डाउनलोड करा.',
+      hi: 'फोटो के नीचे नाम व तारीख जोड़ें, सफेद या हल्का नीला बैकग्राउंड चुनें और MPSC/UPSC के लिए ८ या १२ फोटो की A4 शीट PDF/JPG में डाउनलोड करें।',
+    },
+    metaLabel: {
+      en: 'Name & Date · A4 8/12 PDF & JPG',
+      mr: 'नाव व तारीख · A4 ८/१२ PDF/JPG',
+      hi: 'नाम व तारीख · A4 ८/१२ PDF/JPG',
+    },
+    accentBg: 'bg-sky-50 border-sky-200',
+    accentText: 'text-sky-700',
+    seoTitle: {
+      en: 'Free Passport Photo Maker Online — Name & Date, A4 8/12 Sheet PDF & JPG | SadhanBox',
+      mr: 'पासपोर्ट फोटो मेकर — नाव व तारीख टाकून MPSC/UPSC साठी A4 शीट PDF/JPG बनवा | SadhanBox',
+      hi: 'फ्री पासपोर्ट फोटो मेकर — नाम व तारीख के साथ A4 शीट PDF/JPG बनाएं | SadhanBox',
+    },
+  },
+  {
+    route: '/signature-resize',
+    id: 'signature-resize',
+    title: {
+      en: 'Signature & Thumb Resize Tool',
+      mr: 'सही आणि अंगठा रिसाईझ टूल',
+      hi: 'सिग्नेचर व थंब रिसाइज़ टूल',
+    },
+    shortDesc: {
+      en: 'Auto-crop and resize signatures and thumb impressions to exact govt form dimensions (140×60px, 240×240px) and 10KB–20KB JPG size.',
+      mr: 'सरकारी फॉर्मसाठी सही व अंगठ्याचा ठसा अचूक पिक्सेल (140×60px, 240×240px) आणि 10KB ते 20KB साईझमध्ये ऑटो-क्रॉप व कॉम्प्रेस करा.',
+      hi: 'सरकारी फॉर्म के लिए सिग्नेचर और अंगूठे के निशान को सटीक पिक्सेल (140×60px, 240×240px) और 10KB–20KB में ऑटो-क्रॉप व कंप्रेस करें।',
+    },
+    metaLabel: {
+      en: '140×60px · 240×240px · 10–20KB',
+      mr: '140×60px · 240×240px · 10–20KB',
+      hi: '140×60px · 240×240px · 10–20KB',
+    },
+    accentBg: 'bg-teal-50 border-teal-200',
+    accentText: 'text-teal-700',
+    seoTitle: {
+      en: 'Signature & Thumb Impression Resize Online (140×60px, 240×240px, 10–20KB) | SadhanBox',
+      mr: 'सही आणि अंगठा रिसाईझ टूल — 140×60px, 240×240px व 10–20KB ऑटो-क्रॉप | SadhanBox',
+      hi: 'सिग्नेचर व थंब रिसाइज़ टूल — 140×60px, 240×240px और 10–20KB ऑटो-क्रॉप | SadhanBox',
+    },
+  },
+  {
+    route: '/rent-receipt-generator',
+    id: 'rent-receipt-generator',
+    title: {
+      en: 'Rent Receipt & Salary Slip Generator',
+      mr: 'घरभाडे पावती व पगार स्लिप जनरेटर',
+      hi: 'रेंट रसीद व सैलरी स्लिप जनरेटर',
+    },
+    shortDesc: {
+      en: 'Generate printable HRA Rent Receipts (with Revenue Stamp & PAN) and professional Salary Slips, and export ready-to-print A4 PDFs instantly.',
+      mr: 'आयकर (HRA) बचतीसाठी घरभाडे पावती (Rent Receipt) आणि सोपी पगार स्लिप (Salary Slip) तयार करून झटपट A4 PDF डाउनलोड करा.',
+      hi: 'इनकम टैक्स (HRA) बचत के लिए रेंट रसीद (Rent Receipt) और प्रोफेशनल सैलरी स्लिप (Salary Slip) बनाकर तुरंत A4 PDF डाउनलोड करें।',
+    },
+    metaLabel: {
+      en: 'HRA Rent Receipt · Salary Slip A4 PDF',
+      mr: 'HRA घरभाडे पावती · पगार स्लिप PDF',
+      hi: 'HRA रेंट रसीद · सैलरी स्लिप PDF',
+    },
+    accentBg: 'bg-orange-50 border-orange-200',
+    accentText: 'text-orange-700',
+    seoTitle: {
+      en: 'Free Rent Receipt (HRA) & Salary Slip Generator — A4 PDF | SadhanBox',
+      mr: 'घरभाडे पावती व पगार स्लिप जनरेटर — HRA साठी A4 PDF मोफत बनवा | SadhanBox',
+      hi: 'फ्री रेंट रसीद (HRA) व सैलरी स्लिप जनरेटर — A4 PDF डाउनलोड | SadhanBox',
+    },
+  },
+  {
+    route: '/gst-emi-calculator',
+    id: 'gst-emi-calculator',
+    title: {
+      en: 'GST & EMI Calculator',
+      mr: 'GST व EMI कॅल्क्युलेटर',
+      hi: 'GST व EMI कैलकुलेटर',
+    },
+    shortDesc: {
+      en: 'Calculate GST Inclusive & Exclusive amounts (3%, 5%, 12%, 18%, 28%) with CGST/SGST split, and compute Home/Vehicle Loan EMI & total interest.',
+      mr: 'व्यवसायासाठी GST (3%, 5%, 12%, 18%, 28%) Inclusive/Exclusive आणि गृहकर्ज/वाहन कर्जाचा मासिक EMI व व्याज अचूक मोजा.',
+      hi: 'व्यापार के लिए GST (3%, 5%, 12%, 18%, 28%) Inclusive/Exclusive और होम/वाहन लोन की मासिक EMI व कुल ब्याज आसानी से निकालें।',
+    },
+    metaLabel: {
+      en: 'GST (3–28%) · Home & Car Loan EMI',
+      mr: 'GST (3–28%) · कर्ज EMI व व्याज',
+      hi: 'GST (3–28%) · लोन EMI व ब्याज',
+    },
+    accentBg: 'bg-purple-50 border-purple-200',
+    accentText: 'text-purple-700',
+    seoTitle: {
+      en: 'Free GST Calculator (3%–28%) & Loan EMI Calculator Online | SadhanBox',
+      mr: 'GST व EMI कॅल्क्युलेटर — GST हिशोब आणि कर्ज हप्ता (EMI) मोफत मोजा | SadhanBox',
+      hi: 'फ्री GST कैलकुलेटर (3%–28%) और लोन EMI कैलकुलेटर | SadhanBox',
+    },
+  },
+  {
+    route: '/image-converter',
+    id: 'image-converter',
+    title: {
+      en: 'Image Format Converter',
+      mr: 'इमेज फॉरमॅट कन्व्हर्टर',
+      hi: 'इमेज फॉर्मेट कन्वर्टर',
+    },
+    shortDesc: {
+      en: 'Convert any mobile or desktop photo (PNG, WebP, JPG, BMP) into crisp high-quality JPG, PNG, or WebP directly in your browser.',
+      mr: 'मोबाईलमधील कोणत्याही फोटोचे (PNG, WebP, JPG, BMP) थेट ब्राउझरमध्ये उच्च गुणवत्तेच्या JPG, PNG किंवा WebP फॉरमॅटमध्ये रूपांतर करा.',
+      hi: 'मोबाइल की किसी भी फोटो (PNG, WebP, JPG, BMP) को सीधे ब्राउज़र में उच्च गुणवत्ता वाले JPG, PNG या WebP में बदलें।',
+    },
+    metaLabel: {
+      en: 'PNG · JPG · WebP · BMP',
+      mr: 'PNG · JPG · WebP · BMP',
+      hi: 'PNG · JPG · WebP · BMP',
+    },
+    accentBg: 'bg-pink-50 border-pink-200',
+    accentText: 'text-pink-700',
+    seoTitle: {
+      en: 'Free Image Format Converter — PNG, WebP, JPG, BMP Online | SadhanBox',
+      mr: 'इमेज फॉरमॅट कन्व्हर्टर — फोटो JPG, PNG व WebP मध्ये मोफत बदला | SadhanBox',
+      hi: 'फ्री इमेज फॉर्मेट कन्वर्टर — फोटो JPG, PNG व WebP में बदलें | SadhanBox',
+    },
+  },
+  {
+    route: '/word-counter-typing',
+    id: 'word-counter-typing',
+    title: {
+      en: 'Word Counter & Marathi/Hindi Typing Pad',
+      mr: 'वर्ड काउंटर व मराठी/हिंदी टायपिंग पॅड',
+      hi: 'वर्ड काउंटर व मराठी/हिंदी टाइपिंग पैड',
+    },
+    shortDesc: {
+      en: 'Count exact words, characters, and sentences in real time, and type Marathi or Hindi phonetically using English letters with one-click copy.',
+      mr: 'मजकुरातील शब्द, अक्षरे व वाक्यांची संख्या मोजा आणि इंग्रजी अक्षरांतून (Transliteration) मराठी किंवा हिंदी टाईप करून कॉपी करा.',
+      hi: 'टेक्स्ट में शब्द, अक्षर और वाक्य गिनें, साथ ही अंग्रेजी अक्षरों (Transliteration) से मराठी या हिंदी टाइप करके तुरंत कॉपी करें।',
+    },
+    metaLabel: {
+      en: 'Words & Chars · English → मराठी / हिंदी',
+      mr: 'शब्द मोजणी · English → मराठी / हिंदी',
+      hi: 'शब्द गणना · English → मराठी / हिंदी',
+    },
+    accentBg: 'bg-lime-50 border-lime-200',
+    accentText: 'text-lime-700',
+    seoTitle: {
+      en: 'Word Counter & English to Marathi / Hindi Typing Pad Online | SadhanBox',
+      mr: 'वर्ड काउंटर व मराठी/हिंदी टायपिंग पॅड — शब्द मोजणी व टायपिंग | SadhanBox',
+      hi: 'वर्ड काउंटर व मराठी/हिंदी टाइपिंग पैड — शब्द गिनें और टाइप करें | SadhanBox',
     },
   },
 ];

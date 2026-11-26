@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
+  ArrowLeftRight,
   Briefcase,
   Cake,
+  Calculator,
   CheckCircle2,
   ChevronDown,
   Crown,
@@ -18,7 +20,11 @@ import {
   Languages,
   LayoutGrid,
   Loader2,
+  PenTool,
   QrCode,
+  ReceiptText,
+  Type,
+  UserSquare2,
   X,
 } from 'lucide-react';
 import { A4PreviewSheet } from './components/A4PreviewSheet';
@@ -31,10 +37,16 @@ import { SeoGuideFooter } from './components/SeoGuideFooter';
 import { TemplateSelector } from './components/TemplateSelector';
 import { AgeCalculatorTool } from './components/tools/AgeCalculatorTool';
 import { BackgroundRemoverTool } from './components/tools/BackgroundRemoverTool';
+import { GstEmiCalculatorTool } from './components/tools/GstEmiCalculatorTool';
 import { ImageCompressorTool } from './components/tools/ImageCompressorTool';
+import { ImageFormatConverterTool } from './components/tools/ImageFormatConverterTool';
+import { PassportPhotoMakerTool } from './components/tools/PassportPhotoMakerTool';
 import { PdfToolsTool } from './components/tools/PdfToolsTool';
 import { QrGeneratorTool } from './components/tools/QrGeneratorTool';
+import { RentReceiptSalarySlipTool } from './components/tools/RentReceiptSalarySlipTool';
+import { SignatureResizeTool } from './components/tools/SignatureResizeTool';
 import { ToolSeoSection } from './components/tools/ToolSeoSection';
+import { WordCounterTypingTool } from './components/tools/WordCounterTypingTool';
 import {
   AppLanguage,
   BiodataMode,
@@ -110,6 +122,12 @@ const NAV_TOOL_ICONS: Record<string, React.ReactNode> = {
   'image-compressor': <FileDown className="w-4 h-4 text-emerald-600 shrink-0" />,
   'qr-generator': <QrCode className="w-4 h-4 text-cyan-600 shrink-0" />,
   'age-calculator': <Cake className="w-4 h-4 text-indigo-600 shrink-0" />,
+  'passport-photo-maker': <UserSquare2 className="w-4 h-4 text-sky-600 shrink-0" />,
+  'signature-resize': <PenTool className="w-4 h-4 text-teal-600 shrink-0" />,
+  'rent-receipt-generator': <ReceiptText className="w-4 h-4 text-orange-600 shrink-0" />,
+  'gst-emi-calculator': <Calculator className="w-4 h-4 text-purple-600 shrink-0" />,
+  'image-converter': <ArrowLeftRight className="w-4 h-4 text-pink-600 shrink-0" />,
+  'word-counter-typing': <Type className="w-4 h-4 text-lime-700 shrink-0" />,
 };
 
 const IN_APP_BANNER_COPY: Record<
@@ -920,6 +938,65 @@ export default function App() {
             isPro={proActive}
             onBackHome={() => navigateTo('/')}
             onOpenProModal={() => openProModal('monthly')}
+          />
+        )}
+
+        {activeRoute === '/passport-photo-maker' && (
+          <PassportPhotoMakerTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/signature-resize' && (
+          <SignatureResizeTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/rent-receipt-generator' && (
+          <RentReceiptSalarySlipTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/gst-emi-calculator' && (
+          <GstEmiCalculatorTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+          />
+        )}
+
+        {activeRoute === '/image-converter' && (
+          <ImageFormatConverterTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/word-counter-typing' && (
+          <WordCounterTypingTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
           />
         )}
 

@@ -19,13 +19,13 @@ const FOOTER_FAQS_BY_LANG: Record<
 > = {
   en: {
     toggleLabel: 'How SadhanBox works · Guide & FAQs',
-    guideTitle: 'SadhanBox — 7 Utility Tools in One Browser Suite',
+    guideTitle: 'SadhanBox — 13 Utility Tools in One Browser Suite',
     guideDesc:
-      'SadhanBox gives you instant access to Marriage Biodata Maker, Resume Maker, AI Background Remover, PDF Merge & Split, KB Image Compressor, QR Code Generator, and Age Calculator with zero sign-up.',
+      'SadhanBox gives you instant access to Marriage Biodata Maker, Resume Maker, Passport Photo Maker, Signature & Thumb Resize, Rent Receipt & Salary Slip Generator, GST & EMI Calculator, Image Format Converter, Word Counter & Marathi/Hindi Typing Pad, AI Background Remover, PDF Merge & Split, KB Image Compressor, QR Code Generator, and Age Calculator with zero sign-up.',
     faqs: [
       {
         q: 'Is my data private while using SadhanBox tools?',
-        a: 'Yes! All 7 tools run strictly inside your browser (Client-Side). Files and personal details never leave your device.',
+        a: 'Yes! All 13 tools run strictly inside your browser (Client-Side). Files and personal details never leave your device.',
       },
       {
         q: 'How do I download a Biodata or Resume PDF?',
@@ -39,13 +39,13 @@ const FOOTER_FAQS_BY_LANG: Record<
   },
   mr: {
     toggleLabel: 'SadhanBox कसे वापरावे? · मार्गदर्शक व प्रश्नोत्तरे',
-    guideTitle: 'SadhanBox — एकाच ठिकाणी ७ उपयुक्त साधने',
+    guideTitle: 'SadhanBox — एकाच ठिकाणी १३ उपयुक्त साधने',
     guideDesc:
-      'SadhanBox वर तुम्हाला लग्न बायोडाटा मेकर, रेझ्युमे मेकर, बॅकग्राउंड रिमूव्हर, PDF टूल्स, इमेज कॉम्प्रेसर, QR Code जनरेटर आणि वय कॅल्क्युलेटर ही सर्व साधने विना-साइनअप मोफत मिळतात.',
+      'SadhanBox वर तुम्हाला लग्न बायोडाटा मेकर, रेझ्युमे मेकर, पासपोर्ट फोटो मेकर, सही व अंगठा रिसाईझ, घरभाडे पावती व पगार स्लिप, GST व EMI कॅल्क्युलेटर, इमेज फॉरमॅट कन्व्हर्टर, वर्ड काउंटर व मराठी/हिंदी टायपिंग पॅड, बॅकग्राउंड रिमूव्हर, PDF टूल्स, इमेज कॉम्प्रेसर, QR Code जनरेटर आणि वय कॅल्क्युलेटर ही सर्व साधने विना-साइनअप मोफत मिळतात.',
     faqs: [
       {
         q: 'SadhanBox वापरताना माझा डेटा सुरक्षित राहतो का?',
-        a: 'होय! सर्व ७ साधने पूर्णपणे तुमच्या ब्राउझरमध्ये चालतात व कोणतीही माहिती सर्व्हरवर पाठवली जात नाही.',
+        a: 'होय! सर्व १३ साधने पूर्णपणे तुमच्या ब्राउझरमध्ये चालतात व कोणतीही माहिती सर्व्हरवर पाठवली जात नाही.',
       },
       {
         q: 'बायोडाटा व रेझ्युमे PDF मध्ये कसा डाउनलोड करावा?',
@@ -59,13 +59,13 @@ const FOOTER_FAQS_BY_LANG: Record<
   },
   hi: {
     toggleLabel: 'SadhanBox का उपयोग कैसे करें? · गाइड और प्रश्न',
-    guideTitle: 'SadhanBox — एक ही स्थान पर ७ उपयोगी टूल्स',
+    guideTitle: 'SadhanBox — एक ही स्थान पर १३ उपयोगी टूल्स',
     guideDesc:
-      'SadhanBox पर आपको मैरिज बायोडाटा मेकर, रिज्यूमे मेकर, बैकग्राउंड रिमूवर, PDF टूल्स, इमेज कंप्रेसर, QR Code जनरेटर और आयु कैलकुलेटर बिना साइन-अप मुफ्त मिलते हैं।',
+      'SadhanBox पर आपको मैरिज बायोडाटा मेकर, रिज्यूमे मेकर, पासपोर्ट फोटो मेकर, सिग्नेचर व थंब रिसाइज़, रेंट रसीद व सैलरी स्लिप, GST व EMI कैलकुलेटर, इमेज फॉर्मेट कन्वर्टर, वर्ड काउंटर व मराठी/हिंदी टाइपिंग पैड, बैकग्राउंड रिमूवर, PDF टूल्स, इमेज कंप्रेसर, QR Code जनरेटर और आयु कैलकुलेटर बिना साइन-अप मुफ्त मिलते हैं।',
     faqs: [
       {
         q: 'क्या SadhanBox टूल्स इस्तेमाल करते समय मेरा डेटा सुरक्षित रहता है?',
-        a: 'हां! सभी ७ टूल्स पूरी तरह आपके ब्राउज़र में चलते हैं और कोई भी फाइल सर्वर पर अपलोड नहीं होती।',
+        a: 'हां! सभी १३ टूल्स पूरी तरह आपके ब्राउज़र में चलते हैं और कोई भी फाइल सर्वर पर अपलोड नहीं होती।',
       },
       {
         q: 'बायोडाटा और रिज्यूमे PDF में कैसे डाउनलोड करें?',

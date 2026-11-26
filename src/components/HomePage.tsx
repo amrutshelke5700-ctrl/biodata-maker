@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {
+  ArrowLeftRight,
   ArrowRight,
   Briefcase,
   Cake,
+  Calculator,
   Check,
   CheckCircle2,
   ChevronDown,
@@ -14,9 +16,13 @@ import {
   Heart,
   HelpCircle,
   Lock,
+  PenTool,
   QrCode,
+  ReceiptText,
   ShieldCheck,
   Sparkles,
+  Type,
+  UserSquare2,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { AdSlot } from './AdSlot';
@@ -42,6 +48,12 @@ const TOOL_ICONS: Record<string, React.ReactNode> = {
   'image-compressor': <FileDown className="w-5 h-5 text-emerald-600" />,
   'qr-generator': <QrCode className="w-5 h-5 text-cyan-600" />,
   'age-calculator': <Cake className="w-5 h-5 text-indigo-600" />,
+  'passport-photo-maker': <UserSquare2 className="w-5 h-5 text-sky-600" />,
+  'signature-resize': <PenTool className="w-5 h-5 text-teal-600" />,
+  'rent-receipt-generator': <ReceiptText className="w-5 h-5 text-orange-600" />,
+  'gst-emi-calculator': <Calculator className="w-5 h-5 text-purple-600" />,
+  'image-converter': <ArrowLeftRight className="w-5 h-5 text-pink-600" />,
+  'word-counter-typing': <Type className="w-5 h-5 text-lime-700" />,
 };
 
 const HOME_FAQS_BY_LANG: Record<UiLang, { title: string; overviewTitle: string; items: { q: string; a: string }[] }> = {
@@ -51,11 +63,11 @@ const HOME_FAQS_BY_LANG: Record<UiLang, { title: string; overviewTitle: string; 
     items: [
       {
         q: 'Are SadhanBox tools safe and private? Is my data uploaded to any server?',
-        a: 'All 7 tools on SadhanBox run 100% locally inside your browser (Client-Side). Your photos, PDFs, marriage biodata, and resumes are never uploaded or stored on any server.',
+        a: 'All 13 tools on SadhanBox run 100% locally inside your browser (Client-Side). Your photos, PDFs, marriage biodata, and resumes are never uploaded or stored on any server.',
       },
       {
         q: 'Are Background Remover, PDF Tools, and Image Compressor free?',
-        a: 'Yes! Everyday use of all 7 tools is completely free. Optional Single Downloads (₹19) or All-Tools Pro Pass (₹49/month or ₹199/year) unlock watermark-free Royal biodata templates, HD background removal, batch processing, and an ad-free interface.',
+        a: 'Yes! Everyday use of all 13 tools is completely free. Optional Single Downloads (₹19) or All-Tools Pro Pass (₹49/month or ₹199/year) unlock watermark-free Royal biodata templates, HD background removal, batch processing, and an ad-free interface.',
       },
       {
         q: 'How can I compress a photo to 20KB or 50KB for MPSC or UPSC forms?',
@@ -73,11 +85,11 @@ const HOME_FAQS_BY_LANG: Record<UiLang, { title: string; overviewTitle: string; 
     items: [
       {
         q: 'SadhanBox वरील टूल्स सुरक्षित आहेत का? माझा डेटा सर्व्हरवर सेव्ह होतो का?',
-        a: 'SadhanBox वरील सर्व ७ साधने १००% तुमच्या ब्राउझरमध्ये चालतात. तुमचे फोटो, PDF फाईल्स, लग्नाचा बायोडाटा किंवा रेझ्युमे कोणत्याही सर्व्हरवर अपलोड केला जात नाही.',
+        a: 'SadhanBox वरील सर्व १३ साधने १००% तुमच्या ब्राउझरमध्ये चालतात. तुमचे फोटो, PDF फाईल्स, लग्नाचा बायोडाटा किंवा रेझ्युमे कोणत्याही सर्व्हरवर अपलोड केला जात नाही.',
       },
       {
         q: 'बॅकग्राउंड रिमूव्हर, PDF टूल्स व इमेज कॉम्प्रेसर मोफत आहेत का?',
-        a: 'होय! सर्व ७ साधनांचा दैनंदिन वापर पूर्णपणे मोफत आहे. तसेच ₹19 सिंगल डाउनलोड किंवा ₹49 All-Tools Pro Pass मध्ये जाहिरातमुक्त अनुभव, रॉयल टेम्प्लेट्स आणि बॅच प्रोसेसिंग मिळते.',
+        a: 'होय! सर्व १३ साधनांचा दैनंदिन वापर पूर्णपणे मोफत आहे. तसेच ₹19 सिंगल डाउनलोड किंवा ₹49 All-Tools Pro Pass मध्ये जाहिरातमुक्त अनुभव, रॉयल टेम्प्लेट्स आणि बॅच प्रोसेसिंग मिळते.',
       },
       {
         q: 'MPSC / UPSC फॉर्मसाठी फोटो 20KB किंवा 50KB मध्ये कसा कॉम्प्रेस करायचा?',
@@ -95,11 +107,11 @@ const HOME_FAQS_BY_LANG: Record<UiLang, { title: string; overviewTitle: string; 
     items: [
       {
         q: 'क्या SadhanBox के टूल्स सुरक्षित हैं? क्या मेरा डेटा सर्वर पर सेव होता है?',
-        a: 'SadhanBox के सभी ७ टूल्स १००% आपके ब्राउज़र में चलते हैं। आपकी फोटो, PDF फाइलें, शादी का बायोडाटा या रिज्यूमे किसी भी सर्वर पर अपलोड नहीं होता।',
+        a: 'SadhanBox के सभी १३ टूल्स १००% आपके ब्राउज़र में चलते हैं। आपकी फोटो, PDF फाइलें, शादी का बायोडाटा या रिज्यूमे किसी भी सर्वर पर अपलोड नहीं होता।',
       },
       {
         q: 'क्या बैकग्राउंड रिमूवर, PDF टूल्स और इमेज कंप्रेसर मुफ्त हैं?',
-        a: 'हां! सभी ७ टूल्स का दैनिक उपयोग पूरी तरह मुफ्त है। ₹19 सिंगल डाउनलोड या ₹49 All-Tools Pro Pass से विज्ञापन-मुक्त अनुभव, रॉयल टेम्प्लेट्स और बैच प्रोसेसिंग अनलॉक होती है।',
+        a: 'हां! सभी १३ टूल्स का दैनिक उपयोग पूरी तरह मुफ्त है। ₹19 सिंगल डाउनलोड या ₹49 All-Tools Pro Pass से विज्ञापन-मुक्त अनुभव, रॉयल टेम्प्लेट्स और बैच प्रोसेसिंग अनलॉक होती है।',
       },
       {
         q: 'MPSC / UPSC फॉर्म के लिए फोटो 20KB या 50KB में कैसे कंप्रेस करें?',
