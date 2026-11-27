@@ -26,6 +26,8 @@ import { UiLang } from '../../utils/siteI18n';
 interface WatermarkAdderToolProps {
   uiLang: UiLang;
   isPro: boolean;
+  singleCredits?: number;
+  onConsumeSingleCredit?: () => void;
   onBackHome: () => void;
   onOpenProModal: () => void;
   onToolDownload: () => void;
@@ -58,6 +60,7 @@ interface CopyPack {
   paidGateDesc: string;
   paidGateCta: string;
   proUnlockedBanner: string;
+  singleCreditBanner: string;
   tabImage: string;
   tabPdf: string;
   tabVideo: string;
@@ -119,6 +122,7 @@ const COPY: Record<UiLang, CopyPack> = {
       'Customize and preview watermarks on your Images, PDFs, and Videos here. Upgrade to All-Tools Pro Pass (₹49/mo) to export watermarked files without limits.',
     paidGateCta: 'Unlock Pro (₹49)',
     proUnlockedBanner: 'Pro Pass Active — Unlimited Image, PDF & Video Watermarking Unlocked',
+    singleCreditBanner: 'Single Pro Download Credit Active — Click below to export your watermarked file',
     tabImage: 'Image',
     tabPdf: 'PDF',
     tabVideo: 'Video',
@@ -180,6 +184,7 @@ const COPY: Record<UiLang, CopyPack> = {
       'तुम्ही तुमचा फोटो, PDF किंवा व्हिडिओ अपलोड करून येथे लाइव्ह प्रिव्ह्यू तपासू शकता. वॉटरमार्क लावलेली फाईल डाउनलोड करण्यासाठी ₹49 Pro पास अनलॉक करा.',
     paidGateCta: 'Pro अनलॉक करा (₹49)',
     proUnlockedBanner: 'Pro पास सक्रिय — इमेज, PDF आणि व्हिडिओ वॉटरमार्किंग अमर्याद उपलब्ध',
+    singleCreditBanner: '१ सिंगल डाउनलोड क्रेडिट सक्रिय — खालील बटनावर क्लिक करून डाउनलोड करा',
     tabImage: 'फोटो / इमेज',
     tabPdf: 'PDF दस्तऐवज',
     tabVideo: 'व्हिडिओ',
@@ -241,6 +246,7 @@ const COPY: Record<UiLang, CopyPack> = {
       'आप अपनी फोटो, PDF और वीडियो अपलोड करके लाइव प्रीव्यू देख सकते हैं। वॉटरमार्क लगी फाइल डाउनलोड करने के लिए ₹49 Pro पास अनलॉक करें।',
     paidGateCta: 'Pro अनलॉक करें (₹49)',
     proUnlockedBanner: 'Pro पास सक्रिय — इमेज, PDF और वीडियो वॉटरमार्किंग अनलिमिटेड उपलब्ध',
+    singleCreditBanner: '१ सिंगल डाउनलोड क्रेडिट सक्रिय — नीचे क्लिक करके वॉटरमार्क फाइल डाउनलोड करें',
     tabImage: 'इमेज / फोटो',
     tabPdf: 'PDF दस्तावेज़',
     tabVideo: 'वीडियो',
@@ -304,10 +310,11 @@ function triggerDownload(blob: Blob, filename: string) {
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
+  a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+  window.setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
 
 function drawWatermarkOnCanvas(
@@ -401,12 +408,15 @@ function drawWatermarkOnCanvas(
 export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
   uiLang,
   isPro,
+  singleCredits = 0,
+  onConsumeSingleCredit,
   onBackHome,
   onOpenProModal,
   onToolDownload,
 }) => {
   const c = COPY[uiLang] || COPY.en;
   const toolMeta = TOOL_CATALOG.find((t) => t.route === '/watermark-adder')!;
+  const canExport = isPro || singleCredits > 0;
 
   const [mediaKind, setMediaKind] = useState<MediaKind>('image');
   const [config, setConfig] = useState<WatermarkConfig>({
@@ -459,6 +469,7 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const pendingDownloadAfterUnlockRef = useRef<boolean>(false);
 
   // Cleanup object URLs on unmount
   const urlsRef = useRef<{ logo: string; img: string; vid: string }>({ logo: '', img: '', vid: '' });
@@ -719,138 +730,178 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
     setVideoProgress(1);
 
     const hiddenVideo = document.createElement('video');
-    hiddenVideo.src = videoUrl;
     hiddenVideo.playsInline = true;
-    hiddenVideo.crossOrigin = 'anonymous';
     hiddenVideo.muted = true;
+    hiddenVideo.preload = 'auto';
+    hiddenVideo.style.cssText =
+      'position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0.01;pointer-events:none;';
+    document.body.appendChild(hiddenVideo);
 
-    await new Promise<void>((resolve, reject) => {
-      hiddenVideo.onloadedmetadata = () => resolve();
-      hiddenVideo.onerror = () => reject(new Error('Video load failed'));
-    });
+    let combinedStream: MediaStream | null = null;
 
-    const natW = hiddenVideo.videoWidth || 1280;
-    const natH = hiddenVideo.videoHeight || 720;
-    const maxDim = 1280;
-    const scale = Math.min(1, maxDim / Math.max(natW, natH));
-    const outW = Math.max(2, Math.round((natW * scale) / 2) * 2);
-    const outH = Math.max(2, Math.round((natH * scale) / 2) * 2);
-
-    const compCanvas = document.createElement('canvas');
-    compCanvas.width = outW;
-    compCanvas.height = outH;
-    const ctx = compCanvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas unavailable');
-
-    const canvasStream = compCanvas.captureStream(30);
-    const tracks: MediaStreamTrack[] = [...canvasStream.getVideoTracks()];
-
-    // Preserve audio track if supported by browser captureStream
     try {
-      const capFn =
-        (hiddenVideo as HTMLVideoElement & { captureStream?: () => MediaStream }).captureStream ||
-        (hiddenVideo as HTMLVideoElement & { mozCaptureStream?: () => MediaStream })
-          .mozCaptureStream;
-      if (typeof capFn === 'function') {
-        const mediaStream = capFn.call(hiddenVideo);
-        for (const audioTrack of mediaStream.getAudioTracks()) {
-          tracks.push(audioTrack);
+      await new Promise<void>((resolve, reject) => {
+        hiddenVideo.onloadedmetadata = () => resolve();
+        hiddenVideo.onerror = () => reject(new Error('Video load failed'));
+        hiddenVideo.src = videoUrl;
+        hiddenVideo.load();
+      });
+
+      const natW = hiddenVideo.videoWidth || 1280;
+      const natH = hiddenVideo.videoHeight || 720;
+      const maxDim = 1280;
+      const scale = Math.min(1, maxDim / Math.max(natW, natH));
+      const outW = Math.max(2, Math.round((natW * scale) / 2) * 2);
+      const outH = Math.max(2, Math.round((natH * scale) / 2) * 2);
+
+      const compCanvas = document.createElement('canvas');
+      compCanvas.width = outW;
+      compCanvas.height = outH;
+      const ctx = compCanvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas unavailable');
+
+      const canvasStream = compCanvas.captureStream(30);
+      const videoOnlyStream = new MediaStream([...canvasStream.getVideoTracks()]);
+      const tracks: MediaStreamTrack[] = [...canvasStream.getVideoTracks()];
+
+      try {
+        const capFn =
+          (hiddenVideo as HTMLVideoElement & { captureStream?: () => MediaStream }).captureStream ||
+          (hiddenVideo as HTMLVideoElement & { mozCaptureStream?: () => MediaStream })
+            .mozCaptureStream;
+        if (typeof capFn === 'function') {
+          const mediaStream = capFn.call(hiddenVideo);
+          for (const audioTrack of mediaStream.getAudioTracks()) {
+            tracks.push(audioTrack);
+          }
+        }
+      } catch {
+        // Proceed with video stream cleanly if audio capture is unavailable
+      }
+
+      combinedStream = new MediaStream(tracks);
+      const mimeCandidates = [
+        'video/webm;codecs=vp9,opus',
+        'video/webm;codecs=vp8,opus',
+        'video/webm',
+        'video/mp4;codecs=avc1',
+        'video/mp4',
+      ];
+
+      let chosenMime = '';
+      let recorder: MediaRecorder | null = null;
+
+      for (const candidate of mimeCandidates) {
+        if (!MediaRecorder.isTypeSupported(candidate)) continue;
+        try {
+          recorder = new MediaRecorder(combinedStream, {
+            mimeType: candidate,
+            videoBitsPerSecond: 4_000_000,
+          });
+          chosenMime = candidate;
+          break;
+        } catch {
+          // Try next codec or fallback stream
         }
       }
-    } catch {
-      // Proceed with video stream cleanly if audio capture is unavailable
-    }
 
-    const combinedStream = new MediaStream(tracks);
-    const mimeCandidates = [
-      'video/mp4;codecs=avc1',
-      'video/mp4',
-      'video/webm;codecs=vp9,opus',
-      'video/webm;codecs=vp8,opus',
-      'video/webm',
-    ];
-    const mimeType =
-      mimeCandidates.find((m) => MediaRecorder.isTypeSupported(m)) || '';
+      if (!recorder) {
+        try {
+          recorder = new MediaRecorder(combinedStream);
+          chosenMime = recorder.mimeType || 'video/webm';
+        } catch {
+          combinedStream = videoOnlyStream;
+          recorder = new MediaRecorder(videoOnlyStream);
+          chosenMime = recorder.mimeType || 'video/webm';
+        }
+      }
 
-    const recorder = mimeType
-      ? new MediaRecorder(combinedStream, { mimeType, videoBitsPerSecond: 4_000_000 })
-      : new MediaRecorder(combinedStream);
-
-    const chunks: BlobPart[] = [];
-    recorder.ondataavailable = (ev) => {
-      if (ev.data && ev.data.size > 0) chunks.push(ev.data);
-    };
-
-    const recordedPromise = new Promise<Blob>((resolve) => {
-      recorder.onstop = () => {
-        resolve(new Blob(chunks, { type: mimeType || 'video/webm' }));
+      const chunks: BlobPart[] = [];
+      recorder.ondataavailable = (ev) => {
+        if (ev.data && ev.data.size > 0) chunks.push(ev.data);
       };
-    });
 
-    hiddenVideo.currentTime = 0;
-    recorder.start(250);
+      const recordedPromise = new Promise<Blob>((resolve) => {
+        recorder!.onstop = () => {
+          resolve(new Blob(chunks, { type: chosenMime || 'video/webm' }));
+        };
+      });
 
-    let rafId = 0;
-    const drawFrame = () => {
-      if (cancelVideoRef.current) {
-        hiddenVideo.pause();
-        if (recorder.state !== 'inactive') recorder.stop();
-        return;
-      }
-      ctx.drawImage(hiddenVideo, 0, 0, outW, outH);
-      drawWatermarkOnCanvas(ctx, outW, outH, config, logoElement);
-      if (hiddenVideo.duration > 0) {
-        setVideoProgress(
-          Math.min(99, Math.max(1, Math.round((hiddenVideo.currentTime / hiddenVideo.duration) * 100)))
-        );
-      }
-      if (!hiddenVideo.ended && !hiddenVideo.paused) {
-        rafId = requestAnimationFrame(drawFrame);
-      }
-    };
+      hiddenVideo.currentTime = 0;
+      recorder.start(250);
 
-    await hiddenVideo.play();
-    rafId = requestAnimationFrame(drawFrame);
-
-    await new Promise<void>((resolve) => {
-      hiddenVideo.onended = () => resolve();
-      const checkCancel = window.setInterval(() => {
+      let rafId = 0;
+      const drawFrame = () => {
         if (cancelVideoRef.current) {
+          hiddenVideo.pause();
+          if (recorder && recorder.state !== 'inactive') recorder.stop();
+          return;
+        }
+        ctx.drawImage(hiddenVideo, 0, 0, outW, outH);
+        drawWatermarkOnCanvas(ctx, outW, outH, config, logoElement);
+        if (hiddenVideo.duration > 0) {
+          setVideoProgress(
+            Math.min(
+              99,
+              Math.max(1, Math.round((hiddenVideo.currentTime / hiddenVideo.duration) * 100))
+            )
+          );
+        }
+        if (!hiddenVideo.ended && !hiddenVideo.paused) {
+          rafId = requestAnimationFrame(drawFrame);
+        }
+      };
+
+      await hiddenVideo.play();
+      rafId = requestAnimationFrame(drawFrame);
+
+      await new Promise<void>((resolve) => {
+        const checkCancel = window.setInterval(() => {
+          if (cancelVideoRef.current) {
+            window.clearInterval(checkCancel);
+            resolve();
+          }
+        }, 150);
+        hiddenVideo.onended = () => {
           window.clearInterval(checkCancel);
           resolve();
-        }
-      }, 150);
-      hiddenVideo.addEventListener('ended', () => window.clearInterval(checkCancel), {
-        once: true,
+        };
       });
-    });
 
-    cancelAnimationFrame(rafId);
-    if (recorder.state !== 'inactive') {
-      recorder.stop();
+      cancelAnimationFrame(rafId);
+      if (recorder.state !== 'inactive') {
+        recorder.stop();
+      }
+
+      const outBlob = await recordedPromise;
+
+      if (cancelVideoRef.current) {
+        setVideoProgress(0);
+        return;
+      }
+
+      setVideoProgress(100);
+      const baseName = videoFile.name.replace(/\.[^.]+$/, '') || 'sadhanbox-video';
+      const ext = chosenMime.includes('mp4') ? 'mp4' : 'webm';
+      triggerDownload(outBlob, `${baseName}-watermarked.${ext}`);
+      setSuccessMsg(c.doneVideoMsg);
+    } finally {
+      if (combinedStream) {
+        combinedStream.getTracks().forEach((t) => t.stop());
+      }
+      if (hiddenVideo.parentNode) {
+        hiddenVideo.parentNode.removeChild(hiddenVideo);
+      }
     }
-
-    const outBlob = await recordedPromise;
-    combinedStream.getTracks().forEach((t) => t.stop());
-
-    if (cancelVideoRef.current) {
-      setVideoProgress(0);
-      return;
-    }
-
-    setVideoProgress(100);
-    const baseName = videoFile.name.replace(/\.[^.]+$/, '') || 'sadhanbox-video';
-    const ext = mimeType.includes('mp4') ? 'mp4' : 'webm';
-    triggerDownload(outBlob, `${baseName}-watermarked.${ext}`);
-    setSuccessMsg(c.doneVideoMsg);
   };
 
-  const handleApplyAndDownload = async () => {
+  const runWatermarkExport = async () => {
     clearFeedback();
-    if (!isPro) {
-      onOpenProModal();
-      return;
-    }
+    const mediaReady =
+      (mediaKind === 'image' && Boolean(imageElement)) ||
+      (mediaKind === 'pdf' && Boolean(pdfFile)) ||
+      (mediaKind === 'video' && Boolean(videoFile));
+    if (!mediaReady) return;
     if (!validateWatermarkReady()) return;
 
     setIsProcessing(true);
@@ -863,6 +914,9 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
         await handleExportVideo();
       }
       if (!cancelVideoRef.current) {
+        if (!isPro && singleCredits > 0) {
+          onConsumeSingleCredit?.();
+        }
         pushDataLayerEvent('file_download', {
           document_type: `watermarked_${mediaKind}`,
           watermark_kind: config.kind,
@@ -875,6 +929,24 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  useEffect(() => {
+    if (canExport && pendingDownloadAfterUnlockRef.current && !isProcessing) {
+      pendingDownloadAfterUnlockRef.current = false;
+      void runWatermarkExport();
+    }
+  });
+
+  const handleApplyAndDownload = async () => {
+    clearFeedback();
+    if (!validateWatermarkReady()) return;
+    if (!canExport) {
+      pendingDownloadAfterUnlockRef.current = true;
+      onOpenProModal();
+      return;
+    }
+    await runWatermarkExport();
   };
 
   const hasCurrentMedia =
@@ -901,7 +973,7 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
     >
       <div className="space-y-5">
         {/* Paid / Pro Status Banner */}
-        {!isPro ? (
+        {!canExport ? (
           <div className="bg-amber-50 border border-[#F59E0B]/50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-start gap-3">
               <div className="w-9 h-9 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0">
@@ -932,7 +1004,7 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
         ) : (
           <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5 flex items-center gap-2 text-xs font-semibold text-emerald-800">
             <Crown className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>{c.proUnlockedBanner}</span>
+            <span>{isPro ? c.proUnlockedBanner : c.singleCreditBanner}</span>
           </div>
         )}
 
@@ -1429,14 +1501,14 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
                 </div>
               )}
 
-              {/* Primary Apply & Download CTA (Gated by Pro) */}
+              {/* Primary Apply & Download CTA (Gated by Pro or Single Credit) */}
               <div className="flex items-center gap-2 pt-1">
                 <button
                   type="button"
                   disabled={!hasCurrentMedia || isProcessing}
                   onClick={() => void handleApplyAndDownload()}
                   className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
-                    isPro
+                    canExport
                       ? 'text-white bg-[#16A34A] hover:bg-[#15803D] shadow-xs'
                       : 'text-white bg-gradient-to-r from-[#D97706] to-[#F59E0B] hover:brightness-105 shadow-xs'
                   }`}
@@ -1446,7 +1518,7 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
                       <Loader2 className="w-4 h-4 animate-spin shrink-0" />
                       <span>{c.processingBtn}</span>
                     </>
-                  ) : isPro ? (
+                  ) : canExport ? (
                     <>
                       <Download className="w-4 h-4 shrink-0" />
                       <span>{c.applyDownloadBtn}</span>
@@ -1478,7 +1550,7 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
           <div className="lg:col-span-7 bg-slate-100 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-xs sm:text-sm font-bold text-slate-900">{c.previewHeading}</h2>
-              {!isPro && (
+              {!canExport && (
                 <span className="inline-flex items-center gap-1 rounded bg-amber-100 border border-[#F59E0B]/40 px-2 py-0.5 text-[10px] font-extrabold text-[#B45309]">
                   <Crown className="w-3 h-3 text-[#D97706]" />
                   {c.paidBadge}

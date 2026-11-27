@@ -82,6 +82,7 @@ export const ProPricingModal: React.FC<ProPricingModalProps> = ({
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const autoCloseTimerRef = React.useRef<number | null>(null);
 
   const proActive = isProActive(proState);
 
@@ -94,6 +95,19 @@ export const ProPricingModal: React.FC<ProPricingModalProps> = ({
       setErrorMsg('');
     }
   }, [isOpen, initialPlan]);
+
+  useEffect(() => {
+    if (!isOpen && autoCloseTimerRef.current !== null) {
+      window.clearTimeout(autoCloseTimerRef.current);
+      autoCloseTimerRef.current = null;
+    }
+    return () => {
+      if (autoCloseTimerRef.current !== null) {
+        window.clearTimeout(autoCloseTimerRef.current);
+        autoCloseTimerRef.current = null;
+      }
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -129,6 +143,13 @@ export const ProPricingModal: React.FC<ProPricingModalProps> = ({
     onProStateChange(nextState);
     setErrorMsg('');
     setFeedbackMsg(s.proSuccessUnlocked);
+    if (autoCloseTimerRef.current !== null) {
+      window.clearTimeout(autoCloseTimerRef.current);
+    }
+    autoCloseTimerRef.current = window.setTimeout(() => {
+      autoCloseTimerRef.current = null;
+      onClose();
+    }, 550);
   };
 
   const handleRazorpayCheckout = async () => {

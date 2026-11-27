@@ -1052,6 +1052,8 @@ export default function App() {
           <WatermarkAdderTool
             uiLang={uiLang}
             isPro={proActive}
+            singleCredits={proState.singleCredits}
+            onConsumeSingleCredit={() => setProState(consumeSingleProCredit())}
             onBackHome={() => navigateTo('/')}
             onOpenProModal={() => openProModal('monthly')}
             onToolDownload={handleToolDownload}
