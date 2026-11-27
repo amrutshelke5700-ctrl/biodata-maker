@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Copy,
+  Crown,
   Eraser,
   ExternalLink,
   FileDown,
@@ -21,6 +22,7 @@ import {
   ReceiptText,
   ShieldCheck,
   Sparkles,
+  Stamp,
   Type,
   UserSquare2,
 } from 'lucide-react';
@@ -54,6 +56,7 @@ const TOOL_ICONS: Record<string, React.ReactNode> = {
   'gst-emi-calculator': <Calculator className="w-5 h-5 text-purple-600" />,
   'image-converter': <ArrowLeftRight className="w-5 h-5 text-pink-600" />,
   'word-counter-typing': <Type className="w-5 h-5 text-lime-700" />,
+  'watermark-adder': <Stamp className="w-5 h-5 text-amber-600" />,
 };
 
 const HOME_FAQS_BY_LANG: Record<UiLang, { title: string; overviewTitle: string; items: { q: string; a: string }[] }> = {
@@ -291,9 +294,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                   >
                     {TOOL_ICONS[tool.id]}
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-500 text-right leading-snug">
-                    {tool.metaLabel[uiLang]}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    {tool.isProOnly && (
+                      <span className="inline-flex items-center gap-1 rounded bg-amber-100 border border-[#F59E0B]/40 px-1.5 py-0.5 text-[10px] font-extrabold text-[#B45309]">
+                        <Crown className="w-2.5 h-2.5 text-[#D97706]" />
+                        {s.tplProBadge}
+                      </span>
+                    )}
+                    <span className="text-[11px] font-semibold text-slate-500 text-right leading-snug">
+                      {tool.metaLabel[uiLang]}
+                    </span>
+                  </div>
                 </div>
 
                 <div>

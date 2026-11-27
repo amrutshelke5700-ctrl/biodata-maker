@@ -4,6 +4,7 @@ import {
   Circle,
   Crop,
   Plus,
+  QrCode,
   RotateCcw,
   Square,
   Trash2,
@@ -42,7 +43,9 @@ import {
   toLocalizedDigits,
 } from '../utils/smartFieldOptions';
 import { ImageCropModal } from './ImageCropModal';
+import { QrScannerModal } from './QrScannerModal';
 import { ReligionEmblem } from './ReligionIcons';
+import { normalizeAndValidateResumeUrl } from '../utils/resumeQr';
 
 interface BiodataFormProps {
   mode: BiodataMode;
@@ -79,6 +82,8 @@ export const BiodataForm: React.FC<BiodataFormProps> = ({
   });
   const [cropSourceUrl, setCropSourceUrl] = useState<string>('');
   const [isCropModalOpen, setIsCropModalOpen] = useState<boolean>(false);
+  const [isQrScannerOpen, setIsQrScannerOpen] = useState<boolean>(false);
+  const [qrScanSuccess, setQrScanSuccess] = useState<boolean>(false);
 
   const currentPhoto = mode === 'marriage' ? marriageData.photoDataUrl : jobData.photoDataUrl;
   const currentShape = mode === 'marriage' ? marriageData.photoShape : jobData.photoShape;
@@ -178,6 +183,7 @@ export const BiodataForm: React.FC<BiodataFormProps> = ({
       | 'mobile'
       | 'email'
       | 'address'
+      | 'portfolioUrl'
       | 'careerObjective'
       | 'skills'
       | 'languages',
@@ -185,6 +191,8 @@ export const BiodataForm: React.FC<BiodataFormProps> = ({
   ) => {
     onChangeJob({ ...jobData, [key]: value });
   };
+
+  const portfolioValidation = normalizeAndValidateResumeUrl(jobData.portfolioUrl || '');
 
   const updateEduItem = (id: string, field: keyof JobEducationItem, value: string) => {
     onChangeJob({
@@ -922,6 +930,47 @@ export const BiodataForm: React.FC<BiodataFormProps> = ({
                     className={inputBaseClass}
                   />
                 </div>
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="j-portfolio-qr"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 mb-1.5"
+                  >
+                    <QrCode className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                    <span>{copy.portfolioQrLabel}</span>
+                  </label>
+                  <div className="flex items-stretch gap-2">
+                    <input
+                      id="j-portfolio-qr"
+                      type="url"
+                      value={jobData.portfolioUrl || ''}
+                      onChange={(e) => {
+                        setQrScanSuccess(false);
+                        updateJobField('portfolioUrl', e.target.value);
+                      }}
+                      placeholder={copy.portfolioQrPlaceholder}
+                      className={`${inputBaseClass} flex-1 min-w-0`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setIsQrScannerOpen(true)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                      <span>{copy.scanQrBtn}</span>
+                    </button>
+                  </div>
+                  {qrScanSuccess && portfolioValidation.isValid ? (
+                    <p className="mt-1.5 text-xs font-medium text-emerald-700">
+                      {copy.scanQrSuccessHint}
+                    </p>
+                  ) : !portfolioValidation.isEmpty && !portfolioValidation.isValid ? (
+                    <p className="mt-1.5 text-xs font-medium text-amber-700">
+                      {copy.portfolioQrInvalidHint}
+                    </p>
+                  ) : (
+                    <p className="mt-1.5 text-xs text-slate-500">{copy.portfolioQrHint}</p>
+                  )}
+                </div>
               </div>
             </section>
 
@@ -1132,6 +1181,18 @@ export const BiodataForm: React.FC<BiodataFormProps> = ({
         onClose={() => setIsCropModalOpen(false)}
         onSaveCropped={handleSaveCroppedPhoto}
       />
+
+      {mode === 'job' && (
+        <QrScannerModal
+          isOpen={isQrScannerOpen}
+          language={language}
+          onClose={() => setIsQrScannerOpen(false)}
+          onScanSuccess={(scannedUrl) => {
+            updateJobField('portfolioUrl', scannedUrl);
+            setQrScanSuccess(true);
+          }}
+        />
+      )}
     </div>
   );
 };

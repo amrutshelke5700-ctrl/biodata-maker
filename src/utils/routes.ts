@@ -13,7 +13,8 @@ export type ToolRoute =
   | '/rent-receipt-generator'
   | '/gst-emi-calculator'
   | '/image-converter'
-  | '/word-counter-typing';
+  | '/word-counter-typing'
+  | '/watermark-adder';
 
 export type LegalRoute = '/about' | '/privacy-policy' | '/terms' | '/contact';
 
@@ -22,6 +23,7 @@ export type AppRoute = '/' | ToolRoute | LegalRoute;
 export interface ToolCatalogItem {
   route: ToolRoute;
   id: string;
+  isProOnly?: boolean;
   title: Record<UiLang, string>;
   shortDesc: Record<UiLang, string>;
   metaLabel: Record<UiLang, string>;
@@ -367,6 +369,33 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
       en: 'Word Counter & English to Marathi / Hindi Typing Pad Online | SadhanBox',
       mr: 'वर्ड काउंटर व मराठी/हिंदी टायपिंग पॅड — शब्द मोजणी व टायपिंग | SadhanBox',
       hi: 'वर्ड काउंटर व मराठी/हिंदी टाइपिंग पैड — शब्द गिनें और टाइप करें | SadhanBox',
+    },
+  },
+  {
+    route: '/watermark-adder',
+    id: 'watermark-adder',
+    isProOnly: true,
+    title: {
+      en: 'Watermark Adder (Image, PDF & Video)',
+      mr: 'वॉटरमार्क ॲडर (इमेज, PDF व व्हिडिओ)',
+      hi: 'वॉटरमार्क ऐडर (इमेज, PDF व वीडियो)',
+    },
+    shortDesc: {
+      en: 'Add custom text or logo watermarks on Photos, PDF documents, and Videos with diagonal tiling, opacity, rotation, and color controls.',
+      mr: 'फोटो, PDF कागदपत्रे आणि व्हिडिओवर हवा तो मजकूर किंवा लोगो वॉटरमार्क (तिरका, मध्यभागी किंवा कोपऱ्यात) जोडून डाउनलोड करा.',
+      hi: 'फोटो, PDF डॉक्यूमेंट और वीडियो पर मनचाहा टेक्स्ट या लोगो वॉटरमार्क (तिरछा, बीच या कोने में) लगाकर डाउनलोड करें।',
+    },
+    metaLabel: {
+      en: 'Image · PDF · Video · Pro Tool',
+      mr: 'इमेज · PDF · व्हिडिओ · Pro टूल',
+      hi: 'इमेज · PDF · वीडियो · Pro टूल',
+    },
+    accentBg: 'bg-amber-50 border-amber-200',
+    accentText: 'text-amber-700',
+    seoTitle: {
+      en: 'Watermark Adder for Image, PDF & Video Online | SadhanBox Pro',
+      mr: 'वॉटरमार्क ॲडर — फोटो, PDF व व्हिडिओवर वॉटरमार्क लावा | SadhanBox Pro',
+      hi: 'वॉटरमार्क ऐडर — फोटो, PDF और वीडियो पर वॉटरमार्क लगाएं | SadhanBox Pro',
     },
   },
 ];

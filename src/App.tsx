@@ -23,6 +23,7 @@ import {
   PenTool,
   QrCode,
   ReceiptText,
+  Stamp,
   Type,
   UserSquare2,
   X,
@@ -46,14 +47,17 @@ import { QrGeneratorTool } from './components/tools/QrGeneratorTool';
 import { RentReceiptSalarySlipTool } from './components/tools/RentReceiptSalarySlipTool';
 import { SignatureResizeTool } from './components/tools/SignatureResizeTool';
 import { ToolSeoSection } from './components/tools/ToolSeoSection';
+import { WatermarkAdderTool } from './components/tools/WatermarkAdderTool';
 import { WordCounterTypingTool } from './components/tools/WordCounterTypingTool';
 import {
   AppLanguage,
   BiodataMode,
+  DEFAULT_RESUME_CUSTOMIZATION,
   EMPTY_JOB_DATA,
   EMPTY_MARRIAGE_DATA,
   JobBiodata,
   MarriageBiodata,
+  ResumeCustomization,
   TEMPLATES,
   TemplateId,
 } from './types/biodata';
@@ -107,6 +111,7 @@ import { getCopy } from './utils/translations';
 const STORAGE_KEY_MARRIAGE = 'marathi_biodata_marriage_v4';
 const STORAGE_KEY_JOB = 'marathi_biodata_job_v2';
 const STORAGE_KEY_LANG = 'marathi_biodata_lang_v1';
+const STORAGE_KEY_RESUME_CUSTOMIZATION = 'sadhanbox_resume_customization_v1';
 
 const UI_LANGUAGE_OPTIONS: { code: UiLang; label: string }[] = [
   { code: 'en', label: 'English' },
@@ -128,6 +133,7 @@ const NAV_TOOL_ICONS: Record<string, React.ReactNode> = {
   'gst-emi-calculator': <Calculator className="w-4 h-4 text-purple-600 shrink-0" />,
   'image-converter': <ArrowLeftRight className="w-4 h-4 text-pink-600 shrink-0" />,
   'word-counter-typing': <Type className="w-4 h-4 text-lime-700 shrink-0" />,
+  'watermark-adder': <Stamp className="w-4 h-4 text-amber-600 shrink-0" />,
 };
 
 const IN_APP_BANNER_COPY: Record<
@@ -240,6 +246,9 @@ export default function App() {
     const lang = getInitialDocumentLanguage();
     return loadSavedState(STORAGE_KEY_JOB, getSampleBundle(lang).job);
   });
+  const [resumeCustomization, setResumeCustomization] = useState<ResumeCustomization>(() =>
+    loadSavedState(STORAGE_KEY_RESUME_CUSTOMIZATION, DEFAULT_RESUME_CUSTOMIZATION)
+  );
 
   const [isToolsMenuOpen, setIsToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement | null>(null);
@@ -262,6 +271,7 @@ export default function App() {
 
   const [isExportingSample, setIsExportingSample] = useState(false);
   const [isExportingHd, setIsExportingHd] = useState(false);
+  const [resumeWatermarkEnabled, setResumeWatermarkEnabled] = useState(false);
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [exportError, setExportError] = useState('');
   const [showInAppBanner, setShowInAppBanner] = useState<boolean>(isSocialInAppBrowser);
@@ -407,6 +417,17 @@ export default function App() {
   }, [jobData]);
 
   useEffect(() => {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY_RESUME_CUSTOMIZATION,
+        JSON.stringify(resumeCustomization)
+      );
+    } catch {
+      // Ignore quota errors
+    }
+  }, [resumeCustomization]);
+
+  useEffect(() => {
     if (!isBiodataOrResumeRoute) return;
     const el = previewWrapperRef.current;
     if (!el) return;
@@ -498,6 +519,7 @@ export default function App() {
         ...targetBundle.job,
         photoDataUrl: prev.photoDataUrl,
         photoShape: prev.photoShape,
+        portfolioUrl: prev.portfolioUrl || '',
       }));
     }
   };
@@ -814,9 +836,17 @@ export default function App() {
                             >
                               {NAV_TOOL_ICONS[tool.id]}
                             </div>
-                            <div className="min-w-0">
-                              <div className="text-xs font-bold text-slate-900 truncate">
-                                {tool.title[uiLang]}
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs font-bold text-slate-900 truncate">
+                                  {tool.title[uiLang]}
+                                </span>
+                                {tool.isProOnly && (
+                                  <span className="inline-flex items-center gap-0.5 rounded bg-amber-100 border border-[#F59E0B]/40 px-1 py-0.2 text-[9px] font-extrabold text-[#B45309] shrink-0">
+                                    <Crown className="w-2.5 h-2.5 text-[#D97706]" />
+                                    {s.tplProBadge}
+                                  </span>
+                                )}
                               </div>
                               <div className="text-[11px] text-slate-500 truncate">
                                 {tool.metaLabel[uiLang]}
@@ -1000,6 +1030,16 @@ export default function App() {
           />
         )}
 
+        {activeRoute === '/watermark-adder' && (
+          <WatermarkAdderTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
         {isLegalRoute(activeRoute) && (
           <LegalPageView
             route={activeRoute}
@@ -1124,6 +1164,10 @@ export default function App() {
               isPro={proActive}
               onSelectTemplate={setTemplateId}
               onOpenProModal={() => openProModal('monthly')}
+              resumeCustomization={resumeCustomization}
+              onChangeResumeCustomization={setResumeCustomization}
+              marriageData={marriageData}
+              jobData={jobData}
             />
 
             {/* Mobile / Tablet Pane Toggle */}
@@ -1231,6 +1275,56 @@ export default function App() {
                     </button>
                   </div>
 
+                  {mode === 'job' && (
+                    <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-800">
+                            {copy.resumeWatermarkToggleLabel}
+                          </span>
+                          {!proActive && (
+                            <span className="inline-flex items-center gap-0.5 rounded bg-amber-100 border border-[#F59E0B]/40 px-1.5 py-0.5 text-[10px] font-extrabold text-[#B45309]">
+                              <Crown className="w-2.5 h-2.5 text-[#D97706]" />
+                              {s.tplProBadge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11px] text-slate-500 mt-0.5">
+                          {proActive ? copy.resumeWatermarkProHint : copy.resumeWatermarkFreeHint}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        role="switch"
+                        dir="ltr"
+                        aria-label={copy.resumeWatermarkToggleLabel}
+                        aria-checked={proActive ? resumeWatermarkEnabled : true}
+                        aria-disabled={!proActive}
+                        disabled={!proActive}
+                        onClick={() => {
+                          if (!proActive) return;
+                          setResumeWatermarkEnabled((prev) => !prev);
+                        }}
+                        className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${
+                          !proActive
+                            ? 'bg-slate-300 opacity-60 cursor-not-allowed'
+                            : resumeWatermarkEnabled
+                            ? 'bg-[#16A34A] cursor-pointer'
+                            : 'bg-slate-300 cursor-pointer'
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-xs transition-transform ${
+                            !proActive || resumeWatermarkEnabled
+                              ? 'translate-x-6'
+                              : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  )}
+
                   {exportError && <p className="text-xs font-medium text-rose-600">{exportError}</p>}
                 </div>
 
@@ -1262,7 +1356,11 @@ export default function App() {
                           templateId={templateId}
                           marriageData={marriageData}
                           jobData={jobData}
-                          showWatermark={!proActive}
+                          showWatermark={
+                            mode === 'job' && proActive ? resumeWatermarkEnabled : !proActive
+                          }
+                          watermarkText={mode === 'job' && proActive ? 'SadhanBox' : undefined}
+                          resumeCustomization={resumeCustomization}
                         />
                       </div>
                     </div>
@@ -1313,7 +1411,9 @@ export default function App() {
               templateId={templateId}
               marriageData={marriageData}
               jobData={jobData}
-              showWatermark={true}
+              showWatermark={mode === 'job' && proActive ? resumeWatermarkEnabled : true}
+              watermarkText={mode === 'job' && proActive ? 'SadhanBox' : undefined}
+              resumeCustomization={resumeCustomization}
             />
           </div>
           <div
@@ -1336,7 +1436,9 @@ export default function App() {
               templateId={templateId}
               marriageData={marriageData}
               jobData={jobData}
-              showWatermark={false}
+              showWatermark={mode === 'job' && proActive ? resumeWatermarkEnabled : false}
+              watermarkText={mode === 'job' && proActive ? 'SadhanBox' : undefined}
+              resumeCustomization={resumeCustomization}
             />
           </div>
         </>

@@ -2,14 +2,17 @@ import React from 'react';
 import {
   AppLanguage,
   BiodataMode,
+  DEFAULT_RESUME_CUSTOMIZATION,
   JobBiodata,
   MarriageBiodata,
+  ResumeCustomization,
   TemplateId,
 } from '../types/biodata';
 import { getLanguageMeta } from '../utils/languageFonts';
 import { getModernTemplateSpec } from '../utils/modernTemplates';
 import { getCopy } from '../utils/translations';
 import { getReligionFieldValues } from '../utils/religionConfig';
+import { createCrispQrDataUrl, normalizeAndValidateResumeUrl } from '../utils/resumeQr';
 import { formatBirthDateForDisplay } from '../utils/smartFieldOptions';
 import { ReligionEmblem } from './ReligionIcons';
 import {
@@ -28,6 +31,8 @@ interface A4PreviewSheetProps {
   marriageData: MarriageBiodata;
   jobData: JobBiodata;
   showWatermark: boolean;
+  watermarkText?: string;
+  resumeCustomization?: ResumeCustomization;
 }
 
 interface ThemePalette {
@@ -187,9 +192,21 @@ const WatermarkLayer: React.FC<{ watermarkText: string; language: AppLanguage }>
   watermarkText,
   language,
 }) => {
+  const trimmed = watermarkText.trim();
+  const len = trimmed.length;
   const rows = [0, 1, 2, 3, 4];
-  const cols = [0, 1, 2];
+  const cols = len > 12 ? [0, 1] : [0, 1, 2];
+  const fontSize = len > 24 ? '22px' : len > 14 ? '28px' : len > 10 ? '34px' : '42px';
+  const isPureLatin = /^[A-Za-z0-9\s\-._/@]+$/.test(trimmed);
+  const letterSpacing = isPureLatin
+    ? len > 20
+      ? '0.08em'
+      : len > 12
+      ? '0.16em'
+      : '0.28em'
+    : 'normal';
   const langMeta = getLanguageMeta(language);
+
   return (
     <div
       style={{
@@ -221,21 +238,23 @@ const WatermarkLayer: React.FC<{ watermarkText: string; language: AppLanguage }>
               display: 'flex',
               justifyContent: 'space-around',
               alignItems: 'center',
+              gap: '24px',
             }}
           >
             {cols.map((c) => (
               <span
                 key={`${r}-${c}`}
                 style={{
-                  fontSize: '42px',
+                  fontSize,
                   fontWeight: 700,
-                  letterSpacing: language === 'en' ? '0.28em' : 'normal',
+                  letterSpacing,
                   color: 'rgba(71, 85, 105, 0.16)',
+                  whiteSpace: 'nowrap',
                   userSelect: 'none',
                   fontFamily: langMeta.fontStack,
                 }}
               >
-                {watermarkText}
+                {trimmed}
               </span>
             ))}
           </div>
@@ -781,7 +800,8 @@ const SectionHeading: React.FC<{
   language: AppLanguage;
   palette: ThemePalette;
   templateId: TemplateId;
-}> = ({ title, language, palette, templateId }) => {
+  fontScale?: number;
+}> = ({ title, language, palette, templateId, fontScale = 1 }) => {
   const langMeta = getLanguageMeta(language);
   const isRtl = langMeta.dir === 'rtl';
   const modernSpec = getModernTemplateSpec(templateId);
@@ -816,7 +836,7 @@ const SectionHeading: React.FC<{
     >
       <span
         style={{
-          fontSize: '14.5px',
+          fontSize: `${Number((14.5 * fontScale).toFixed(2))}px`,
           fontWeight: 700,
           color: palette.headingColor,
           fontFamily: isClassic ? langMeta.serifFontStack : langMeta.fontStack,
@@ -836,6 +856,8 @@ export const A4PreviewSheet: React.FC<A4PreviewSheetProps> = ({
   marriageData,
   jobData,
   showWatermark,
+  watermarkText,
+  resumeCustomization = DEFAULT_RESUME_CUSTOMIZATION,
 }) => {
   const copy = getCopy(language);
   const langMeta = getLanguageMeta(language);
@@ -866,7 +888,7 @@ export const A4PreviewSheet: React.FC<A4PreviewSheetProps> = ({
     >
       <FrameChrome templateId={templateId} isRtl={isRtl} />
       {showWatermark && (
-        <WatermarkLayer watermarkText={copy.watermarkWord} language={language} />
+        <WatermarkLayer watermarkText={watermarkText || copy.watermarkWord} language={language} />
       )}
 
       {mode === 'marriage' ? (
@@ -882,6 +904,7 @@ export const A4PreviewSheet: React.FC<A4PreviewSheetProps> = ({
           language={language}
           templateId={templateId}
           palette={palette}
+          customization={resumeCustomization}
         />
       )}
     </div>
@@ -1113,14 +1136,36 @@ const MarriageContent: React.FC<{
   );
 };
 
+const EduCapSvg: React.FC<{ color: string; size?: number }> = ({ color, size = 14 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2.1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle' }}
+  >
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+  </svg>
+);
+
 const JobContent: React.FC<{
   data: JobBiodata;
   language: AppLanguage;
   templateId: TemplateId;
   palette: ThemePalette;
-}> = ({ data, language, templateId, palette }) => {
+  customization: ResumeCustomization;
+}> = ({ data, language, templateId, palette, customization }) => {
   const copy = getCopy(language);
   const isRtl = getLanguageMeta(language).dir === 'rtl';
+  const fontScale =
+    Math.min(115, Math.max(85, Number(customization.fontSizeScale) || 100)) / 100;
+  const fs = (px: number) => `${Number((px * fontScale).toFixed(2))}px`;
   const modernSpec = getModernTemplateSpec(templateId);
   const hasDarkBanner =
     templateId === 'modern-blue' ||
@@ -1152,6 +1197,14 @@ const JobContent: React.FC<{
   const validExperience = data.experienceList.filter(
     (item) => item.role.trim() || item.company.trim() || item.duration.trim() || item.details.trim()
   );
+  const qrValidation = React.useMemo(
+    () => normalizeAndValidateResumeUrl(data.portfolioUrl || ''),
+    [data.portfolioUrl]
+  );
+  const qrDataUrl = React.useMemo(
+    () => (qrValidation.isValid ? createCrispQrDataUrl(qrValidation.normalizedUrl, '#0F172A') : ''),
+    [qrValidation.isValid, qrValidation.normalizedUrl]
+  );
 
   return (
     <div style={{ position: 'relative', zIndex: 10 }}>
@@ -1174,7 +1227,7 @@ const JobContent: React.FC<{
           <h1
             style={{
               margin: 0,
-              fontSize: '25px',
+              fontSize: fs(25),
               fontWeight: 700,
               lineHeight: 1.25,
               color: hasDarkBanner ? '#FFFFFF' : palette.headingColor,
@@ -1186,7 +1239,7 @@ const JobContent: React.FC<{
             <div
               style={{
                 marginTop: '4px',
-                fontSize: '14.5px',
+                fontSize: fs(14.5),
                 fontWeight: 500,
                 color: hasDarkBanner ? bannerSubColor : palette.subHeadingColor,
               }}
@@ -1197,7 +1250,7 @@ const JobContent: React.FC<{
           <div
             style={{
               marginTop: '10px',
-              fontSize: '12.5px',
+              fontSize: fs(12.5),
               lineHeight: 1.55,
               color: hasDarkBanner ? '#E2E8F0' : palette.labelColor,
             }}
@@ -1209,31 +1262,85 @@ const JobContent: React.FC<{
           </div>
         </div>
 
-        {data.photoDataUrl && (
+        {(qrDataUrl || data.photoDataUrl) && (
           <div
             style={{
-              width: data.photoShape === 'circle' ? '124px' : '104px',
-              height: data.photoShape === 'circle' ? '124px' : '156px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
               flexShrink: 0,
-              borderRadius: data.photoShape === 'circle' ? '9999px' : '8px',
-              border: `3px solid ${hasDarkBanner ? '#FFFFFF' : palette.photoBorder}`,
-              overflow: 'hidden',
-              backgroundColor: '#FFFFFF',
             }}
           >
-            <img
-              src={data.photoDataUrl}
-              alt={data.fullName || copy.photoAlt}
-              loading="eager"
-              decoding="sync"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: data.photoShape === 'circle' ? '9999px' : '5px',
-                display: 'block',
-              }}
-            />
+            {qrDataUrl && (
+              <div
+                style={{
+                  width: '84px',
+                  flexShrink: 0,
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${hasDarkBanner ? '#E2E8F0' : palette.dividerColor}`,
+                  borderRadius: '6px',
+                  padding: '5px 5px 4px 5px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <img
+                  src={qrDataUrl}
+                  alt={copy.a4JobQrLabel}
+                  loading="eager"
+                  decoding="sync"
+                  style={{
+                    width: '62px',
+                    height: '62px',
+                    display: 'block',
+                    imageRendering: 'pixelated',
+                  }}
+                />
+                <div
+                  style={{
+                    marginTop: '3px',
+                    fontSize: '7.5px',
+                    fontWeight: 700,
+                    lineHeight: 1.15,
+                    color: '#0F172A',
+                    textAlign: 'center',
+                    wordBreak: 'break-word',
+                  }}
+                >
+                  {copy.a4JobQrLabel}
+                </div>
+              </div>
+            )}
+
+            {data.photoDataUrl && (
+              <div
+                style={{
+                  width: data.photoShape === 'circle' ? '124px' : '104px',
+                  height: data.photoShape === 'circle' ? '124px' : '156px',
+                  flexShrink: 0,
+                  borderRadius: data.photoShape === 'circle' ? '9999px' : '8px',
+                  border: `3px solid ${hasDarkBanner ? '#FFFFFF' : palette.photoBorder}`,
+                  overflow: 'hidden',
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <img
+                  src={data.photoDataUrl}
+                  alt={data.fullName || copy.photoAlt}
+                  loading="eager"
+                  decoding="sync"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: data.photoShape === 'circle' ? '9999px' : '5px',
+                    display: 'block',
+                  }}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -1246,11 +1353,12 @@ const JobContent: React.FC<{
             language={language}
             palette={palette}
             templateId={templateId}
+            fontScale={fontScale}
           />
           <p
             style={{
               margin: '6px 0 0 0',
-              fontSize: '13.5px',
+              fontSize: fs(13.5),
               lineHeight: 1.65,
               color: palette.valueColor,
             }}
@@ -1268,72 +1376,110 @@ const JobContent: React.FC<{
             language={language}
             palette={palette}
             templateId={templateId}
+            fontScale={fontScale}
           />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
-            {validExperience.map((exp) => (
-              <div
-                key={exp.id}
-                style={{
-                  paddingBottom: '10px',
-                  borderBottom: `1px solid ${palette.dividerColor}`,
-                }}
-              >
+            {validExperience.map((exp, idx) => {
+              const showTimeline = customization.showExperienceTimeline;
+              const isLast = idx === validExperience.length - 1;
+              return (
                 <div
+                  key={exp.id}
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'baseline',
-                    gap: '12px',
+                    position: 'relative',
+                    paddingLeft: showTimeline && !isRtl ? '22px' : '0px',
+                    paddingRight: showTimeline && isRtl ? '22px' : '0px',
+                    paddingBottom: '10px',
+                    borderBottom: `1px solid ${palette.dividerColor}`,
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize: '14.5px',
-                      fontWeight: 700,
-                      color: palette.valueColor,
-                    }}
-                  >
-                    {exp.role}
-                  </span>
-                  {exp.duration && (
-                    <span
-                      style={{
-                        fontSize: '12.5px',
-                        fontWeight: 600,
-                        color: palette.subHeadingColor,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {exp.duration}
-                    </span>
+                  {showTimeline && (
+                    <>
+                      {!isLast && (
+                        <div
+                          aria-hidden="true"
+                          style={{
+                            position: 'absolute',
+                            top: '13px',
+                            bottom: '-18px',
+                            ...(isRtl ? { right: '5px' } : { left: '5px' }),
+                            width: '2px',
+                            backgroundColor: palette.dividerColor,
+                          }}
+                        />
+                      )}
+                      <div
+                        aria-hidden="true"
+                        style={{
+                          position: 'absolute',
+                          top: '5px',
+                          ...(isRtl ? { right: '0px' } : { left: '0px' }),
+                          width: '12px',
+                          height: '12px',
+                          borderRadius: '9999px',
+                          backgroundColor: palette.paperBg,
+                          border: `2.5px solid ${palette.accentColor}`,
+                        }}
+                      />
+                    </>
                   )}
-                </div>
-                {exp.company && (
                   <div
                     style={{
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: palette.labelColor,
-                      marginTop: '2px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'baseline',
+                      gap: '12px',
                     }}
                   >
-                    {exp.company}
+                    <span
+                      style={{
+                        fontSize: fs(14.5),
+                        fontWeight: 700,
+                        color: palette.valueColor,
+                      }}
+                    >
+                      {exp.role}
+                    </span>
+                    {exp.duration && (
+                      <span
+                        style={{
+                          fontSize: fs(12.5),
+                          fontWeight: 600,
+                          color: palette.subHeadingColor,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {exp.duration}
+                      </span>
+                    )}
                   </div>
-                )}
-                {exp.details && (
-                  <p
-                    style={{
-                      margin: '5px 0 0 0',
-                      fontSize: '13px',
-                      lineHeight: 1.55,
-                      color: palette.valueColor,
-                    }}
-                  >
-                    {exp.details}
-                  </p>
-                )}
-              </div>
-            ))}
+                  {exp.company && (
+                    <div
+                      style={{
+                        fontSize: fs(13),
+                        fontWeight: 600,
+                        color: palette.labelColor,
+                        marginTop: '2px',
+                      }}
+                    >
+                      {exp.company}
+                    </div>
+                  )}
+                  {exp.details && (
+                    <p
+                      style={{
+                        margin: '5px 0 0 0',
+                        fontSize: fs(13),
+                        lineHeight: 1.55,
+                        color: palette.valueColor,
+                      }}
+                    >
+                      {exp.details}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -1346,13 +1492,14 @@ const JobContent: React.FC<{
             language={language}
             palette={palette}
             templateId={templateId}
+            fontScale={fontScale}
           />
           <table
             style={{
               width: '100%',
               borderCollapse: 'collapse',
               marginTop: '6px',
-              fontSize: '13px',
+              fontSize: fs(13),
             }}
           >
             <thead>
@@ -1411,7 +1558,17 @@ const JobContent: React.FC<{
                       color: palette.valueColor,
                     }}
                   >
-                    {edu.degree}
+                    {customization.showEducationalIcons ? (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <EduCapSvg
+                          color={palette.accentColor}
+                          size={Math.round(14 * fontScale)}
+                        />
+                        <span>{edu.degree}</span>
+                      </div>
+                    ) : (
+                      edu.degree
+                    )}
                   </td>
                   <td style={{ padding: '7px 8px', color: palette.labelColor }}>
                     {edu.institute}
@@ -1450,11 +1607,12 @@ const JobContent: React.FC<{
             language={language}
             palette={palette}
             templateId={templateId}
+            fontScale={fontScale}
           />
           <p
             style={{
               margin: '6px 0 0 0',
-              fontSize: '13.5px',
+              fontSize: fs(13.5),
               lineHeight: 1.65,
               color: palette.valueColor,
             }}
@@ -1472,11 +1630,12 @@ const JobContent: React.FC<{
             language={language}
             palette={palette}
             templateId={templateId}
+            fontScale={fontScale}
           />
           <p
             style={{
               margin: '6px 0 0 0',
-              fontSize: '13.5px',
+              fontSize: fs(13.5),
               lineHeight: 1.6,
               color: palette.valueColor,
             }}

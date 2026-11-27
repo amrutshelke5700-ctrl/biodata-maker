@@ -1,6 +1,6 @@
 {
   "name": "मराठी बायोडाटा मेकर — All-in-One Marathi Biodata Maker",
   "description": "SadhanBox (साधनबॉक्स) — तुमच्या दैनंदिन कामांसाठी १००% मोफत आणि सुरक्षित ऑनलाइन साधने (Biodata, Resume, Background Remover, PDF Tools, Image Compressor, QR Generator, Age Calculator).",
-  "requestFramePermissions": [],
+  "requestFramePermissions": ["camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

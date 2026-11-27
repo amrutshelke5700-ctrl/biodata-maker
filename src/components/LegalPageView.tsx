@@ -232,7 +232,7 @@ const LEGAL_DOCS: Record<LegalRoute, Record<UiLang, LegalDocContent>> = {
           heading: 'Get in Touch',
           paragraphs: [
             'Have questions about SadhanBox tools, Pro Pass activation, payment verification, or feature suggestions? Reach out to our team directly via email.',
-            'Support Email: visionenterprises5700@gmail.com',
+            'Support Email: sadhanboxtool@gmail.com',
           ],
         },
         {
@@ -251,7 +251,7 @@ const LEGAL_DOCS: Record<LegalRoute, Record<UiLang, LegalDocContent>> = {
           heading: 'आमच्याशी संपर्क साधा',
           paragraphs: [
             'SadhanBox टूल्स, Pro पास सक्रियता, पेमेंट तपासणी किंवा नवीन सुविधांबाबत काही प्रश्न असल्यास आम्हाला ईमेल करा.',
-            'ईमेल पत्ता: visionenterprises5700@gmail.com',
+            'ईमेल पत्ता: sadhanboxtool@gmail.com',
           ],
         },
         {
@@ -270,7 +270,7 @@ const LEGAL_DOCS: Record<LegalRoute, Record<UiLang, LegalDocContent>> = {
           heading: 'हमसे संपर्क करें',
           paragraphs: [
             'यदि आपको SadhanBox टूल्स, Pro पास एक्टिवेशन, पेमेंट सत्यापन या किसी नए सुझाव के बारे में पूछना है, तो कृपया ईमेल द्वारा संपर्क करें।',
-            'सहायता ईमेल: visionenterprises5700@gmail.com',
+            'सहायता ईमेल: sadhanboxtool@gmail.com',
           ],
         },
         {
@@ -332,11 +332,11 @@ export const LegalPageView: React.FC<LegalPageViewProps> = ({
         {route === '/contact' && (
           <div className="pt-2">
             <a
-              href="mailto:visionenterprises5700@gmail.com"
+              href="mailto:sadhanboxtool@gmail.com"
               className="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors"
             >
               <Mail className="w-4 h-4" />
-              <span>visionenterprises5700@gmail.com</span>
+              <span>sadhanboxtool@gmail.com</span>
             </a>
           </div>
         )}

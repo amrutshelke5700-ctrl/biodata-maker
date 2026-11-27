@@ -1324,4 +1324,105 @@ export const TOOL_SEO_CONTENT: ToolSeoMap = {
       ],
     },
   },
+  '/watermark-adder': {
+    en: {
+      howToTitle: 'How to Add a Watermark on Image, PDF & Video',
+      steps: [
+        'Choose Image, PDF, or Video mode at the top of the Watermark Adder workspace.',
+        'Upload your photo (JPG, PNG, WebP), multi-page PDF document, or video file (MP4, WebM, MOV).',
+        'Select Custom Text or upload a transparent Logo watermark, then adjust placement, size, opacity, rotation, and color.',
+        'Inspect the live watermark preview on the right to verify alignment and contrast.',
+        'Unlock SadhanBox Pro Pass and click Apply Watermark & Download to save your protected file.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Is Watermark Adder a paid Pro tool?',
+          a: 'Yes, Watermark Adder is part of SadhanBox Pro Pass (₹49/month or ₹199/year). You can preview watermarks freely and unlock Pro anytime to export watermarked images, PDFs, and videos.',
+        },
+        {
+          q: 'Are my photos, PDFs, or videos uploaded to any server?',
+          a: 'No. All image, PDF, and video watermarking happens 100% locally inside your browser so your private files never leave your device.',
+        },
+        {
+          q: 'Can I add Marathi or Hindi text watermarks to a PDF?',
+          a: 'Yes! You can type custom watermarks in English, Marathi, Hindi, or any Unicode script and apply them cleanly across every page of your PDF.',
+        },
+        {
+          q: 'Can I use my own brand logo as a watermark?',
+          a: 'Yes, switch to Logo / Image mode, upload a PNG or JPG logo, and adjust its scale, opacity, rotation, and placement.',
+        },
+        {
+          q: 'How does video watermarking work in the browser?',
+          a: 'The tool composites your custom watermark over every frame of the uploaded video using HTML5 Canvas and exports a downloadable video file directly on your device.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'फोटो, PDF आणि व्हिडिओवर वॉटरमार्क कसा लावावा?',
+      steps: [
+        'वरच्या टॅबमधून Image, PDF किंवा Video पर्याय निवडा.',
+        'तुमचा फोटो (JPG/PNG/WebP), PDF दस्तऐवज किंवा व्हिडिओ फाईल (MP4/WebM/MOV) अपलोड करा.',
+        'कस्टम मजकूर किंवा तुमचा लोगो निवडा आणि स्थान, आकार, पारदर्शकता (Opacity), कोन आणि रंग सेट करा.',
+        'उजव्या बाजूच्या लाइव्ह प्रिव्ह्यूमध्ये वॉटरमार्क कसा दिसतो ते तपासा.',
+        'SadhanBox Pro अनलॉक करून "वॉटरमार्क लावा व डाउनलोड करा" बटणावर क्लिक करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'वॉटरमार्क ॲडर हे पेड (Pro) टूल आहे का?',
+          a: 'होय, हे टूल SadhanBox Pro Pass (₹49/महिना किंवा ₹199/वर्ष) अंतर्गत उपलब्ध आहे. तुम्ही प्रिव्ह्यू तपासू शकता आणि Pro अनलॉक करून डाउनलोड करू शकता.',
+        },
+        {
+          q: 'माझे फोटो, PDF किंवा व्हिडिओ सर्व्हरवर अपलोड होतात का?',
+          a: 'नाही. संपूर्ण प्रक्रिया १००% तुमच्याच ब्राउझरमध्ये होते, त्यामुळे तुमच्या खाजगी फाईल्स सुरक्षित राहतात.',
+        },
+        {
+          q: 'PDF वर मराठी किंवा हिंदी भाषेत वॉटरमार्क टाकता येतो का?',
+          a: 'होय! तुम्ही मराठी, हिंदी किंवा इंग्रजीमध्ये हवा तो मजकूर लिहून सर्व PDF पानांवर वॉटरमार्क लावू शकता.',
+        },
+        {
+          q: 'मी स्वतःचा लोगो वॉटरमार्क म्हणून वापरू शकतो का?',
+          a: 'होय, "लोगो / फोटो" पर्याय निवडून तुमचा PNG किंवा JPG लोगो अपलोड करा आणि त्याचा आकार व पारदर्शकता सेट करा.',
+        },
+        {
+          q: 'ब्राउझरमध्ये व्हिडिओवर वॉटरमार्क कसा लागतो?',
+          a: 'ब्राउझरमधील Canvas आणि मीडिया एक्सपोर्ट तंत्रज्ञानाद्वारे प्रत्येक व्हिडिओ फ्रेमवर वॉटरमार्क लावून नवीन व्हिडिओ फाईल तयार केली जाते.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'इमेज, PDF और वीडियो पर वॉटरमार्क कैसे लगाएं?',
+      steps: [
+        'ऊपर दिए गए टैब में से Image, PDF या Video विकल्प चुनें।',
+        'अपनी फोटो (JPG/PNG/WebP), PDF फाइल या वीडियो फाइल (MP4/WebM/MOV) अपलोड करें।',
+        'कस्टम टेक्स्ट या अपना लोगो चुनें और प्लेसमेंट, आकार, पारदर्शिता (Opacity), रोटेशन व रंग सेट करें।',
+        'दाईं ओर लाइव प्रीव्यू में अपना वॉटरमार्क जांचें।',
+        'SadhanBox Pro अनलॉक करके "वॉटरमार्क लगाएं और डाउनलोड करें" पर क्लिक करें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या वॉटरमार्क ऐडर एक पेड (Pro) टूल है?',
+          a: 'जी हां, यह SadhanBox Pro Pass (₹49/माह या ₹199/वर्ष) का हिस्सा है। आप लाइव प्रीव्यू देख सकते हैं और Pro अनलॉक करके फाइल डाउनलोड कर सकते हैं।',
+        },
+        {
+          q: 'क्या मेरी फोटो, PDF या वीडियो किसी सर्वर पर अपलोड होते हैं?',
+          a: 'नहीं। पूरी प्रक्रिया १००% आपके ब्राउज़र में चलती है और आपकी कोई भी फाइल आपके डिवाइस से बाहर नहीं जाती।',
+        },
+        {
+          q: 'क्या PDF पर हिंदी या मराठी में वॉटरमार्क लगाया जा सकता है?',
+          a: 'हां! आप हिंदी, मराठी या अंग्रेजी में किसी भी टेक्स्ट का वॉटरमार्क अपनी PDF के सभी पेजों पर लगा सकते हैं।',
+        },
+        {
+          q: 'क्या मैं अपने ब्रांड का लोगो वॉटरमार्क के रूप में इस्तेमाल कर सकता हूं?',
+          a: 'जी हां, "लोगो / इमेज" मोड चुनकर अपना PNG या JPG लोगो अपलोड करें और उसका आकार व पारदर्शिता सेट करें।',
+        },
+        {
+          q: 'ब्राउज़र में वीडियो पर वॉटरमार्क कैसे जुड़ता है?',
+          a: 'यह टूल ब्राउज़र के अंदर ही वीडियो के हर फ्रेम पर आपका वॉटरमार्क जोड़कर डाउनलोड करने योग्य वीडियो फाइल तैयार करता है।',
+        },
+      ],
+    },
+  },
 };

@@ -106,12 +106,25 @@ export interface JobBiodata {
   mobile: string;
   email: string;
   address: string;
+  portfolioUrl?: string;
   careerObjective: string;
   educationList: JobEducationItem[];
   experienceList: JobExperienceItem[];
   skills: string;
   languages: string;
 }
+
+export interface ResumeCustomization {
+  showEducationalIcons: boolean;
+  showExperienceTimeline: boolean;
+  fontSizeScale: number;
+}
+
+export const DEFAULT_RESUME_CUSTOMIZATION: ResumeCustomization = {
+  showEducationalIcons: false,
+  showExperienceTimeline: false,
+  fontSizeScale: 100,
+};
 
 export interface TemplateConfig {
   id: TemplateId;
@@ -399,6 +412,7 @@ export const DEFAULT_JOB_DATA: JobBiodata = {
   mobile: '+९१ ९८२३५ ६७८९०',
   email: 'अनिकेत.पाटील@उदाहरण.कॉम',
   address: 'सिद्धेश्वर नगर, शिवाजी पेठ, कोल्हापूर - ४१६०१२',
+  portfolioUrl: '',
   careerObjective:
     'प्रगतीशील संस्थेमध्ये माझ्या लेखापरीक्षण, जीएसटी अनुपालन आणि आर्थिक विश्लेषणातील ५+ वर्षांच्या अनुभवाचा वापर करून संस्थेच्या आर्थिक कामकाजात अचूकता आणि कार्यक्षमता वाढवणे.',
   educationList: [
@@ -454,6 +468,7 @@ export const DEFAULT_JOB_DATA_EN: JobBiodata = {
   mobile: '+91 98235 67890',
   email: 'aniket.patil@example.com',
   address: 'Siddheshwar Nagar, Shivaji Peth, Kolhapur - 416012',
+  portfolioUrl: '',
   careerObjective:
     'Seeking a Senior Accounts role in a growth-oriented organization to leverage 5+ years of experience in GST compliance, financial reporting, and audit management to drive accuracy and efficiency.',
   educationList: [
@@ -509,6 +524,7 @@ export const EMPTY_JOB_DATA: JobBiodata = {
   mobile: '',
   email: '',
   address: '',
+  portfolioUrl: '',
   careerObjective: '',
   educationList: [
     {

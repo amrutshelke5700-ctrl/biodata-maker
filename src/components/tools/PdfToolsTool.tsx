@@ -5,18 +5,49 @@ import {
   ArrowDown,
   ArrowUp,
   Check,
+  Crop,
   Download,
   FilePlus2,
   Files,
   ImagePlus,
   Loader2,
+  RotateCw,
   Scissors,
   Trash2,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { PdfImageCropModal } from './PdfImageCropModal';
+import { rotateImageFile } from '../../utils/cropImage';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang, getSiteStrings } from '../../utils/siteI18n';
+
+const IMG_ACTION_COPY: Record<
+  UiLang,
+  { cropBtn: string; rotateBtn: string; rotateAria: string; cropAria: string; rotateError: string }
+> = {
+  en: {
+    cropBtn: 'Crop',
+    rotateBtn: 'Rotate',
+    cropAria: 'Crop and rotate image',
+    rotateAria: 'Rotate image 90° clockwise',
+    rotateError: 'Could not rotate this image. Please try again.',
+  },
+  mr: {
+    cropBtn: 'क्रॉप',
+    rotateBtn: 'रोटेट',
+    cropAria: 'इमेज क्रॉप आणि रोटेट करा',
+    rotateAria: 'इमेज ९०° फिरवा',
+    rotateError: 'इमेज फिरवता आली नाही. कृपया पुन्हा प्रयत्न करा.',
+  },
+  hi: {
+    cropBtn: 'क्रॉप',
+    rotateBtn: 'रोटेट',
+    cropAria: 'इमेज क्रॉप और रोटेट करें',
+    rotateAria: 'इमेज 90° घुमाएँ',
+    rotateError: 'इमेज रोटेट नहीं हो सकी। कृपया दोबारा कोशिश करें।',
+  },
+};
 
 interface PdfToolsToolProps {
   uiLang: UiLang;
@@ -121,6 +152,7 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
   onToolDownload,
 }) => {
   const s = getSiteStrings(uiLang);
+  const imgActionCopy = IMG_ACTION_COPY[uiLang];
   const toolMeta = TOOL_CATALOG.find((t) => t.route === '/pdf-tools')!;
   const [activeTab, setActiveTab] = useState<PdfToolTab>('merge');
   const [isWorking, setIsWorking] = useState(false);
@@ -140,6 +172,8 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
   const imgInputRef = useRef<HTMLInputElement | null>(null);
   const [imageEntries, setImageEntries] = useState<ImageEntry[]>([]);
   const [pageLayout, setPageLayout] = useState<'a4' | 'fit'>('a4');
+  const [editingImageId, setEditingImageId] = useState<string | null>(null);
+  const [rotatingImageId, setRotatingImageId] = useState<string | null>(null);
 
   const imageEntriesRef = useRef<ImageEntry[]>([]);
   imageEntriesRef.current = imageEntries;
@@ -308,12 +342,43 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
   };
 
   const removeImageEntry = (id: string) => {
+    if (editingImageId === id) setEditingImageId(null);
     setImageEntries((prev) => {
       const target = prev.find((item) => item.id === id);
       if (target) URL.revokeObjectURL(target.previewUrl);
       return prev.filter((item) => item.id !== id);
     });
   };
+
+  const replaceImageEntryFile = (id: string, updatedFile: File) => {
+    const newPreviewUrl = URL.createObjectURL(updatedFile);
+    setImageEntries((prev) =>
+      prev.map((item) => {
+        if (item.id !== id) return item;
+        URL.revokeObjectURL(item.previewUrl);
+        return {
+          ...item,
+          file: updatedFile,
+          previewUrl: newPreviewUrl,
+        };
+      })
+    );
+  };
+
+  const handleQuickRotateImage = async (entry: ImageEntry) => {
+    clearFeedback();
+    setRotatingImageId(entry.id);
+    try {
+      const rotatedFile = await rotateImageFile(entry.file, 90);
+      replaceImageEntryFile(entry.id, rotatedFile);
+    } catch {
+      setErrorMsg(imgActionCopy.rotateError);
+    } finally {
+      setRotatingImageId(null);
+    }
+  };
+
+  const editingImageEntry = imageEntries.find((item) => item.id === editingImageId) || null;
 
   const handleImagesToPdfDownload = async () => {
     if (imageEntries.length === 0) {
@@ -701,51 +766,86 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {imageEntries.map((item, idx) => (
-                  <div
-                    key={item.id}
-                    className="bg-white border border-slate-200 rounded-xl p-2 flex flex-col gap-2"
-                  >
-                    <img
-                      src={item.previewUrl}
-                      alt={item.file.name}
-                      className="w-full h-32 object-cover rounded-lg bg-slate-100"
-                    />
-                    <div className="text-[11px] font-medium text-slate-700 truncate">
-                      {idx + 1}. {item.file.name}
-                    </div>
-                    <div className="flex items-center justify-between gap-1">
-                      <div className="flex items-center gap-1">
+                {imageEntries.map((item, idx) => {
+                  const isRotating = rotatingImageId === item.id;
+                  return (
+                    <div
+                      key={item.id}
+                      className="bg-white border border-slate-200 rounded-xl p-2 flex flex-col gap-2"
+                    >
+                      <div className="relative w-full h-36 rounded-lg bg-slate-100 border border-slate-200/70 overflow-hidden flex items-center justify-center">
+                        <img
+                          src={item.previewUrl}
+                          alt={item.file.name}
+                          className="w-full h-full object-contain"
+                        />
+                        {isRotating && (
+                          <div className="absolute inset-0 bg-white/75 flex items-center justify-center">
+                            <Loader2 className="w-5 h-5 animate-spin text-slate-700" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-[11px] font-medium text-slate-700 truncate">
+                        {idx + 1}. {item.file.name}
+                      </div>
+
+                      {/* Crop & Rotate quick actions */}
+                      <div className="grid grid-cols-2 gap-1.5">
                         <button
                           type="button"
-                          onClick={() => moveImageEntry(idx, -1)}
-                          disabled={idx === 0}
-                          aria-label="Move up"
-                          className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 disabled:opacity-30 cursor-pointer"
+                          onClick={() => setEditingImageId(item.id)}
+                          disabled={isRotating || isWorking}
+                          aria-label={imgActionCopy.cropAria}
+                          className="inline-flex items-center justify-center gap-1 px-2 py-1.5 text-[11px] font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
                         >
-                          <ArrowUp className="w-3.5 h-3.5" />
+                          <Crop className="w-3 h-3" />
+                          <span>{imgActionCopy.cropBtn}</span>
                         </button>
                         <button
                           type="button"
-                          onClick={() => moveImageEntry(idx, 1)}
-                          disabled={idx === imageEntries.length - 1}
-                          aria-label="Move down"
-                          className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 disabled:opacity-30 cursor-pointer"
+                          onClick={() => void handleQuickRotateImage(item)}
+                          disabled={isRotating || isWorking}
+                          aria-label={imgActionCopy.rotateAria}
+                          className="inline-flex items-center justify-center gap-1 px-2 py-1.5 text-[11px] font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
                         >
-                          <ArrowDown className="w-3.5 h-3.5" />
+                          <RotateCw className={`w-3 h-3 ${isRotating ? 'animate-spin' : ''}`} />
+                          <span>{imgActionCopy.rotateBtn}</span>
                         </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => removeImageEntry(item.id)}
-                        aria-label="Remove"
-                        className="p-1 text-rose-500 hover:text-rose-700 rounded hover:bg-rose-50 cursor-pointer"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+
+                      <div className="flex items-center justify-between gap-1 pt-0.5 border-t border-slate-100">
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => moveImageEntry(idx, -1)}
+                            disabled={idx === 0}
+                            aria-label="Move up"
+                            className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 disabled:opacity-30 cursor-pointer"
+                          >
+                            <ArrowUp className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => moveImageEntry(idx, 1)}
+                            disabled={idx === imageEntries.length - 1}
+                            aria-label="Move down"
+                            className="p-1 text-slate-500 hover:text-slate-900 rounded hover:bg-slate-100 disabled:opacity-30 cursor-pointer"
+                          >
+                            <ArrowDown className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeImageEntry(item.id)}
+                          aria-label="Remove"
+                          className="p-1 text-rose-500 hover:text-rose-700 rounded hover:bg-rose-50 cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <button
@@ -772,6 +872,19 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
           )}
         </div>
       )}
+
+      <PdfImageCropModal
+        isOpen={Boolean(editingImageEntry)}
+        imageSrc={editingImageEntry?.previewUrl || ''}
+        file={editingImageEntry?.file || null}
+        uiLang={uiLang}
+        onClose={() => setEditingImageId(null)}
+        onApply={(updatedFile) => {
+          if (editingImageEntry) {
+            replaceImageEntryFile(editingImageEntry.id, updatedFile);
+          }
+        }}
+      />
     </ToolShell>
   );
 };
