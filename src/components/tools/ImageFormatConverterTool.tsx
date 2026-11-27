@@ -10,6 +10,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang, getSiteStrings } from '../../utils/siteI18n';
@@ -638,6 +639,15 @@ export const ImageFormatConverterTool: React.FC<ImageFormatConverterToolProps> =
                 ))}
               </div>
             </div>
+          )}
+
+          {readyCount > 0 && (
+            <WhatsAppShareBar
+              uiLang={uiLang}
+              route="/image-converter"
+              toolTitle={toolMeta.title[uiLang]}
+              compact
+            />
           )}
         </div>
       )}

@@ -12,17 +12,21 @@ import {
   Eraser,
   ExternalLink,
   Eye,
+  FileCheck2,
   FileDown,
   FileText,
   Files,
   Heart,
   Home,
+  IdCard,
   Languages,
   LayoutGrid,
   Loader2,
+  PartyPopper,
   PenTool,
   QrCode,
   ReceiptText,
+  ScanLine,
   Stamp,
   Type,
   UserSquare2,
@@ -39,15 +43,21 @@ import { TemplateSelector } from './components/TemplateSelector';
 import { AgeCalculatorTool } from './components/tools/AgeCalculatorTool';
 import { BackgroundRemoverTool } from './components/tools/BackgroundRemoverTool';
 import { GstEmiCalculatorTool } from './components/tools/GstEmiCalculatorTool';
+import { GstInvoiceMakerTool } from './components/tools/GstInvoiceMakerTool';
+import { IdCardPrintTool } from './components/tools/IdCardPrintTool';
 import { ImageCompressorTool } from './components/tools/ImageCompressorTool';
 import { ImageFormatConverterTool } from './components/tools/ImageFormatConverterTool';
+import { InvitationCardMakerTool } from './components/tools/InvitationCardMakerTool';
 import { PassportPhotoMakerTool } from './components/tools/PassportPhotoMakerTool';
+import { PdfCompressorTool } from './components/tools/PdfCompressorTool';
+import { PdfToJpgScannerTool } from './components/tools/PdfToJpgScannerTool';
 import { PdfToolsTool } from './components/tools/PdfToolsTool';
 import { QrGeneratorTool } from './components/tools/QrGeneratorTool';
 import { RentReceiptSalarySlipTool } from './components/tools/RentReceiptSalarySlipTool';
 import { SignatureResizeTool } from './components/tools/SignatureResizeTool';
 import { ToolSeoSection } from './components/tools/ToolSeoSection';
 import { WatermarkAdderTool } from './components/tools/WatermarkAdderTool';
+import { WhatsAppShareBar } from './components/tools/WhatsAppShareBar';
 import { WordCounterTypingTool } from './components/tools/WordCounterTypingTool';
 import {
   AppLanguage,
@@ -134,6 +144,11 @@ const NAV_TOOL_ICONS: Record<string, React.ReactNode> = {
   'image-converter': <ArrowLeftRight className="w-4 h-4 text-pink-600 shrink-0" />,
   'word-counter-typing': <Type className="w-4 h-4 text-lime-700 shrink-0" />,
   'watermark-adder': <Stamp className="w-4 h-4 text-amber-600 shrink-0" />,
+  'pdf-compressor': <FileDown className="w-4 h-4 text-emerald-600 shrink-0" />,
+  'id-card-print': <IdCard className="w-4 h-4 text-sky-600 shrink-0" />,
+  'invitation-card-maker': <PartyPopper className="w-4 h-4 text-rose-600 shrink-0" />,
+  'gst-invoice-maker': <FileCheck2 className="w-4 h-4 text-indigo-600 shrink-0" />,
+  'pdf-to-jpg-scanner': <ScanLine className="w-4 h-4 text-cyan-600 shrink-0" />,
 };
 
 const IN_APP_BANNER_COPY: Record<
@@ -271,6 +286,7 @@ export default function App() {
 
   const [isExportingSample, setIsExportingSample] = useState(false);
   const [isExportingHd, setIsExportingHd] = useState(false);
+  const [hasBiodataDownloaded, setHasBiodataDownloaded] = useState(false);
   const [resumeWatermarkEnabled, setResumeWatermarkEnabled] = useState(false);
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [exportError, setExportError] = useState('');
@@ -622,6 +638,7 @@ export default function App() {
         language,
       });
       handleToolDownload();
+      setHasBiodataDownloaded(true);
     } catch {
       setExportError(copy.exportErrorMsg);
     } finally {
@@ -657,6 +674,7 @@ export default function App() {
         language,
       });
       handleToolDownload();
+      setHasBiodataDownloaded(true);
     } catch {
       setExportError(copy.exportErrorMsg);
       throw new Error('HD PDF export failed');
@@ -1040,6 +1058,56 @@ export default function App() {
           />
         )}
 
+        {activeRoute === '/pdf-compressor' && (
+          <PdfCompressorTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/id-card-print' && (
+          <IdCardPrintTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/invitation-card-maker' && (
+          <InvitationCardMakerTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/gst-invoice-maker' && (
+          <GstInvoiceMakerTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
+        {activeRoute === '/pdf-to-jpg-scanner' && (
+          <PdfToJpgScannerTool
+            uiLang={uiLang}
+            isPro={proActive}
+            onBackHome={() => navigateTo('/')}
+            onOpenProModal={() => openProModal('monthly')}
+            onToolDownload={handleToolDownload}
+          />
+        )}
+
         {isLegalRoute(activeRoute) && (
           <LegalPageView
             route={activeRoute}
@@ -1326,6 +1394,15 @@ export default function App() {
                   )}
 
                   {exportError && <p className="text-xs font-medium text-rose-600">{exportError}</p>}
+
+                  {hasBiodataDownloaded && (
+                    <WhatsAppShareBar
+                      uiLang={uiLang}
+                      route={activeRoute === '/resume-maker' ? '/resume-maker' : '/biodata-maker'}
+                      toolTitle={modeLabel}
+                      compact
+                    />
+                  )}
                 </div>
 
                 {/* Scaled Live A4 Viewport Container */}

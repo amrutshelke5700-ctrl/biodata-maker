@@ -11,6 +11,7 @@ import {
   Type,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang, getSiteStrings } from '../../utils/siteI18n';
@@ -55,6 +56,7 @@ export const QrGeneratorTool: React.FC<QrGeneratorToolProps> = ({
   const [qrDataUrl, setQrDataUrl] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [copiedPayload, setCopiedPayload] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
 
   const qrTabs: { id: QrMode; label: string; icon: React.ReactNode }[] = [
     { id: 'url', label: s.qrTabUrl, icon: <Globe className="w-4 h-4" /> },
@@ -159,6 +161,7 @@ export const QrGeneratorTool: React.FC<QrGeneratorToolProps> = ({
       file_extension: 'png',
     });
     onToolDownload();
+    setHasDownloaded(true);
   };
 
   const handleCopyPayload = async () => {
@@ -431,6 +434,16 @@ export const QrGeneratorTool: React.FC<QrGeneratorToolProps> = ({
                 <Download className="w-4 h-4" />
                 <span>{s.qrDownloadBtn}</span>
               </button>
+              {hasDownloaded && (
+                <div className="w-full text-left">
+                  <WhatsAppShareBar
+                    uiLang={uiLang}
+                    route="/qr-generator"
+                    toolTitle={toolMeta.title[uiLang]}
+                    compact
+                  />
+                </div>
+              )}
             </>
           ) : (
             <div className="py-10 space-y-2">

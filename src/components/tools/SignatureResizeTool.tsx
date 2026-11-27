@@ -10,6 +10,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang, getSiteStrings } from '../../utils/siteI18n';
@@ -816,6 +817,15 @@ export const SignatureResizeTool: React.FC<SignatureResizeToolProps> = ({
               </div>
             </div>
           </div>
+
+          {resultBlob && (
+            <WhatsAppShareBar
+              uiLang={uiLang}
+              route="/signature-resize"
+              toolTitle={toolMeta.title[uiLang]}
+              compact
+            />
+          )}
         </div>
       )}
     </ToolShell>

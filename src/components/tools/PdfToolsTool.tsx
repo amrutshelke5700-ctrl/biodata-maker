@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
 import { PdfImageCropModal } from './PdfImageCropModal';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { rotateImageFile } from '../../utils/cropImage';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
@@ -527,9 +528,17 @@ export const PdfToolsTool: React.FC<PdfToolsToolProps> = ({
         </div>
       )}
       {successMsg && (
-        <div className="mb-4 flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm font-semibold text-emerald-800">
-          <Check className="w-4 h-4 shrink-0 text-emerald-600" />
-          <span>{successMsg}</span>
+        <div className="mb-4 space-y-2.5">
+          <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm font-semibold text-emerald-800">
+            <Check className="w-4 h-4 shrink-0 text-emerald-600" />
+            <span>{successMsg}</span>
+          </div>
+          <WhatsAppShareBar
+            uiLang={uiLang}
+            route="/pdf-tools"
+            toolTitle={toolMeta.title[uiLang]}
+            compact
+          />
         </div>
       )}
 

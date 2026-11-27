@@ -14,7 +14,12 @@ export type ToolRoute =
   | '/gst-emi-calculator'
   | '/image-converter'
   | '/word-counter-typing'
-  | '/watermark-adder';
+  | '/watermark-adder'
+  | '/pdf-compressor'
+  | '/id-card-print'
+  | '/invitation-card-maker'
+  | '/gst-invoice-maker'
+  | '/pdf-to-jpg-scanner';
 
 export type LegalRoute = '/about' | '/privacy-policy' | '/terms' | '/contact';
 
@@ -396,6 +401,136 @@ export const TOOL_CATALOG: ToolCatalogItem[] = [
       en: 'Watermark Adder for Image, PDF & Video Online | SadhanBox Pro',
       mr: 'वॉटरमार्क ॲडर — फोटो, PDF व व्हिडिओवर वॉटरमार्क लावा | SadhanBox Pro',
       hi: 'वॉटरमार्क ऐडर — फोटो, PDF और वीडियो पर वॉटरमार्क लगाएं | SadhanBox Pro',
+    },
+  },
+  {
+    route: '/pdf-compressor',
+    id: 'pdf-compressor',
+    title: {
+      en: 'PDF Compressor (Target KB)',
+      mr: 'PDF कॉम्प्रेसर (KB मध्ये)',
+      hi: 'PDF कंप्रेसर (KB में)',
+    },
+    shortDesc: {
+      en: 'Reduce PDF file size cleanly to 100 KB, 200 KB, 500 KB, or any custom KB target for government forms and portals inside your browser.',
+      mr: 'सरकारी फॉर्म व पोर्टलसाठी PDF ची साईज अचूक 100 KB, 200 KB, 500 KB किंवा हव्या त्या KB मध्ये थेट ब्राउझरमध्ये कमी करा.',
+      hi: 'सरकारी फॉर्म और पोर्टल के लिए PDF साइज सीधे ब्राउज़र में 100 KB, 200 KB, 500 KB या मनचाहे KB में कम करें।',
+    },
+    metaLabel: {
+      en: '100KB / 200KB / Custom KB',
+      mr: '100KB / 200KB / कस्टम KB',
+      hi: '100KB / 200KB / कस्टम KB',
+    },
+    accentBg: 'bg-emerald-50 border-emerald-200',
+    accentText: 'text-emerald-700',
+    seoTitle: {
+      en: 'Free PDF Compressor Online — Reduce PDF Size to 100KB, 200KB | SadhanBox',
+      mr: 'PDF कॉम्प्रेसर — PDF साईज 100KB, 200KB मध्ये मोफत कमी करा | SadhanBox',
+      hi: 'फ्री PDF कंप्रेसर — PDF साइज 100KB, 200KB में कम करें | SadhanBox',
+    },
+  },
+  {
+    route: '/id-card-print',
+    id: 'id-card-print',
+    title: {
+      en: 'ID Card A4 Print Maker',
+      mr: 'आधार / पॅन ID कार्ड A4 प्रिंट मेकर',
+      hi: 'आधार / पैन ID कार्ड A4 प्रिंट मेकर',
+    },
+    shortDesc: {
+      en: 'Place Front & Back photos of Aadhaar, PAN, or Voter ID onto a crisp A4 print sheet (1, 2, or 4 copies) with crop, rotate, and text boost.',
+      mr: 'आधार, पॅन किंवा मतदार कार्डची पुढची व मागची बाजू एकाच A4 पानावर क्रॉप, रोटेट व स्पष्ट अक्षरांसह प्रिंटसाठी तयार करा.',
+      hi: 'आधार, पैन या वोटर ID के आगे और पीछे की फोटो एक ही A4 पेज पर क्रॉप, रोटेट व साफ टेक्स्ट के साथ प्रिंट-रेडी बनाएं।',
+    },
+    metaLabel: {
+      en: 'Front + Back · 1/2/4 Copies A4',
+      mr: 'Front + Back · १/२/४ प्रती A4',
+      hi: 'Front + Back · 1/2/4 कॉपी A4',
+    },
+    accentBg: 'bg-sky-50 border-sky-200',
+    accentText: 'text-sky-700',
+    seoTitle: {
+      en: 'ID Card A4 Print Maker — Aadhaar & PAN Front Back on One Page PDF | SadhanBox',
+      mr: 'ID कार्ड A4 प्रिंट मेकर — आधार व पॅन दोन्ही बाजू एकाच पानावर PDF बनवा | SadhanBox',
+      hi: 'ID कार्ड A4 प्रिंट मेकर — आधार व पैन आगे-पीछे एक पेज PDF | SadhanBox',
+    },
+  },
+  {
+    route: '/invitation-card-maker',
+    id: 'invitation-card-maker',
+    title: {
+      en: 'Digital Invitation & Festival Card Maker',
+      mr: 'डिजिटल निमंत्रण व सण शुभेच्छा कार्ड मेकर',
+      hi: 'डिजिटल निमंत्रण व त्यौहार कार्ड मेकर',
+    },
+    shortDesc: {
+      en: 'Design WhatsApp-ready Wedding Save-the-Date, Birthday Invitations, and Festival / Shop Offer cards in Marathi, Hindi & English with instant PNG/JPG.',
+      mr: 'मराठी, हिंदी व इंग्रजीत लग्न निमंत्रण (Save the Date), वाढदिवस आणि सण/दुकान ऑफरची WhatsApp कार्ड्स काही सेकंदांत बनवा.',
+      hi: 'मराठी, हिंदी और अंग्रेजी में शादी निमंत्रण, जन्मदिन व त्यौहार/दुकान ऑफर के WhatsApp कार्ड कुछ सेकंड में बनाएं।',
+    },
+    metaLabel: {
+      en: 'Wedding · Birthday · Festival PNG',
+      mr: 'लग्न · वाढदिवस · सण व ऑफर कार्ड',
+      hi: 'शादी · जन्मदिन · त्यौहार कार्ड',
+    },
+    accentBg: 'bg-rose-50 border-rose-200',
+    accentText: 'text-rose-700',
+    seoTitle: {
+      en: 'Free Digital Invitation & Festival Card Maker — Marathi WhatsApp Cards | SadhanBox',
+      mr: 'डिजिटल निमंत्रण व सण कार्ड मेकर — मराठी लग्नपत्रिका व WhatsApp कार्ड बनवा | SadhanBox',
+      hi: 'फ्री डिजिटल निमंत्रण व त्यौहार कार्ड मेकर — WhatsApp कार्ड बनाएं | SadhanBox',
+    },
+  },
+  {
+    route: '/gst-invoice-maker',
+    id: 'gst-invoice-maker',
+    title: {
+      en: 'GST Invoice & Quotation Maker',
+      mr: 'GST बिल (Invoice) व कोटेशन मेकर',
+      hi: 'GST बिल (Invoice) व कोटेशन मेकर',
+    },
+    shortDesc: {
+      en: 'Create professional GST Tax Invoices (CGST+SGST / IGST) and Business Quotations with HSN codes, auto Rupee words, and instant A4 PDF export.',
+      mr: 'व्यवसाय व दुकानदारांसाठी CGST+SGST / IGST सह व्यावसायिक टॅक्स बिल (Invoice) आणि कोटेशन A4 PDF झटपट तयार करा.',
+      hi: 'व्यापार व दुकानों के लिए CGST+SGST / IGST के साथ प्रोफेशनल GST बिल (Invoice) और कोटेशन A4 PDF तुरंत बनाएं।',
+    },
+    metaLabel: {
+      en: 'Tax Invoice · Quotation · A4 PDF',
+      mr: 'GST टॅक्स बिल · कोटेशन · A4 PDF',
+      hi: 'GST बिल · कोटेशन · A4 PDF',
+    },
+    accentBg: 'bg-indigo-50 border-indigo-200',
+    accentText: 'text-indigo-700',
+    seoTitle: {
+      en: 'Free GST Invoice & Quotation Generator Online — A4 PDF | SadhanBox',
+      mr: 'GST बिल व कोटेशन मेकर — दुकानाचे मोफत A4 PDF बिल बनवा | SadhanBox',
+      hi: 'फ्री GST बिल व कोटेशन जनरेटर ऑनलाइन — A4 PDF डाउनलोड | SadhanBox',
+    },
+  },
+  {
+    route: '/pdf-to-jpg-scanner',
+    id: 'pdf-to-jpg-scanner',
+    title: {
+      en: 'PDF to JPG & Document Scan Cleaner',
+      mr: 'PDF ते JPG व डॉक्युमेंट स्कॅन क्लीनर',
+      hi: 'PDF से JPG व डॉक्यूमेंट स्कैन क्लीनर',
+    },
+    shortDesc: {
+      en: 'Convert PDF pages into crisp JPG photos or whiten dark/shadowed mobile document photos into clean scanner-quality JPG and A4 PDF files.',
+      mr: 'PDF मधील पाने JPG फोटोत बदला किंवा मोबाईलने काढलेले काळपट कागदपत्रे पांढरे स्वच्छ (Scan Cleaner) करून JPG/PDF डाउनलोड करा.',
+      hi: 'PDF पेजों को साफ JPG फोटो में बदलें या मोबाइल से ली गई अंधेरी डॉक्यूमेंट फोटो को सफेद साफ स्कैन (JPG/PDF) बनाएं।',
+    },
+    metaLabel: {
+      en: 'PDF → JPG · White Scan Cleaner',
+      mr: 'PDF → JPG · स्कॅन क्लीनर',
+      hi: 'PDF → JPG · स्कैन क्लीनर',
+    },
+    accentBg: 'bg-cyan-50 border-cyan-200',
+    accentText: 'text-cyan-700',
+    seoTitle: {
+      en: 'PDF to JPG Converter & Document Scan Cleaner Online Free | SadhanBox',
+      mr: 'PDF ते JPG व डॉक्युमेंट स्कॅन क्लीनर — मोफत ऑनलाइन टूल | SadhanBox',
+      hi: 'PDF से JPG कन्वर्टर व डॉक्यूमेंट स्कैन क्लीनर ऑनलाइन | SadhanBox',
     },
   },
 ];

@@ -13,6 +13,7 @@ import {
   UserSquare2,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang, getSiteStrings } from '../../utils/siteI18n';
@@ -296,6 +297,7 @@ export const PassportPhotoMakerTool: React.FC<PassportPhotoMakerToolProps> = ({
   const [bgProgress, setBgProgress] = useState(0);
   const [bgStatus, setBgStatus] = useState('');
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   const urlsRef = useRef<{ sourceUrl: string; cutoutUrl: string }>({
@@ -486,6 +488,7 @@ export const PassportPhotoMakerTool: React.FC<PassportPhotoMakerToolProps> = ({
       file_extension: 'jpg',
     });
     onToolDownload();
+    setHasDownloaded(true);
   };
 
   const handleDownloadA4Pdf = async () => {
@@ -514,6 +517,7 @@ export const PassportPhotoMakerTool: React.FC<PassportPhotoMakerToolProps> = ({
         file_extension: 'pdf',
       });
       onToolDownload();
+      setHasDownloaded(true);
     } catch {
       setErrorMsg(s.passFileTypeError);
     } finally {
@@ -555,6 +559,7 @@ export const PassportPhotoMakerTool: React.FC<PassportPhotoMakerToolProps> = ({
       file_extension: 'jpg',
     });
     onToolDownload();
+    setHasDownloaded(true);
   };
 
   return (
@@ -861,6 +866,14 @@ export const PassportPhotoMakerTool: React.FC<PassportPhotoMakerToolProps> = ({
                   <span>{s.passDownloadSingleBtn}</span>
                 </button>
               </div>
+              {hasDownloaded && (
+                <WhatsAppShareBar
+                  uiLang={uiLang}
+                  route="/passport-photo-maker"
+                  toolTitle={toolMeta.title[uiLang]}
+                  compact
+                />
+              )}
             </div>
 
             {/* Previews */}

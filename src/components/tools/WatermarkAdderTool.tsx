@@ -18,6 +18,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { TOOL_CATALOG } from '../../utils/routes';
 import { UiLang } from '../../utils/siteI18n';
@@ -1398,9 +1399,17 @@ export const WatermarkAdderTool: React.FC<WatermarkAdderToolProps> = ({
               )}
 
               {successMsg && (
-                <div className="flex items-start gap-2 rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2.5 text-xs font-medium text-emerald-800">
-                  <Check className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
-                  <span>{successMsg}</span>
+                <div className="space-y-2.5">
+                  <div className="flex items-start gap-2 rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2.5 text-xs font-medium text-emerald-800">
+                    <Check className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
+                    <span>{successMsg}</span>
+                  </div>
+                  <WhatsAppShareBar
+                    uiLang={uiLang}
+                    route="/watermark-adder"
+                    toolTitle={toolMeta.title[uiLang]}
+                    compact
+                  />
                 </div>
               )}
 

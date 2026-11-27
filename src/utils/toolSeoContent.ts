@@ -1425,4 +1425,509 @@ export const TOOL_SEO_CONTENT: ToolSeoMap = {
       ],
     },
   },
+  '/pdf-compressor': {
+    en: {
+      howToTitle: 'How to Compress PDF Size Online',
+      steps: [
+        'Upload your PDF document from your phone or computer.',
+        'Pick a preset limit (100 KB, 200 KB, 500 KB, 1 MB) or enter any custom KB size.',
+        'Click "Compress PDF" so your browser optimizes page resolution and compression automatically.',
+        'Review the original vs compressed file size and percentage saved.',
+        'Click "Download Compressed PDF" to save the smaller file immediately.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Are my PDF files uploaded to any external server?',
+          a: 'No. Compression runs 100% locally inside your browser so marksheets, certificates, and IDs remain private.',
+        },
+        {
+          q: 'Can I compress a PDF strictly under 200 KB for government forms?',
+          a: 'Yes! Select 200 KB (or type any KB number) and the compressor automatically tunes quality to fit cleanly under your limit.',
+        },
+        {
+          q: 'Why can a 20-page PDF not fit under 50 KB?',
+          a: 'Each page requires minimum readable pixels; if a strict KB limit cannot be reached cleanly, the tool delivers the smallest readable PDF possible.',
+        },
+        {
+          q: 'Does PDF compression work on mobile phones?',
+          a: 'Yes, it works smoothly on Android Chrome, iOS Safari, and desktop browsers with zero app installation.',
+        },
+        {
+          q: 'Is PDF Compressor free to use?',
+          a: 'Yes, compressing PDFs on SadhanBox is completely free for everyday use.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'PDF ची साईज KB मध्ये कशी कमी करावी?',
+      steps: [
+        'तुमच्या मोबाईल किंवा कॉम्प्युटरवरून PDF फाईल निवडा.',
+        '100 KB, 200 KB, 500 KB पैकी पर्याय निवडा किंवा हवी ती कस्टम KB संख्या टाका.',
+        '"PDF कॉम्प्रेस करा" बटणावर क्लिक करा.',
+        'मूळ साईज आणि कमी झालेली साईज तपासा.',
+        '"कॉम्प्रेस PDF डाउनलोड करा" वर क्लिक करून फाईल सेव्ह करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'माझी PDF कागदपत्रे सर्व्हरवर अपलोड होतात का?',
+          a: 'नाही. संपूर्ण PDF कॉम्प्रेशन प्रक्रिया तुमच्याच ब्राउझरमध्ये होते, त्यामुळे कोणतीही फाईल बाहेर जात नाही.',
+        },
+        {
+          q: 'सरकारी फॉर्मसाठी PDF २०० KB पेक्षा लहान होते का?',
+          a: 'होय! २०० KB किंवा हवा तो आकडा निवडल्यास टूल आपोआप योग्य गुणवत्ता सेट करून साईज कमी करते.',
+        },
+        {
+          q: 'खूप जास्त पाने असलेली PDF खूप लहान KB मध्ये का येत नाही?',
+          a: 'प्रत्येक पानातील अक्षरे वाचता येण्यासाठी किमान गुणवत्ता लागते; त्यामुळे वाचण्यायोग्य राहील अशी सर्वात लहान साईज तयार केली जाते.',
+        },
+        {
+          q: 'हे टूल मोबाईलवर चालते का?',
+          a: 'होय, अँड्रॉइड, आयफोन आणि संगणकावरील ब्राउझरवर कोणतेही अ‍ॅप न घेता हे सहज चालते.',
+        },
+        {
+          q: 'PDF कॉम्प्रेसर वापरण्यासाठी पैसे लागतात का?',
+          a: 'नाही, हे टूल रोजच्या वापरासाठी पूर्णपणे मोफत आहे.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'PDF फाइल की साइज KB में कम कैसे करें?',
+      steps: [
+        'अपने फोन या कंप्यूटर से PDF फाइल चुनें।',
+        '100 KB, 200 KB, 500 KB या अपनी जरूरत के अनुसार कस्टम KB लिखें।',
+        '"PDF कंप्रेस करें" बटन पर क्लिक करें।',
+        'मूल साइज और कम हुई नई साइज की तुलना देखें।',
+        '"कंप्रेस PDF डाउनलोड करें" पर क्लिक करके फाइल सेव करें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या मेरी PDF फाइलें किसी सर्वर पर भेजी जाती हैं?',
+          a: 'नहीं। पूरी प्रक्रिया १००% आपके ब्राउज़र के भीतर होती है, इसलिए आपके दस्तावेज सुरक्षित रहते हैं।',
+        },
+        {
+          q: 'क्या सरकारी फॉर्म के लिए PDF 200 KB के अंदर बन जाती है?',
+          a: 'हां! 200 KB चुनने पर टूल अपने आप क्वालिटी एडजस्ट करके फाइल को तय सीमा के भीतर लाता है।',
+        },
+        {
+          q: 'बहुत अधिक पेजों वाली PDF बहुत कम KB में क्यों नहीं आती?',
+          a: 'हर पेज को पढ़ने योग्य रखने के लिए न्यूनतम पिक्सेल जरूरी होते हैं, इसलिए सबसे छोटा पठनीय PDF तैयार किया जाता है।',
+        },
+        {
+          q: 'क्या यह टूल मोबाइल पर काम करता है?',
+          a: 'हां, यह मोबाइल और डेस्कटॉप दोनों ब्राउज़र पर बिना किसी ऐप के चलता है।',
+        },
+        {
+          q: 'क्या PDF कंप्रेसर मुफ्त है?',
+          a: 'जी हां, दैनिक उपयोग के लिए यह पूरी तरह मुफ्त है।',
+        },
+      ],
+    },
+  },
+  '/id-card-print': {
+    en: {
+      howToTitle: 'How to Print Aadhaar or PAN Front & Back on One A4 Sheet',
+      steps: [
+        'Upload the Front side photo of your Aadhaar, PAN, or Voter ID card.',
+        'Upload the Back side photo (optional).',
+        'Use the Crop and Rotate buttons on each side to straighten tilted card photos cleanly.',
+        'Choose Side-by-Side or Top & Bottom layout, and select 1, 2, or 4 copies per A4 page.',
+        'Download the ready-to-print A4 PDF or A4 JPG.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Is my Aadhaar or PAN photo uploaded to any server?',
+          a: 'Never. All cropping, contrast enhancement, and A4 PDF creation run strictly inside your browser.',
+        },
+        {
+          q: 'Are the cards sized accurately for standard ID card printing?',
+          a: 'Yes, cards are placed cleanly at standard ID proportions on an A4 (210 × 297 mm) sheet with optional cutting lines.',
+        },
+        {
+          q: 'Can I fix tilted or upside-down card photos?',
+          a: 'Yes! Click Crop or Rotate 90° directly under the Front or Back preview to straighten your card before printing.',
+        },
+        {
+          q: 'Can I print multiple copies on one A4 page?',
+          a: 'Yes, choose 1, 2, or 4 copies to save paper at home or at a print/CSC shop.',
+        },
+        {
+          q: 'What does the text sharpness option do?',
+          a: 'It boosts contrast and brightness slightly so dark mobile photos of Aadhaar or PAN cards print crisply.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'आधार किंवा पॅन कार्ड दोन्ही बाजू एकाच A4 पानावर कशा बसवाव्यात?',
+      steps: [
+        'कार्डची पुढची बाजू (Front) अपलोड करा.',
+        'कार्डची मागची बाजू (Back) अपलोड करा.',
+        'फोटो वाकडा असल्यास क्रॉप आणि ९०° रोटेट बटणाने सरळ व स्वच्छ करून घ्या.',
+        'शेजारी-शेजारी किंवा वर-खाली मांडणी निवडा आणि A4 पानावर १, २ किंवा ४ प्रती ठरवा.',
+        '"A4 PDF डाउनलोड करा" किंवा "A4 JPG डाउनलोड करा" वर क्लिक करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'माझे आधार किंवा पॅन कार्ड फोटो सर्व्हरवर सेव्ह होतात का?',
+          a: 'नाही. संपूर्ण काम थेट तुमच्या ब्राउझरमध्ये होते; तुमचे ओळखपत्र फोटो कुठेही अपलोड केले जात नाहीत.',
+        },
+        {
+          q: 'यामध्ये कार्डचा आकार प्रिंटिंगसाठी अचूक येतो का?',
+          a: 'होय, A4 (२१० × २९७ मिमी) पानावर मानक ID कार्ड आकारात आणि कटिंग बॉर्डरसह शीट तयार होते.',
+        },
+        {
+          q: 'तिरपा आलेला फोटो सरळ व क्रॉप करता येतो का?',
+          a: 'होय! प्रत्येक बाजूखालील क्रॉप आणि ९०° रोटेट बटणांनी तुम्ही फोटो अचूक कापून सरळ करू शकता.',
+        },
+        {
+          q: 'एकाच पानावर एकापेक्षा जास्त प्रती काढता येतात का?',
+          a: 'होय, १, २ किंवा ४ प्रती निवडून तुम्ही एकाच A4 कागदावर अनेक प्रती प्रिंट करू शकता.',
+        },
+        {
+          q: '"मजकूर स्पष्ट करा" पर्यायाचा काय फायदा होतो?',
+          a: 'मोबाईलने काढलेल्या काळपट फोटोतील अक्षरे अधिक स्पष्ट व वाचण्यायोग्य होण्यास मदत होते.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'आधार या पैन कार्ड के दोनों तरफ एक ही A4 पेज पर कैसे प्रिंट करें?',
+      steps: [
+        'अपने कार्ड की आगे की फोटो (Front) अपलोड करें।',
+        'कार्ड की पीछे की फोटो (Back) अपलोड करें।',
+        'यदि फोटो टेढ़ी है तो क्रॉप और 90° रोटेट बटन से उसे सीधा व साफ करें।',
+        'अगल-बगल या ऊपर-नीचे लेआउट और 1, 2 या 4 कॉपियां चुनें।',
+        '"A4 PDF डाउनलोड करें" या "A4 JPG डाउनलोड करें" पर क्लिक करें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या मेरा आधार या पैन फोटो किसी सर्वर पर अपलोड होता है?',
+          a: 'बिल्कुल नहीं। सारी प्रोसेसिंग सीधे आपके ब्राउज़र में होती है और कोई फोटो बाहर नहीं जाती।',
+        },
+        {
+          q: 'क्या कार्ड का प्रिंट साइज सही आता है?',
+          a: 'हां, A4 (210 × 297 मिमी) शीट पर स्टैंडर्ड ID कार्ड साइज और कटिंग बॉर्डर के साथ प्रिंट फाइल बनती है।',
+        },
+        {
+          q: 'क्या मैं टेढ़ी फोटो को क्रॉप या रोटेट कर सकता हूं?',
+          a: 'हां, आगे व पीछे दोनों फोटो के नीचे क्रॉप और 90° रोटेट बटन दिए गए हैं।',
+        },
+        {
+          q: 'क्या एक पेज पर एक से ज्यादा कॉपियां निकल सकती हैं?',
+          a: 'हां, आप 1, 2 या 4 कॉपियां एक ही A4 शीट पर सेट कर सकते हैं।',
+        },
+        {
+          q: 'टेक्स्ट स्पष्ट करने वाला विकल्प क्या करता है?',
+          a: 'यह मोबाइल से ली गई कम रोशनी वाली फोटो का कंट्रास्ट बढ़ाकर अक्षरों को साफ दिखाता है।',
+        },
+      ],
+    },
+  },
+  '/invitation-card-maker': {
+    en: {
+      howToTitle: 'How to Create Digital Wedding, Birthday & Festival Cards',
+      steps: [
+        'Choose your category: Wedding Invite, Birthday Invite, or Festival / Shop Offer Card.',
+        'Pick one of the 6 color themes and select WhatsApp Card (4:5), Status (9:16), or Square (1:1).',
+        'Edit names, date, venue, greeting message, and host details in any language.',
+        'Optionally add a couple photo, portrait, or shop logo.',
+        'Download crisp PNG or JPG and share directly on WhatsApp.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Can I write invitation cards in Marathi or Hindi?',
+          a: 'Yes! All fields support Marathi, Hindi, and English fonts cleanly.',
+        },
+        {
+          q: 'Which card size works best for WhatsApp Status?',
+          a: 'Select "WhatsApp Status (9:16)" for full-screen mobile status stories, or 4:5 for group sharing.',
+        },
+        {
+          q: 'Can shopkeepers create festival wishes and sale offer cards?',
+          a: 'Yes! Switch to the Festival / Shop Card tab to add your shop name, discount details, and contact number.',
+        },
+        {
+          q: 'Are my photos or family details uploaded anywhere?',
+          a: 'No. The card is rendered inside your browser and downloaded straight to your device.',
+        },
+        {
+          q: 'Is PNG or JPG better for sharing?',
+          a: 'PNG gives ultra-sharp text edges, while JPG creates a slightly smaller file for fast WhatsApp forwarding.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'मराठी डिजिटल निमंत्रण व सण कार्ड कसे बनवावे?',
+      steps: [
+        'लग्न निमंत्रण, वाढदिवस किंवा सण / दुकान ऑफर यापैकी प्रकार निवडा.',
+        '६ आकर्षक थीम्सपैकी एक निवडा व WhatsApp कार्ड (4:5), स्टेटस (9:16) किंवा चौरस (1:1) आकार निवडा.',
+        'शीर्षक, नावे, तारीख-वेळ, स्थळ आणि निमंत्रण संदेश तुमच्या भाषेत लिहा.',
+        'ऐच्छिक असल्यास वर-वधू, व्यक्तीचा फोटो किंवा दुकानाचा लोगो जोडा.',
+        'PNG किंवा JPG डाउनलोड करून थेट WhatsApp वर शेअर करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'लग्न निमंत्रण कार्ड मराठी किंवा हिंदीत बनवता येते का?',
+          a: 'होय! मराठी, हिंदी आणि इंग्रजी तिन्ही भाषांत तुम्ही सुबक कार्ड बनवू शकता.',
+        },
+        {
+          q: 'WhatsApp स्टेटससाठी कोणता आकार निवडावा?',
+          a: 'फुल-स्क्रीन स्टेटससाठी "WhatsApp स्टेटस (9:16)" आणि ग्रुपवर पाठवण्यासाठी "4:5" आकार उत्तम आहे.',
+        },
+        {
+          q: 'दुकानदारांसाठी सणांच्या शुभेच्छा व ऑफर कार्ड बनवता येते का?',
+          a: 'होय! "सण / दुकान ऑफर" टॅब निवडून तुम्ही दुकानाचे नाव, ऑफर आणि संपर्क क्रमांकासह कार्ड बनवू शकता.',
+        },
+        {
+          q: 'माझा फोटो किंवा कौटुंबिक माहिती सर्व्हरवर जाते का?',
+          a: 'नाही, कार्ड थेट तुमच्या ब्राउझरमध्ये तयार होते आणि तुमच्या फोनवर सेव्ह होते.',
+        },
+        {
+          q: 'PNG आणि JPG मध्ये कोणता फॉरमॅट चांगला आहे?',
+          a: 'अतिशय स्पष्ट अक्षरांसाठी PNG किंवा जलद WhatsApp फॉरवर्डसाठी JPG वापरू शकता.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'डिजिटल शादी, जन्मदिन और त्यौहार कार्ड कैसे बनाएं?',
+      steps: [
+        'शादी निमंत्रण, जन्मदिन या त्यौहार / दुकान ऑफर टैब चुनें।',
+        '६ थीम में से एक चुनें और WhatsApp कार्ड (4:5), स्टेटस (9:16) या चौकोर (1:1) साइज सेट करें।',
+        'नाम, तारीख-समय, पता और शुभ संदेश अपनी भाषा में लिखें।',
+        'चाहें तो अपनी फोटो या दुकान का लोगो भी जोड़ें।',
+        'PNG या JPG डाउनलोड करें और सीधे WhatsApp पर भेजें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या मैं हिंदी या मराठी में निमंत्रण कार्ड बना सकता हूं?',
+          a: 'जी हां! सभी बॉक्स हिंदी, मराठी और अंग्रेजी टेक्स्ट को पूरी तरह सपोर्ट करते हैं।',
+        },
+        {
+          q: 'WhatsApp स्टेटस के लिए कौन-सा साइज सही है?',
+          a: 'फुल-स्क्रीन स्टेटस के लिए 9:16 और ग्रुप में भेजने के लिए 4:5 साइज सबसे बढ़िया है।',
+        },
+        {
+          q: 'क्या दुकानदार त्यौहार शुभकामना और सेल ऑफर कार्ड बना सकते हैं?',
+          a: 'हां! "त्यौहार / दुकान कार्ड" चुनकर अपनी दुकान का नाम, ऑफर व नंबर जोड़ सकते हैं।',
+        },
+        {
+          q: 'क्या मेरी फोटो किसी सर्वर पर अपलोड होती है?',
+          a: 'नहीं, कार्ड पूरी तरह आपके ब्राउज़र में बनता है और सीधे आपके डिवाइस पर सेव होता है।',
+        },
+        {
+          q: 'PNG और JPG में क्या चुनें?',
+          a: 'सबसे साफ टेक्स्ट के लिए PNG और हल्की फाइल के लिए JPG डाउनलोड करें।',
+        },
+      ],
+    },
+  },
+  '/gst-invoice-maker': {
+    en: {
+      howToTitle: 'How to Create a GST Tax Invoice or Quotation PDF',
+      steps: [
+        'Choose Tax Invoice (GST Bill) or Quotation / Estimate at the top.',
+        'Enter your business name, optional GSTIN, address, and optional company logo.',
+        'Fill in customer Bill To details, invoice number, and tax mode (CGST+SGST, IGST, or No GST).',
+        'Add line items with HSN code, quantity, rate, and GST slab (0% to 28%).',
+        'Check the live A4 preview and click Download A4 PDF.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Are GST totals and Amount in Words calculated automatically?',
+          a: 'Yes! CGST/SGST or IGST amounts, grand total, and Indian Rupee words update live as you type.',
+        },
+        {
+          q: 'Can small businesses without GSTIN also make simple bills or estimates?',
+          a: 'Yes, choose "No GST / Simple Bill" or leave GSTIN blank to generate clean bills or quotations.',
+        },
+        {
+          q: 'Is my business or customer billing data stored on any server?',
+          a: 'No. Everything runs inside your browser with zero server uploads.',
+        },
+        {
+          q: 'Can I add my business logo to the invoice?',
+          a: 'Yes, click "Add Logo" in the business details section to display your brand logo on the A4 PDF.',
+        },
+        {
+          q: 'Does it export a standard A4 printable PDF?',
+          a: 'Yes, clicking Download A4 PDF exports a clean, ready-to-print A4 invoice or quotation.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'GST बिल (Invoice) किंवा कोटेशन PDF कसे बनवावे?',
+      steps: [
+        'वरून "GST टॅक्स बिल" किंवा "अंदाजपत्रक (Quotation)" पर्याय निवडा.',
+        'तुमच्या दुकानाचे/कंपनीचे नाव, पत्ता, GSTIN (असल्यास) आणि लोगो जोडा.',
+        'ग्राहकाचे नाव, पत्ता, बिल क्रमांक आणि कर प्रकार (CGST+SGST, IGST किंवा विना-GST) निवडा.',
+        'वस्तूंची यादी, HSN कोड, नग, दर आणि GST % भरा.',
+        'लाइव्ह A4 प्रिव्ह्यू पाहून त्वरित PDF डाउनलोड करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'GST आणि अक्षरी रक्कम आपोआप मोजली जाते का?',
+          a: 'होय! वस्तूंचे दर व GST टक्केवारी टाकताच एकूण रक्कम, CGST/SGST किंवा IGST आणि अक्षरी रक्कम आपोआप तयार होते.',
+        },
+        {
+          q: 'GST नंबर नसलेले लहान दुकानदार साधे बिल किंवा कोटेशन बनवू शकतात का?',
+          a: 'होय, "विना-GST साधे बिल" पर्याय निवडून आणि GSTIN रिकामा ठेवून तुम्ही साधे बिल किंवा अंदाजपत्रक बनवू शकता.',
+        },
+        {
+          q: 'माझ्या ग्राहकांची किंवा व्यवसायाची माहिती सर्व्हरवर सेव्ह होते का?',
+          a: 'नाही, सर्व माहिती केवळ तुमच्या ब्राउझरमध्ये राहते व बाहेर पाठवली जात नाही.',
+        },
+        {
+          q: 'बिलावर दुकानाचा लोगो लावता येतो का?',
+          a: 'होय, "लोगो जोडा" बटणावरून तुम्ही तुमचा लोगो बिलाच्या वरच्या बाजूला लावू शकता.',
+        },
+        {
+          q: 'डाउनलोड केलेले बिल A4 कागदावर प्रिंट करता येते का?',
+          a: 'होय, हे टूल मानक A4 आकारात प्रिंट-रेडी PDF तयार करते.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'GST टैक्स बिल (Invoice) या कोटेशन PDF कैसे बनाएं?',
+      steps: [
+        'ऊपर से "GST टैक्स बिल" या "कोटेशन / एस्टीमेट" चुनें।',
+        'अपनी दुकान/कंपनी का नाम, पता, GSTIN (वैकल्पिक) और लोगो जोड़ें।',
+        'ग्राहक का नाम, पता, बिल नंबर और टैक्स प्रकार (CGST+SGST, IGST या बिना GST) चुनें।',
+        'सामान का विवरण, HSN, मात्रा, दर और GST % दर्ज करें।',
+        'लाइव A4 प्रिव्यू जांचें और तुरंत A4 PDF डाउनलोड करें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या GST और शब्दों में राशि अपने आप कैलकुलेट होती है?',
+          a: 'हां! मात्रा, दर और GST % लिखते ही CGST/SGST या IGST और कुल राशि शब्दों में अपने आप अपडेट होती है।',
+        },
+        {
+          q: 'क्या बिना GSTIN वाले छोटे दुकानदार भी बिल या कोटेशन बना सकते हैं?',
+          a: 'हां, "बिना GST सरल बिल" चुनें और GSTIN खाली छोड़कर साफ बिल या कोटेशन बनाएं।',
+        },
+        {
+          q: 'क्या मेरी बिलिंग जानकारी किसी सर्वर पर जाती है?',
+          a: 'नहीं, सब कुछ सीधे आपके ब्राउज़र में चलता है और कोई डेटा बाहर नहीं जाता।',
+        },
+        {
+          q: 'क्या बिल पर अपनी दुकान का लोगो लगा सकते हैं?',
+          a: 'हां, "लोगो जोड़ें" बटन से आप अपना लोगो ऊपर हेडर में लगा सकते हैं।',
+        },
+        {
+          q: 'क्या यह मानक A4 प्रिंट साइज में PDF देता है?',
+          a: 'हां, डाउनलोड की गई PDF मानक A4 प्रिंट-रेडी होती है।',
+        },
+      ],
+    },
+  },
+  '/pdf-to-jpg-scanner': {
+    en: {
+      howToTitle: 'How to Convert PDF to JPG or Clean Scanned Document Photos',
+      steps: [
+        'Switch between PDF to JPG and Document Scan Cleaner tabs at the top.',
+        'In PDF to JPG, upload a PDF and pick Standard (150 DPI) or High (250 DPI) to download individual or all page JPGs.',
+        'In Document Scan Cleaner, upload any shadowed document photo from your phone camera.',
+        'Crop and rotate edges cleanly, choose Magic White Scan or B&W Sharp Text, and adjust contrast if needed.',
+        'Save your cleaned document as a crisp JPG or A4 PDF.',
+      ],
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          q: 'Can I convert a multi-page PDF into separate JPG images?',
+          a: 'Yes! Every page is rendered cleanly in your browser and you can download single pages or all pages.',
+        },
+        {
+          q: 'How does Magic White Scan clean dark phone photos?',
+          a: 'It brightens shadowed gray paper backgrounds toward pure white while keeping handwritten or printed ink crisp.',
+        },
+        {
+          q: 'Can I crop and rotate a tilted photo before saving?',
+          a: 'Yes, use the built-in Crop and Rotate 90° tools right above the preview.',
+        },
+        {
+          q: 'Are my confidential PDFs and documents uploaded anywhere?',
+          a: 'No. Both PDF-to-JPG conversion and document scan cleaning run 100% inside your browser.',
+        },
+        {
+          q: 'Can I export the cleaned scan directly as an A4 PDF?',
+          a: 'Yes! Click "Save as A4 PDF" to download a printable A4 PDF immediately.',
+        },
+      ],
+    },
+    mr: {
+      howToTitle: 'PDF चे JPG फोटो कसे बनवावेत किंवा डॉक्युमेंट फोटो स्वच्छ कसा करावा?',
+      steps: [
+        'वरून "PDF ते JPG" किंवा "डॉक्युमेंट स्कॅन क्लीनर" टॅब निवडा.',
+        'PDF ते JPG मध्ये PDF अपलोड करून 150/250 DPI मध्ये प्रत्येक पानाचा किंवा सर्व पानांचा JPG डाउनलोड करा.',
+        'डॉक्युमेंट स्कॅन क्लीनरमध्ये मोबाईलने काढलेला सावली असलेला फोटो निवडा.',
+        'क्रॉप आणि ९०° रोटेट करून मॅजिक व्हाईट स्कॅन किंवा B&W फिल्टर निवडा.',
+        'स्वच्छ केलेला फोटो JPG किंवा A4 PDF मध्ये सेव्ह करा.',
+      ],
+      faqTitle: 'नेहमी विचारले जाणारे प्रश्न',
+      faqs: [
+        {
+          q: 'अनेक पाने असलेल्या PDF चे वेगवेगळे JPG फोटो होतात का?',
+          a: 'होय! प्रत्येक पानाचा स्वतंत्र JPG तयार होतो आणि तुम्ही हवे ते पान किंवा सर्व पाने डाउनलोड करू शकता.',
+        },
+        {
+          q: 'मॅजिक व्हाईट स्कॅन फोटो कसा स्वच्छ करतो?',
+          a: 'तो काळपट व सावली असलेल्या कागदाचा रंग पांढरा स्वच्छ करतो आणि अक्षरे अधिक गडद व स्पष्ट ठेवतो.',
+        },
+        {
+          q: 'फोटो वाकडा असल्यास क्रॉप आणि सरळ करता येतो का?',
+          a: 'होय, प्रिव्ह्यूच्या वरच क्रॉप आणि ९०° रोटेट बटणे दिलेली आहेत.',
+        },
+        {
+          q: 'माझी कागदपत्रे सर्व्हरवर अपलोड होतात का?',
+          a: 'नाही. संपूर्ण प्रक्रिया १००% तुमच्या ब्राउझरमध्ये सुरक्षितपणे पार पडते.',
+        },
+        {
+          q: 'स्वच्छ केलेल्या स्कॅनची थेट A4 PDF बनवता येते का?',
+          a: 'होय! "A4 PDF सेव्ह करा" बटणाने तुम्ही लगेच प्रिंट-रेडी PDF डाउनलोड करू शकता.',
+        },
+      ],
+    },
+    hi: {
+      howToTitle: 'PDF को JPG में कैसे बदलें या डॉक्यूमेंट फोटो साफ स्कैन कैसे बनाएं?',
+      steps: [
+        'ऊपर से "PDF से JPG" या "डॉक्यूमेंट स्कैन क्लीनर" टैब चुनें।',
+        'PDF से JPG में फाइल अपलोड करें और 150 या 250 DPI चुनकर हर पेज का JPG डाउनलोड करें।',
+        'स्कैन क्लीनर में फोन कैमरे से ली गई परछाई वाली डॉक्यूमेंट फोटो अपलोड करें।',
+        'क्रॉप व 90° रोटेट करके मैजिक व्हाइट स्कैन या B&W फिल्टर चुनें।',
+        'साफ किए गए डॉक्यूमेंट को JPG या A4 PDF के रूप में सेव करें।',
+      ],
+      faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
+      faqs: [
+        {
+          q: 'क्या कई पेजों वाली PDF से अलग-अलग JPG फोटो बन जाते हैं?',
+          a: 'हां! हर पेज का अलग JPG बनता है जिसे आप एक-एक करके या एक साथ डाउनलोड कर सकते हैं।',
+        },
+        {
+          q: 'मैजिक व्हाइट स्कैन धुंधली फोटो को कैसे साफ करता है?',
+          a: 'यह ग्रे या परछाई वाले कागज को शुद्ध सफेद करता है और लिखे हुए टेक्स्ट को गहरा व साफ बनाए रखता है।',
+        },
+        {
+          q: 'क्या सेव करने से पहले फोटो क्रॉप और रोटेट कर सकते हैं?',
+          a: 'हां, ऊपर दिए गए क्रॉप और 90° रोटेट बटन से आप फोटो सही कर सकते हैं।',
+        },
+        {
+          q: 'क्या मेरी फाइलें किसी सर्वर पर भेजी जाती हैं?',
+          a: 'नहीं। दोनों टूल्स पूरी तरह आपके ब्राउज़र के भीतर सुरक्षित रूप से काम करते हैं।',
+        },
+        {
+          q: 'क्या साफ की गई फोटो को सीधे A4 PDF में सेव कर सकते हैं?',
+          a: 'हां! "A4 PDF सेव करें" बटन से तुरंत प्रिंट करने लायक A4 PDF डाउनलोड करें।',
+        },
+      ],
+    },
+  },
 };

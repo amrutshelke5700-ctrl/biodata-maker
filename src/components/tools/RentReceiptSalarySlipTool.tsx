@@ -8,6 +8,7 @@ import {
   Wallet,
 } from 'lucide-react';
 import { ToolShell } from './ToolShell';
+import { WhatsAppShareBar } from './WhatsAppShareBar';
 import { pushDataLayerEvent } from '../../utils/gtm';
 import { exportA4Pdf } from '../../utils/pdfExport';
 import { TOOL_CATALOG } from '../../utils/routes';
@@ -730,6 +731,7 @@ export const RentReceiptSalarySlipTool: React.FC<RentReceiptSalarySlipToolProps>
   const captureRef = useRef<HTMLDivElement | null>(null);
   const [previewScale, setPreviewScale] = useState<number>(0.62);
   const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [hasDownloaded, setHasDownloaded] = useState<boolean>(false);
   const [exportError, setExportError] = useState<string>('');
 
   useEffect(() => {
@@ -780,6 +782,7 @@ export const RentReceiptSalarySlipTool: React.FC<RentReceiptSalarySlipToolProps>
         file_extension: 'pdf',
       });
       onToolDownload();
+      setHasDownloaded(true);
     } catch {
       setExportError(s.pdfImgFailed);
     } finally {
@@ -1329,6 +1332,15 @@ export const RentReceiptSalarySlipTool: React.FC<RentReceiptSalarySlipToolProps>
                 )}
               </button>
             </div>
+
+            {hasDownloaded && (
+              <WhatsAppShareBar
+                uiLang={uiLang}
+                route="/rent-receipt-generator"
+                toolTitle={toolMeta.title[uiLang]}
+                compact
+              />
+            )}
 
             {exportError && (
               <div
