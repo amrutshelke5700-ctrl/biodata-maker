@@ -59,7 +59,7 @@ export const WhatsAppShareBar: React.FC<WhatsAppShareBarProps> = ({
   const shareUrl =
     typeof window !== 'undefined' && window.location.origin
       ? `${window.location.origin}${route === '/' ? '' : route}`
-      : `https://sadhanbox.pages.dev${route === '/' ? '' : route}`;
+      : `https://sadhanbox.in${route === '/' ? '' : route}`;
 
   const titlePart = toolTitle ? ` — ${toolTitle}` : '';
   const shareText = `${c.messagePrefix}${titlePart}. ${c.messageSuffix} ${shareUrl}`;

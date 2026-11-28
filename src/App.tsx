@@ -238,6 +238,65 @@ function isLegalRoute(route: AppRoute): route is LegalRoute {
   return (LEGAL_ROUTES as string[]).includes(route);
 }
 
+const BRAND_LOGO_SVG_1024 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="1024" height="1024" fill="none">
+  <defs>
+    <linearGradient id="sbBg" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="sbGold" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#sbBg)" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="12.5" stroke="#93C5FD" stroke-opacity="0.45" stroke-width="1.5" />
+  <path d="M24 21C24 18.7909 25.7909 17 28 17H36C38.2091 17 40 18.7909 40 21V24H24V21Z" stroke="url(#sbGold)" stroke-width="2.6" stroke-linejoin="round" />
+  <rect x="14" y="23.5" width="36" height="24.5" rx="5.5" fill="#FFFFFF" />
+  <path d="M14 29C14 25.9624 16.4624 23.5 19.5 23.5H44.5C47.5376 23.5 50 25.9624 50 29V32.5H14V29Z" fill="#EFF6FF" />
+  <line x1="14" y1="32.5" x2="50" y2="32.5" stroke="#BFDBFE" stroke-width="1.5" />
+  <rect x="28.5" y="30" width="7" height="5" rx="1.5" fill="url(#sbGold)" />
+  <rect x="20" y="38.5" width="7" height="4.5" rx="1.5" fill="#1E40AF" />
+  <rect x="29" y="38.5" width="7" height="4.5" rx="1.5" fill="#2563EB" />
+  <rect x="38" y="38.5" width="6" height="4.5" rx="1.5" fill="#16A34A" />
+</svg>`;
+
+async function downloadBrandLogoPng(): Promise<void> {
+  const svgBlob = new Blob([BRAND_LOGO_SVG_1024], {
+    type: 'image/svg+xml;charset=utf-8',
+  });
+  const svgUrl = URL.createObjectURL(svgBlob);
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error('Logo SVG load failed'));
+      image.src = svgUrl;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024;
+    canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.drawImage(img, 0, 0, 1024, 1024);
+    const pngBlob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob((blob) => resolve(blob), 'image/png', 1)
+    );
+    if (!pngBlob) return;
+    const pngUrl = URL.createObjectURL(pngBlob);
+    const link = document.createElement('a');
+    link.href = pngUrl;
+    link.download = 'sadhanbox-logo-1024x1024.png';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(() => URL.revokeObjectURL(pngUrl), 5000);
+  } finally {
+    URL.revokeObjectURL(svgUrl);
+  }
+}
+
 export default function App() {
   const [activeRoute, setActiveRoute] = useState<AppRoute>(getInitialRoute);
   const [uiLang, setUiLang] = useState<UiLang>(getInitialUiLang);
@@ -1462,8 +1521,16 @@ export default function App() {
       {/* SadhanBox Footer & Legal Navigation + Quick FAQs */}
       <footer lang={uiLang} dir="ltr" className="border-t border-[#E2E8F0] bg-[#FFFFFF] mt-12">
         <SeoGuideFooter uiLang={uiLang} onNavigate={navigateTo} />
-        <div className="border-t border-[#E2E8F0] max-w-7xl mx-auto px-4 sm:px-6 py-4 text-center text-xs font-medium text-slate-600">
-          © 2026 SadhanBox. All rights reserved.
+        <div className="border-t border-[#E2E8F0] max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-center sm:justify-between gap-3 text-xs font-medium text-slate-600">
+          <span>© 2026 SadhanBox. All rights reserved.</span>
+          <button
+            type="button"
+            onClick={() => void downloadBrandLogoPng()}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
+          >
+            <Download className="w-3.5 h-3.5 text-[#1E40AF]" />
+            <span>Download Logo (PNG)</span>
+          </button>
         </div>
       </footer>
 
